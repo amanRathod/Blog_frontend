@@ -6,9 +6,10 @@
 
 import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import chalk from 'chalk';
+import Dashboard from './dashboard';
 import * as ROUTES from '../constants/routes';
-
-
 
 export default function Login() {
   const history = useHistory();
@@ -19,16 +20,48 @@ export default function Login() {
   const [error, setError] = useState('');
   const isInvalid = email === '' || password === '';
 
-  const handleGoogleAuth= async (e) => {
+  const handleGoogleAuth= (e) => {
     e.preventDefault();
 
     try {
+
+      axios({
+        method: 'POST',
+        data: {
+          email,
+          password
+        },
+        credentials: true,
+        url: 'http://localhost:4444/user/login'
+      }).then((res) => {
+
+        if(res.status === 203){
+          console.log(res.data)
+          setError(res.data.message)
+        }
+        else {
+          console.log('response data', res.data)
+          const storedata = {
+            firstName :res.data.firstName,
+            id: res.data._id,
+            email: res.data.email,
+          }
+          localStorage.setItem('user', JSON.stringify(storedata));
+          history.push(ROUTES.DASHBOARD);
+        }
+        console.log('asdf',res.data)
+      })
+      
+      
       
     }
     catch(err) {
+      setEmail('')
+      setPassword('')
+     console.error(err.message)
      setError(err.message)
     }
-  }
+  };
 
   useEffect(() => {
     document.title = 'Login - Blog'
@@ -72,6 +105,7 @@ export default function Login() {
               type="submit"
               className={`m-4 w-80 px-5 py-2 flex justify-center text-white bg-orange-base hover:bg-orange-secondary border-transparent border-t border-white border-opacity-20 border-solid  shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none  focus:ring-2 focus:ring-offset-2 duration-500 focus:ring-orange-base
               ${isInvalid && 'opacity-70'}`}
+              onClick={handleGoogleAuth}
               >
               Log in
             </button>

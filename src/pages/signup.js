@@ -1,20 +1,76 @@
 /* eslint-disable prettier/prettier */
+
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import chalk from 'chalk';
 import * as ROUTES from '../constants/routes';
 
 export default function Signup() {
+  const history = useHistory();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [error, setError] = useState('');
-  const isInvalid = firstName === '' || lastName === '' || email === '' || password === '' || confirmPassword === ''
+  const [error, setError] = useState([]);
+  const isInvalid = firstName === '' ||  lastName === '' || email === '' || password === '' || confirmPassword === ''
+  
+  const handlesubmit =  (e) => {
+    console.log('hello')
+    e.preventDefault();
+    // setError([]);
+
+    try{
+      axios({
+        method: 'POST',
+        data: {
+          firstName,
+          lastName,
+          email,
+          password,
+          confirmPassword,      
+        },
+        credentails: true,
+        url: 'http://localhost:4444/user/register',
+      }).then((res) => {
+          console.log(res)
+
+          /** Best way to set values into array */
+          // setError([...error, ...res.data.error]);
+
+          const objValue=[];
+          if(res.status === 203) {
+            Object.keys(res.data.error).forEach((errorKey, idx) => {
+
+              const value = res.data.error[errorKey];
+              console.log(value)
+              // setError([...error, value]);
+              objValue.push(value)
+
+            })
+            setError(objValue)
+            console.log('error array',error)  
+            }
+          else {
+            history.push(ROUTES.LOGIN)
+          }
+          
+        
+      });
+    }
+    catch(err){
+      console.error(err)
+    }
+    
+   
+  };
   
   useEffect(() => {
     document.title = 'Sign Up - Blog'
+    
   })
 
   return (
@@ -24,8 +80,17 @@ export default function Signup() {
           <h1 className="text-white font-black my-12 italic text-4xl tracking-widest font-mono">
             SIGN-UP
           </h1>
-          {error && <p className="text-xl text-red-primary">{error}</p>}
-          <form>
+          {/* {error && <p>{error}</p>} */}
+            <ol>
+              {
+                error.map((errorValue, errorIdx) => (
+                  <li key={errorIdx} className="text-xl overflow-hidden  text-center text-red-primary">{errorValue}</li>
+                ))
+              }
+            </ol>
+          
+          
+          <form >
             <div>
               <input
                 aria-label="Enter your First Name"
@@ -83,10 +148,11 @@ export default function Signup() {
             </div>
             <div>
               <button
-                disabled={!isInvalid}
+                disabled={isInvalid}
                 type="submit"
                 className={`m-4 w-80 px-5 py-2 flex justify-center text-white bg-orange-base hover:bg-orange-secondary border-transparent border-t border-white border-opacity-20 border-solid border-gray-700 shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none  focus:ring-2 focus:ring-offset-2 duration-500 focus:ring-orange-base
                 ${isInvalid && 'opacity-70'}`}
+                onClick={handlesubmit}
               >
                 Sign Up
               </button>
