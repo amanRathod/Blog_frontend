@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/void-dom-elements-no-children */
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
 
 
 const  Dashboard = () => {
   const history = useHistory();
+  const {user} = useContext( UserContext );
+  
   const [firstName, setFirstName] = useState('');
 
   const handlelogout = (e) => {
@@ -32,12 +35,9 @@ const  Dashboard = () => {
 
   useEffect(() => {
     document.title = 'Dashboard - Blog'
-    const loggedInUser = localStorage.getItem('user');
-    if (loggedInUser) {
-      setFirstName(loggedInUser.firstName)
-      // const foundUser = JSON.parse(loggedInUser);
-      console.log('firstaName',loggedInUser.firstName)
-    }
+    setFirstName(user.firstName)
+    console.log('firstName', user)
+    
   }, [])
 
   return (
