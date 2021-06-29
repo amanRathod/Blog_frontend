@@ -26,12 +26,10 @@ module.exports = {
         borders: ''
 
       },
-      // gray: {
-      //   base: '#616161',
-      //   background: '#fafafa',
-      //   primary: '#dbdbdb'
-      // },
       gray: {
+        base: '#616161',
+        background: '#fafafa',
+        primary: '#dbdbdb',
         borderbg:'#6b6363',
         formbg: '#362525',
       },

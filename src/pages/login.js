@@ -49,7 +49,7 @@ export default function Login() {
           localStorage.setItem('user', JSON.stringify(storedata));
           history.push(ROUTES.DASHBOARD);
         }
-        console.log('asdf',res.data)
+        
       })
       
       
@@ -58,8 +58,8 @@ export default function Login() {
     catch(err) {
       setEmail('')
       setPassword('')
-     console.error(err.message)
-     setError(err.message)
+      console.error(err.message)
+      setError(err.message)
     }
   };
 
