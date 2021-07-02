@@ -52,7 +52,9 @@ module.exports = {
       padding: ['hover'],
       maxHeight: ['focus'],
       backgroundColor: ['active'],
-      display: ['group-hover']
+      display: ['group-hover'],
+      visibility: ['hover', 'focus'],
+      divideColor: ['group-hover'],
     }
   }
  };

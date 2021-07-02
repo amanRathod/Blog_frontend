@@ -15,7 +15,7 @@ const UserAuthListener = () => {
   useEffect(() => {
     UserExists();
   }, []);
-
+  console.log('userrrr', user);
   return user;
 };
 export default UserAuthListener;

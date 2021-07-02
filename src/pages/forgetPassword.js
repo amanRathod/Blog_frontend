@@ -1,8 +1,12 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
 
 export default function ForgetPassword() {
+  const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
@@ -19,6 +23,7 @@ export default function ForgetPassword() {
         url: 'http://localhost:4444/auth/forgotPassword'
       }).then((response) => {
         setError(response.data.message);
+        history.push(ROUTES.RESET_PASSWORD);
       });
     } catch (err) {
       console.error(err.message);
