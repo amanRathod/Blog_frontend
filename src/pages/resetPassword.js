@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/button-has-type */
-import React, { useEffect, useState, useParams } from 'react';
+import React, { useEffect, useState,  } from 'react';
+import { useParams  } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ForgetPassword() {
@@ -9,7 +11,7 @@ export default function ForgetPassword() {
   
   const isValid = newPassword === '' || confirmPassword === '';
   const [error, setError] =  useState('');
-  const {token} = useParams();
+  const { token }  = useParams();
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +19,8 @@ export default function ForgetPassword() {
       method: 'POST',
       data: {
         newPassword,
-        confirmPassword
+        confirmPassword,
+        token,
       },
       credentials: true,
       url: 'http://localhost:4444/auth/resetPassword'
@@ -60,6 +63,7 @@ export default function ForgetPassword() {
         className={`px-3 py-2 border-4 rounded1
       ${isValid && 'opcaity-70'}`}
         onSubmit={handleSubmit}
+        
       >
         Update Password
       </button>
