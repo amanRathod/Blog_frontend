@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import chalk from 'chalk';
 import Dashboard from './dashboard';
 import * as ROUTES from '../constants/routes';
 
@@ -34,11 +33,13 @@ export default function Login() {
         } else {
           console.log('response data', res.data);
           const storedata = {
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
+            fullName: res.data.fullName,
+            username: res.data.username,
             id: res.data._id,
             email: res.data.email,
-            image: res.data.image
+            image: res.data.image,
+            following: res.data.following,
+            followers: res.data.followers,
           };
           localStorage.setItem('user', JSON.stringify(storedata));
           history.push(ROUTES.DASHBOARD);
@@ -69,8 +70,8 @@ export default function Login() {
         const storeData = {
           id: response.data._id,
           email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
+          fullName: response.data.fullName,
+          username: response.data.username,
           image: response.data.image
         };
         if(response.status === 200){
@@ -94,9 +95,11 @@ export default function Login() {
         const storeData = {
           id: response.data._id,
           email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          image: response.data.image
+          fullName: response.data.fullName,
+          username: response.data.username,
+          image: response.data.image,
+          followers: response.data.followers,
+          following: response.data.following,
         };
 
         localStorage.setItem('user', JSON.stringify(storeData));

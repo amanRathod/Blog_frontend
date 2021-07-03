@@ -25,7 +25,6 @@ export default function ForgetPassword() {
         confirmPassword,
         token
       },
-      credentials: true,
       url: 'http://localhost:4444/reset/resetPassword'
     }).then((response) => {
       if (response.status === 302) {

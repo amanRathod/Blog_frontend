@@ -4,9 +4,8 @@ import React from 'react';
 
 const Timeline = () => {
   return (
-    <div className="flex mx-auto max-w-screen-lg f">
-
-    <p>Timeline</p>;
+    <div className="flex mx-auto max-w-screen-lg ">
+      <p>Posts</p>
     </div>
   )
 }

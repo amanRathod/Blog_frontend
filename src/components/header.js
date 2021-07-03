@@ -13,6 +13,7 @@ const Header = () => {
   const history = useHistory();
   console.log('user', user);
   const [toggle, setToggle] = useState(false);
+  console.log('user image', user.image);
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -48,15 +49,8 @@ const Header = () => {
           <div className="text-center flex items-center align-items">
             {user ? (
               <>
-                {/* <Link  aria-label="Write-Blog">
-              <button className="inline-flex items-center justify-center w-10 h-10 mr-2  transition-colors duration-150 bg-orange-base rounded-lg focus:shadow-outline focus:ring-2 focus:ring-offset-2 focus:ring-orange-base hover:bg-orange-secondary focus:outline-none">
-                <svg className="w-4 h-4 fill-current  text-gray-base" viewBox="0 0 20 20">
-                <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" fillRule="evenodd" />
-                </svg>
-              </button>
-            </Link> */}
                 <Link to={WriteStory} aria-label="Write-Story">
-                  <button>
+                  <button type="submit">
                     <svg
                       className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base"
                       fill="none"
@@ -77,7 +71,12 @@ const Header = () => {
                 <button
                   className="focus:outline-none"
                   onClick={handleLogOut}
-                  onKeyDown={handleLogOut}
+                  onKeyDown={(event) => {
+                    if(event.key === 'Enter'){
+                      handleLogOut();
+                    }
+                  }}
+                  type="button"
                 >
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer hover:text-orange-base"
@@ -96,11 +95,11 @@ const Header = () => {
                 </button>
 
                 <div className="flex items-center cursor-pointer mr-2">
-                  <Link>
+                  <Link to={`profile/${user.username}`} >
                     <img
                       className=" rounded-full h-8 w-8 flex"
-                      src={`/images/${user.firstName}.jpg`}
-                      alt={`${user.firstName} profile`}
+                      src={`${user.image}`}
+                      alt={`${user.username} profile`}
                     />
                   </Link>
                 </div>

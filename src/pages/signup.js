@@ -9,14 +9,14 @@ import * as ROUTES from '../constants/routes';
 export default function Signup() {
   const history = useHistory();
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState([]);
-  const isInvalid = firstName === '' ||  lastName === '' || email === '' || password === '' || confirmPassword === ''
+  const isInvalid = fullName === '' ||  username === '' || email === '' || password === '' || confirmPassword === ''
   
   const handlesubmit =  (e) => {
     console.log('hello')
@@ -27,8 +27,8 @@ export default function Signup() {
       axios({
         method: 'POST',
         data: {
-          firstName,
-          lastName,
+          fullName,
+          username,
           email,
           password,
           confirmPassword,      
@@ -93,24 +93,24 @@ export default function Signup() {
           <form >
             <div>
               <input
-                aria-label="Enter your First Name"
-                placeholder="First Name"
-                name="first name"
+                aria-label="Enter your Full Name"
+                placeholder="Full Name"
+                name="full name"
                 className="m-4 w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid border-gray-700 shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none "
-                type="first name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                type="full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
               />
             </div>
             <div>
               <input
-                aria-label="Enter your Last Name"
-                placeholder="last Name"
-                name="last name"
-                type="last name"
+                aria-label="Enter your username"
+                placeholder="Username"
+                name="username"
+                type="username"
                 className="m-4 w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid border-gray-700 shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none "
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>

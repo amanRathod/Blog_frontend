@@ -4,7 +4,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/header';
-import Timeline from '../components/timeline';
+import Timeline from '../components/Posts';
 
 const Dashboard = () => {
   useEffect(() => {
@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-background">
       <Header />
-      {/* <Timeline /> */}
+      <Timeline />
     </div>
   );
 };

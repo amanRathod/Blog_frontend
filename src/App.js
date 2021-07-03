@@ -11,7 +11,7 @@ const Signup = lazy(() => import('./pages/signup'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const ForgetPassword = lazy(() => import('./pages/forgetPassword'));
 const ResetPassword = lazy(() => import('./pages/resetPassword'));
-const Profile = lazy(() => import('./components/profile/profile'));
+const Profile = lazy(() => import('./pages/profile'));
 
 const renderLoader = () => <p>Loading...</p>;
 

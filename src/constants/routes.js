@@ -3,4 +3,4 @@ export const SIGNUP = '/signup';
 export const DASHBOARD = '/';
 export const PASS_FORGET = '/forgetPassword';
 export const RESET_PASSWORD = '/resetPassword/:token';
-export const PROFILE = '/profile';
+export const PROFILE = '/profile/:username';

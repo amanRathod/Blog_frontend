@@ -1,15 +1,27 @@
-import React,{ useContext } from 'react';
-import UserContext from '../../context/user';
-import Header from './header';
-import Profile from './profile';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import PropTypes from 'prop-types';
+import UserHeader from './UserHeader';
+import UserPosts from './UserPosts';
 
-const Index = () => (
-  const { user } = useContext(UserContext);
-  
-  <div>
-    <Header user={ user } />
-    <Profile user={ user } />
-  </div>
+const Profile = ({ user }) => (
+  <>
+    <UserHeader />
+    <UserPosts />
+  </>
 );
 
-export default Index;
+export default Profile;
+
+Profile.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    username: Profile.string,
+    fullName: PropTypes.string,
+    image: PropTypes.string,
+    id: PropTypes.number,
+    following: PropTypes.array,
+    followers: PropTypes.array
+  })
+};

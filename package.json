@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.2.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -58,7 +59,6 @@
     "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "prettier": "^2.3.1",
-    "autoprefixer": "^10.2.6",
     "tailwindcss": "^2.2.2"
   }
 }
