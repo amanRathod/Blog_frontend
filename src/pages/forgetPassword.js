@@ -6,7 +6,6 @@ import * as ROUTES from '../constants/routes';
 
 export default function ForgetPassword() {
   const history = useHistory();
-
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
@@ -20,7 +19,7 @@ export default function ForgetPassword() {
           email
         },
         credentials: true,
-        url: 'http://localhost:4444/auth/forgotPassword'
+        url: 'http://localhost:4444/reset/forgotPassword'
       }).then((response) => {
         setError(response.data.message);
         history.push(ROUTES.RESET_PASSWORD);
