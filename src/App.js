@@ -17,7 +17,7 @@ const renderLoader = () => <p>Loading...</p>;
 
 function App() {
   const user = UserAuthListener();
-  console.log('userrrrrr', user);
+  console.log('User Data', user);
   return (
     <UserContext.Provider value={{ user }}>
       <Router>

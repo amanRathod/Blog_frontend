@@ -11,9 +11,6 @@ import UserContext from '../context/user';
 const Header = () => {
   const { user } = useContext(UserContext);
   const history = useHistory();
-  console.log('user', user);
-  const [toggle, setToggle] = useState(false);
-  console.log('user image', user.image);
 
   const handleLogOut = (e) => {
     e.preventDefault();

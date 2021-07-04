@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserHeader from './UserHeader';
-import UserPosts from './UserPosts';
+import UserData from './UserData';
 
 const Profile = ({ user }) => (
   <>
-    <UserHeader />
-    <UserPosts />
+    <UserHeader profile={user} />
+    <UserData userData={user} />
   </>
 );
 

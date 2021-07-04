@@ -101,7 +101,7 @@ export default function Login() {
           followers: response.data.followers,
           following: response.data.following,
         };
-
+        console.log('followers',storeData.followers.length);
         localStorage.setItem('user', JSON.stringify(storeData));
         history.push(ROUTES.DASHBOARD);
       });

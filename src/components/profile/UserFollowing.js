@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function UserPosts() {
+export default function UserFollowing() {
   const [blog, setBlog] = useState('');
 
-  return <h1>Blogs</h1>;
+  return <h1>Following</h1>;
 }

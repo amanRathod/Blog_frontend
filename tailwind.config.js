@@ -38,7 +38,8 @@ module.exports = {
       },
       red: {
         primary: '#ed4956',
-        secondary: '#db3236'
+        secondary: '#db3236',
+        light: '#FECACA'
 
       },
       orange: {
