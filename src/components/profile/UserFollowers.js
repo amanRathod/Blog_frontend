@@ -1,8 +1,10 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable import/named */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 import React, {useState, useEffect } from 'react';
+import Skelton from 'react-loading-skeleton';
 import { getUserByUserId } from '../../service/backened_call';
 
 const fetchData = async (followers) => {
@@ -12,7 +14,7 @@ const fetchData = async (followers) => {
     console.log('fetch', response.data);
     return response.data;
   } catch (err) {
-    console.errror(err);
+    console.error(err);
   }
 }
 
@@ -31,72 +33,49 @@ const UserFollowers = ({
   useEffect(() => {
     
     fetchData(followers).then((userData) => {
-      console.log('dataaa',  userData);
-      console.log('userrrrr', userData);
       setUser(userData);
     })
+
   }, [])
   console.log('fff',followers)
   console.log('user follower',user)
 
   return (
       <div className={`flex mx-auto max-w-screen-lg `}>
-        <div className="flex flex-wrap">
-          {user.map((UserKey, idx) => (
+        <div className="flex flex-wrap justify-between">
+          {user ? user.map((UserKey, idx) => (
+          
+           
             <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
-          <img className="max-h-20 w-full opacity-80 absolute top-0 " src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640" alt="" />
-            <div className="profile w-full flex m-3 ml-4 text-white">
-              <img className="w-28 h-28 p-1 bg-white rounded-full z-10" src={user.image} alt=""/>
+              <img className="max-h-20 w-full opacity-80 absolute top-0 " src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640" alt="" />
+              <div className="profile w-full flex m-3 ml-4 text-white">
+                {UserKey.image ?
+                <img className="w-28 h-28 p-1 bg-white rounded-full z-10" src={UserKey.image} alt=""/>
+                : <Skelton className="w-28 h-28 p-1 bg-white rounded-full z-10" circle height={100} width={100}/>}
+              </div>
+              <div className="flex flex-row ml-6 mb-2">
+                {UserKey.fullName ?
+                <h1 >{UserKey.fullName}</h1>
+                
+                :<Skelton text height={20} width={100}/> }
+              </div>
+              <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
+                {UserKey.fullName ? 
+                <div className=" border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base ">
+                  Follow
+                </div>
+                : <Skelton rect height={30} width={70}/> }
+              </div>
+          
             </div>
-            <div className="flex flex-row ml-6 mb-2">
-              <h1 >{UserKey.fullName}</h1>
-            </div>
-            <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-              <div className="add border rounded-l-2xl rounded-sm border-gray-300 p-1 px-4 cursor-pointer hover:bg-gray-700 hover:text-white">Follow</div>
-            </div>
-          </div>
+            
+       
           )
-          )}
-          <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
-          <img className="max-h-20 w-full opacity-80 absolute top-0 " src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640" alt="" />
-            <div className="profile w-full flex m-3 ml-4 text-white">
-              <img className="w-28 h-28 p-1 bg-white rounded-full z-10" src={user.image} alt=""/>
-            </div>
-            <div className="flex flex-row ml-6 mb-2">
-              <h1 >{user.fullName}</h1>
-            </div>
-            <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-              <div className="add border rounded-l-2xl rounded-sm border-gray-300 p-1 px-4 cursor-pointer hover:bg-gray-700 hover:text-white">Follow</div>
-            </div>
-          </div>
-
-          <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
-          <img className="max-h-20 w-full opacity-80 absolute top-0 " src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640" alt="" />
-            <div className="profile w-full flex m-3 ml-4 text-white">
-              <img className="w-28 h-28 p-1 bg-white rounded-full z-10" src="" alt=""/>
-            </div>
-            <div className="flex flex-row ml-10 mb-2">
-              <h1 >{followers[1]}</h1>
-            </div>
-            <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-              <div className="add border rounded-l-2xl rounded-sm border-gray-300 p-1 px-4 cursor-pointer hover:bg-gray-700 hover:text-white">Follow</div>
-            </div>
-          </div>
-
-          <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
-          <img className="max-h-20 w-full opacity-80 absolute top-0 " src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640" alt="" />
-            <div className="profile w-full flex m-3 ml-4 text-white">
-              <img className="w-28 h-28 p-1 bg-white rounded-full z-10" src="" alt=""/>
-            </div>
-            <div className="flex flex-row ml-10 mb-2">
-              <h1 >Rathod</h1>
-            </div>
-            <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-              <div className="add border rounded-l-2xl rounded-sm border-gray-300 p-1 px-4 cursor-pointer hover:bg-gray-700 hover:text-white">Follow</div>
-            </div>
-          </div>
+          ): `${fullName} doesn't have follower 🙄`}
                 
         </div>
+        
+          
       </div>
   );
 }

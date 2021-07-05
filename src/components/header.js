@@ -30,6 +30,12 @@ const Header = () => {
     }
   };
 
+  const handleWriteBlog = (e) => {
+    e.preventDefault();
+
+    history.push(WriteStory);
+  }
+
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
       <div className="container mx-auto max-w-screen-lg h-full">
@@ -46,10 +52,10 @@ const Header = () => {
           <div className="text-center flex items-center align-items">
             {user ? (
               <>
-                <Link to={WriteStory} aria-label="Write-Story">
-                  <button type="submit">
+                <Link to={ROUTES.WRITE_STORY} aria-label="Write-Story">
+                  <button type="submit" className="focus:outline-none">
                     <svg
-                      className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base"
+                      className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base "
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

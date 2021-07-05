@@ -10,7 +10,7 @@ import UserFollowing from './UserFollowing';
 
 export default function UserData({ userData }) {
   const history = useHistory();
-  const [tab, setTab] = useState('1');
+  const [tab, setTab] = useState('2');
   console.log('tab',tab);
 
   return (
@@ -85,11 +85,11 @@ export default function UserData({ userData }) {
                 <div className={tab === 1 ? 'block' : 'hidden'} id="link1">
                   <UserPosts />
                 </div>
-                <div className={tab === 2 ? 'block' : 'hidden'} id="link2">
+                <div className={tab === 2 ? 'block' : 'hidden'} >
                   <UserFollowers userData={userData}/>
                 </div>
                 <div className={tab === 3 ? 'block' : 'hidden'} id="link3">
-                  <UserFollowing />
+                  <UserFollowing userData={userData}/>
                 </div>
               </div>
             </div>
