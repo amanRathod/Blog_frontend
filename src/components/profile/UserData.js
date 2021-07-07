@@ -56,7 +56,7 @@ export default function UserData({ userData }) {
                 href="#link2"
                 role="tablist"
               >
-                 Followers
+                Followers
               </a>
             </li>
             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -83,7 +83,7 @@ export default function UserData({ userData }) {
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={tab === 1 ? 'block' : 'hidden'} id="link1">
-                  <UserPosts />
+                  <UserPosts userData={userData}/>
                 </div>
                 <div className={tab === 2 ? 'block' : 'hidden'} >
                   <UserFollowers userData={userData}/>

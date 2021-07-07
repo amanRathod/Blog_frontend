@@ -26,3 +26,21 @@ export async function getAllPosts() {
         console.log(err);
     }
 }
+
+export async function getSingleUserByUserId(userId) {
+    try {
+        const response = await axios.get(`http://localhost:4444/getData/singleId/${userId}`);
+        return response;
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export async function getPostsByUserId(userId) {
+    try {
+        const response = await axios.get(`http://localhost:4444/getData/postsBYId/${userId}`);
+        return response;
+    } catch (err) {
+        console.error(err)
+    }
+}
