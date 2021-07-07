@@ -22,7 +22,6 @@ const UserFollowers = ({
   userData:{
     _id,
     fullName,
-    username,
     email,
     followers,
     following,
