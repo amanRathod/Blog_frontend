@@ -18,9 +18,8 @@ export async function getUserByUserId( followers ) {
 
 export async function getAllPosts() {
     try {
-        console.log()
         const responseObject  = await axios.get(`http://localhost:4444/getData/allPosts`)
-        console.log(responseObject);
+        console.log('All posts',responseObject);
         return responseObject;
     } catch (err) {
         console.log(err);
@@ -38,9 +37,19 @@ export async function getSingleUserByUserId(userId) {
 
 export async function getPostsByUserId(userId) {
     try {
+        console.log('backeend call id',userId)
         const response = await axios.get(`http://localhost:4444/getData/postsBYId/${userId}`);
         return response;
     } catch (err) {
         console.error(err)
+    }
+}
+
+export async function getUserByUsername(username) {
+    try {
+        const response = await axios.get(`http://localhost:4444/getData/UserByUsername/${username}`);
+        return response;
+    } catch (err) {
+        console.error(err);
     }
 }

@@ -19,7 +19,6 @@ const fetchData = async (following) => {
 
 const UserFollowing = ({
   userData:{
-    id,
     fullName,
     username,
     email,
@@ -35,7 +34,7 @@ const UserFollowing = ({
       setUser(userData);
     })
 
-  }, [])
+  }, [following])
   console.log('fff',following)
   console.log('user follower',user)
 

@@ -11,7 +11,7 @@ const fetchData = async (followers) => {
   try {
     console.log('followersss', followers)
     const response = await getUserByUserId(followers);
-    console.log('fetch', response.data);
+    console.log('fetch follow', response.data);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -20,7 +20,7 @@ const fetchData = async (followers) => {
 
 const UserFollowers = ({
   userData:{
-    id,
+    _id,
     fullName,
     username,
     email,
@@ -36,7 +36,7 @@ const UserFollowers = ({
       setUser(userData);
     })
 
-  }, [])
+  }, [followers])
   console.log('fff',followers)
   console.log('user follower',user)
 

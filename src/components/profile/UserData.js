@@ -10,7 +10,7 @@ import UserFollowing from './UserFollowing';
 
 export default function UserData({ userData }) {
   const history = useHistory();
-  const [tab, setTab] = useState('2');
+  const [tab, setTab] = useState(1);
   console.log('tab',tab);
 
   return (
