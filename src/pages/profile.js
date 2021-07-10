@@ -15,21 +15,21 @@ const Profile = () => {
   useEffect(() => {
     async function getUser(username) {
       const UserData = await getUserByUsername(username);
-      console.log('user profile data',UserData.data);
-      console.log('user profile da',user);
+      console.log('user profile data', UserData.data);
+      console.log('user profile da', user);
       setUsers(UserData.data);
     }
 
-    getUser(username)
-  }, [])
+    getUser(username);
+  }, []);
 
-  console.log('usersss',users)
+  console.log('usersss', users);
 
   return (
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
-        <UserProfile user={users} />
+        <UserProfile user={users} loggedInUser={user} />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -5,9 +6,9 @@ import PropTypes from 'prop-types';
 import UserHeader from './UserHeader';
 import UserData from './UserData';
 
-const Profile = ({ user }) => (
+const Profile = ({ user, loggedInUser }) => (
   <>
-    <UserHeader profile={user} />
+    <UserHeader loggedInUser={loggedInUser} profile={user} />
     <UserData userData={user} />
   </>
 );

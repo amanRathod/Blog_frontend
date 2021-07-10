@@ -53,3 +53,24 @@ export async function getUserByUsername(username) {
         console.error(err);
     }
 }
+
+export async function isUserFollow(loggedInUser, profileId) {
+    try {
+        
+        const response = await axios.get(`http://localhost:4444/getData/UserFollow?loggedInUsername=${loggedInUser}&profileId=${ profileId}`);
+        return response.data;
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+export async function togglefollowers(loggedInUsername, profileUsername, toggleValue) {
+    try {
+        console.log('loggge', loggedInUsername)
+        const response = await axios.put(`http://localhost:4444/getData/changeFollower?loggedInUsername=${loggedInUsername}&profileUsername=${profileUsername}&toggleValue=${toggleValue}`);
+        console.log('success',response.data);
+        return response.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
