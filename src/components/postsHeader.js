@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {  format, distanceInWordsToNow } from 'date-fns';
+import { format, distanceInWordsToNow } from 'date-fns';
 import { getSingleUserByUserId } from '../service/backened_call';
 
 const fecthData = async (userId) => {
@@ -29,24 +30,23 @@ const PostsHeader = ({ userId, date }) => {
     });
   }, []);
 
-  
   console.log('user of post header', user);
 
   return (
     <>
       <Link to={`/profile/${user.username}`}>
-      <img
-        className="w-10 h-10 object-cover object-center rounded-full"
-        src={user.image}
-        alt={user.fullName}
-      />
-
+        <img
+          className="w-10 h-10 object-cover object-center rounded-full"
+          src={user.image}
+          alt={user.fullName}
+        />
       </Link>
-      
 
-      <div >
+      <div>
         <p className="text-gray-900 font-semibold">{user.fullName}</p>
-        <p className="text-gray-500 font-semibold text-sm">{format(new Date(date.createdAt), 'dd/MM/yyy')} &middot; 0 min read</p>
+        <p className="text-gray-500 font-semibold text-sm">
+          {format(new Date(date.createdAt), 'dd/MM/yyy')} &middot; 0 min read
+        </p>
       </div>
     </>
   );
@@ -60,5 +60,3 @@ PostsHeader.propTypes = {
     createdAt: PropTypes.instanceOf(Date)
   })
 };
-
-

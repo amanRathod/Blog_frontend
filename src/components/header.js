@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable prettier/prettier */
+
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -34,7 +35,7 @@ const Header = () => {
     e.preventDefault();
 
     history.push(WriteStory);
-  }
+  };
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -75,7 +76,7 @@ const Header = () => {
                   className="focus:outline-none"
                   onClick={handleLogOut}
                   onKeyDown={(event) => {
-                    if(event.key === 'Enter'){
+                    if (event.key === 'Enter') {
                       handleLogOut();
                     }
                   }}
@@ -98,7 +99,7 @@ const Header = () => {
                 </button>
 
                 <div className="flex items-center cursor-pointer mr-2">
-                  <Link to={`profile/${user.username}`} >
+                  <Link to={`profile/${user.username}`}>
                     <img
                       className=" rounded-full h-8 w-8 flex"
                       src={`${user.image}`}

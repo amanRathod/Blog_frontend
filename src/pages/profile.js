@@ -5,7 +5,7 @@ import UserContext from '../context/user';
 import UserProfile from '../components/profile';
 import Header from '../components/header';
 import { getUserByUsername } from '../service/backened_call';
-import ProfileContext  from '../context/profile';
+import ProfileContext from '../context/profile';
 
 const Profile = () => {
   const { username } = useParams();
@@ -17,31 +17,34 @@ const Profile = () => {
   const [following, setFollowing] = useState(profile.following);
   const [fullName, setFullName] = useState(profile.fullName);
   const [image, setImage] = useState(profile.image);
-  
+  const [bio, setBio] = useState(profile.bio);
+
   useEffect(() => {
     async function getUser(username) {
       const UserData = await getUserByUsername(username);
-      setId(UserData.data._id)
+      setId(UserData.data._id);
       setFollowers(UserData.data.followers);
       setFollowing(UserData.data.following);
       setFullName(UserData.data.fullName);
-      setImage(UserData.data.image)
-      
+      setImage(UserData.data.image);
+      setBio(UserData.data.bio);
     }
 
     getUser(username);
   }, [username]);
 
-  console.log('profilesese',profile)
-  console.log('idd', _id)
-  console.log('followerere', followers)
+  console.log('profilesese', profile);
+  console.log('idd', _id);
+  console.log('followerere', followers);
 
   return (
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
-        <ProfileContext.Provider value={{_id, fullName, image, followers, following, setFollowers, setFollowing}}>
-          <UserProfile  loggedInUser={user} />
+        <ProfileContext.Provider
+          value={{ _id, fullName, image, bio, setBio, followers, following, setFollowers, setFollowing }}
+        >
+          <UserProfile loggedInUser={user} />
         </ProfileContext.Provider>
       </div>
     </div>

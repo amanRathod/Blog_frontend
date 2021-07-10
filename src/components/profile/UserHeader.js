@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
+import Model from './model.js';
 import { isUserFollow, togglefollowers } from '../../service/backened_call';
 import ProfileContext from '../../context/profile';
 
@@ -13,22 +14,20 @@ const UserHeader = ({
   // eslint-disable-next-line react/prop-types
   loggedInUser
 }) => {
-  const profile  = useContext(ProfileContext);
-  const {username} = useParams();
-  console.log('profileelelel',profile)
+  const profile = useContext(ProfileContext);
+  const { username } = useParams();
+  console.log('profileelelel', profile);
   const [userProfile, setUserProfile] = useState({});
-
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
     setUserProfile(profile);
-    
+
     const isUserFollowing = async (loggedInusername, profileId) => {
       const data = await isUserFollow(loggedInusername, profileId);
       setUserFollow(data);
-      
     };
 
     if (profile._id) {
@@ -45,7 +44,7 @@ const UserHeader = ({
     profile.setFollowers(data.profile.followers);
     profile.setFollowing(data.profile.following);
     setUserProfile(data.profile);
-    
+
     const storeData = {
       id: data.loggedIn._id,
       email: data.loggedIn.email,
@@ -76,9 +75,9 @@ const UserHeader = ({
                 <h1 className="text-2xl mt-2">{profile.fullName}</h1>
                 <div className="px-5 text-sm">
                   <p className="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua.
+                   {profile.bio}
                   </p>
+                  <Model />
                 </div>
                 <div className="flex justify-between mt-3 px-4">
                   <div className="flex flex-col">
