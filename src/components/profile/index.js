@@ -1,17 +1,23 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import UserHeader from './UserHeader';
 import UserData from './UserData';
+import ProfileContext from '../../context/profile';
 
-const Profile = ({ user, loggedInUser }) => (
-  <>
-    <UserHeader loggedInUser={loggedInUser} profile={user} />
-    <UserData userData={user} />
-  </>
-);
+const Profile = ({ loggedInUser }) => {
+  const { profile } = useContext(ProfileContext);
+
+  return (
+    <>
+      <UserHeader loggedInUser={loggedInUser} />
+      <UserData />
+    </>
+  );
+};
 
 export default Profile;
 

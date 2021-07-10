@@ -1,42 +1,31 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable import/named */
 /* eslint-disable prettier/prettier */
-import axios from 'axios';
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { getUserByUserId } from '../../service/backened_call';
+import ProfileContext from '../../context/profile';
 
 const fetchData = async (following) => {
   try {
-    console.log('followingss', following)
     const response = await getUserByUserId(following);
-    console.log('fetch', response.data);
     return response.data;
   } catch (err) {
     console.error(err);
   }
 }
 
-const UserFollowing = ({
-  userData:{
-    fullName,
-    username,
-    email,
-    following,
-    followers,
-  }
-}) => {
+const UserFollowing = () => {
+  const profile = useContext(ProfileContext);
   const [user, setUser] = useState([]);
 
   useEffect(() => {
     
-    fetchData(following).then((userData) => {
+    fetchData(profile.following).then((userData) => {
       setUser(userData);
     })
 
-  }, [following])
-  console.log('fff',following)
-  console.log('user follower',user)
+  }, [profile.following])
 
   return (
       <div className={`flex mx-auto max-w-screen-lg `}>
@@ -60,7 +49,7 @@ const UserFollowing = ({
             </div>
           
           )
-          ): `${fullName} is not following any one 😑`}
+          ): `${profile.fullName} is not following any one 😑`}
                 
         </div>
       </div>

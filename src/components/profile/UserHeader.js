@@ -2,67 +2,78 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
+import { useParams } from 'react-router-dom';
 import { isUserFollow, togglefollowers } from '../../service/backened_call';
+import ProfileContext from '../../context/profile';
 
 const UserHeader = ({
   // eslint-disable-next-line react/prop-types
-  loggedInUser,
-  profile: { fullName, followers, following, username, image, _id }
+  loggedInUser
 }) => {
+  const profile  = useContext(ProfileContext);
+  const {username} = useParams();
+  console.log('profileelelel',profile)
+  const [userProfile, setUserProfile] = useState({});
+
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
+    setUserProfile(profile);
+    
     const isUserFollowing = async (loggedInusername, profileId) => {
-     
       const data = await isUserFollow(loggedInusername, profileId);
       setUserFollow(data);
-     
+      
     };
-    if (_id) {
-      isUserFollowing(loggedInUser.username, _id);
+
+    if (profile._id) {
+      isUserFollowing(loggedInUser.username, profile._id);
     }
-  }, [loggedInUser.username, _id]);
+  }, [loggedInUser.username, profile, userProfile._id]);
 
   const handleFollowClick = async (e) => {
     e.preventDefault();
+
     setUserFollow((userFollow) => !userFollow);
-    console.log('loggedIN  ', loggedInUser.id)
-    const data = await togglefollowers(loggedInUser.id, _id, !userFollow);
+    const data = await togglefollowers(loggedInUser.id, userProfile._id, !userFollow);
+
+    profile.setFollowers(data.profile.followers);
+    profile.setFollowing(data.profile.following);
+    setUserProfile(data.profile);
     
     const storeData = {
-      id:       data.loggedIn._id,
-      email:    data.loggedIn.email,
+      id: data.loggedIn._id,
+      email: data.loggedIn.email,
       fullName: data.loggedIn.fullName,
       username: data.loggedIn.username,
-      image:    data.loggedIn.image,
-      followers:data.loggedIn.followers,
-      following:data.loggedIn.following,
+      image: data.loggedIn.image,
+      followers: data.loggedIn.followers,
+      following: data.loggedIn.following
     };
 
-    localStorage.setItem('user', JSON.stringify(storeData))
-   
+    localStorage.setItem('user', JSON.stringify(storeData));
   };
   return (
     <div classNameName="h-screen w-full py-20 px-3">
       <div className="max-w-md mx-auto md:max-w-lg ">
         <div className="w-full">
-          {image ? (
+          {userProfile.image ? (
             <div className="bg-white p-3 rounded shadow-xl hover:shadow-sm text-center py-5">
               <div className="flex justify-center">
                 <img
                   className="rounded-full"
-                  src={`${image}`}
+                  src={`${profile.image}`}
                   width="100"
-                  alt={`${fullName} Profile`}
+                  alt={`${profile.fullName} Profile`}
                 />
               </div>
               <div className="text-center">
-                <h1 className="text-2xl mt-2">{fullName}</h1>
+                <h1 className="text-2xl mt-2">{profile.fullName}</h1>
                 <div className="px-5 text-sm">
                   <p className="text-justify">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -72,9 +83,11 @@ const UserHeader = ({
                 <div className="flex justify-between mt-3 px-4">
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{followers.length}</span>{' '}
+                    <span className="font-bold text-2xl">{profile.followers.length}</span>{' '}
                     <span className="text-sm  text-gray-base">
-                      {followers.length === 1 || followers.length === 0 ? `Follower` : `Followers`}
+                      {profile.followers.length === 1 || profile.followers.length === 0
+                        ? `Follower`
+                        : `Followers`}
                     </span>{' '}
                   </div>
                   <div className="flex flex-col">
@@ -84,14 +97,14 @@ const UserHeader = ({
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{following.length}</span>{' '}
+                    <span className="font-bold text-2xl">{profile.following.length}</span>{' '}
                     <span className="text-sm text-gray-base">Following</span>{' '}
                   </div>
                 </div>
                 {btnFollow && (
                   <div className="flex flex-row justify-center px-4 mt-4">
                     <button
-                      className="text-lg h-10 w-2/6  text-white text-md rounded bg-orange-base hover:bg-orange-secondary"
+                      className="text-lg h-10 w-2/6  text-white text-md rounded bg-orange-base hover:bg-orange-secondary focus:outline-none"
                       onClick={handleFollowClick}
                     >
                       {userFollow ? 'following' : 'follow'}

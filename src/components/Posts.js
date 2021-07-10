@@ -15,10 +15,8 @@ const fecthData = async () => {
 }
 
 const Timeline = () => {
-  // const { user } = useContext(UserContext);
 
   const [posts, setPosts] = useState([]);
-  // console.log('userrPosts id',user.id)
 
   useEffect(() => {
     fecthData().then((randomData) => {
@@ -26,7 +24,7 @@ const Timeline = () => {
       setPosts(data);
       console.log('pos',posts)
     })
-  }, [])
+  }, [posts])
   console.log('pos',posts)
 
   return (

@@ -3,8 +3,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import Skelton from 'react-loading-skeleton';
+import ProfileContext from '../../context/profile';
 import { getUserByUserId } from '../../service/backened_call';
 
 const fetchData = async (followers) => {
@@ -18,25 +19,18 @@ const fetchData = async (followers) => {
   }
 }
 
-const UserFollowers = ({
-  userData:{
-    _id,
-    fullName,
-    email,
-    followers,
-    following,
-  }
-}) => {
+const UserFollowers = () => {
+  const profile = useContext(ProfileContext);
   const [user, setUser] = useState([]);
+
 
   useEffect(() => {
     
-    fetchData(followers).then((userData) => {
+    fetchData(profile.followers).then((userData) => {
       setUser(userData);
     })
 
-  }, [followers])
-  console.log('fff',followers)
+  }, [profile.followers])
   console.log('user follower',user)
 
   return (
@@ -70,7 +64,7 @@ const UserFollowers = ({
             
        
           )
-          ): `${fullName} doesn't have follower 🙄`}
+          ): `${profile.fullName} doesn't have follower 🙄`}
                 
         </div>
         

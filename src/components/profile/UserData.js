@@ -3,15 +3,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import UserFollowers from './UserFollowers';
 import UserPosts from './UserPosts';
 import UserFollowing from './UserFollowing';
 
-export default function UserData({ userData }) {
-  const history = useHistory();
+export default function UserData() {
   const [tab, setTab] = useState(1);
-  console.log('tab',tab);
 
   return (
     <>
@@ -83,13 +80,13 @@ export default function UserData({ userData }) {
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={tab === 1 ? 'block' : 'hidden'} id="link1">
-                  <UserPosts userData={userData}/>
+                  <UserPosts />
                 </div>
                 <div className={tab === 2 ? 'block' : 'hidden'} >
-                  <UserFollowers userData={userData}/>
+                  <UserFollowers />
                 </div>
                 <div className={tab === 3 ? 'block' : 'hidden'} id="link3">
-                  <UserFollowing userData={userData}/>
+                  <UserFollowing />
                 </div>
               </div>
             </div>
