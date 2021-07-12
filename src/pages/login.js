@@ -28,10 +28,8 @@ export default function Login() {
         url: 'http://localhost:4444/user/login'
       }).then((res) => {
         if (res.status === 203) {
-          console.log(res.data);
           setError(res.data.message);
         } else {
-          console.log('response data', res.data);
           const storedata = {
             fullName: res.data.fullName,
             username: res.data.username,
@@ -66,7 +64,6 @@ export default function Login() {
         // }
       )
       .then((response) => {
-        console.log('dta ->', response.json());
         const storeData = {
           id: response.data._id,
           email: response.data.email,
@@ -80,7 +77,6 @@ export default function Login() {
         }
       })
       .catch(error => {
-        console.log('failed to auth')
       });
   };
 
@@ -101,13 +97,11 @@ export default function Login() {
           followers: response.data.followers,
           following: response.data.following,
         };
-        console.log('followers',storeData.followers.length);
         localStorage.setItem('user', JSON.stringify(storeData));
         history.push(ROUTES.DASHBOARD);
       });
     } catch (err) {
       console.error(err);
-      console.log('fail to connect')
     }
   };
 

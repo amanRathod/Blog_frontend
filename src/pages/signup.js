@@ -19,7 +19,6 @@ export default function Signup() {
   const isInvalid = fullName === '' ||  username === '' || email === '' || password === '' || confirmPassword === ''
   
   const handlesubmit =  (e) => {
-    console.log('hello')
     e.preventDefault();
     // setError([]);
 
@@ -36,7 +35,6 @@ export default function Signup() {
         credentails: true,
         url: 'http://localhost:4444/user/register',
       }).then((res) => {
-          console.log(res)
 
           /** Best way to set values into array */
           // setError([...error, ...res.data.error]);
@@ -46,13 +44,11 @@ export default function Signup() {
             Object.keys(res.data.error).forEach((errorKey, idx) => {
 
               const value = res.data.error[errorKey];
-              console.log(value)
               // setError([...error, value]);
               objValue.push(value)
 
             })
             setError(objValue)
-            console.log('error array',error)  
             }
           else {
             history.push(ROUTES.LOGIN)

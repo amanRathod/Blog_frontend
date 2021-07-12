@@ -10,7 +10,6 @@ import ProfileContext from '../../context/profile';
 const fetchData = async (userId) => {
   try {
     const response = await getPostsByUserId(userId);
-    console.log('posts of user', response.data);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -27,7 +26,6 @@ export default function UserPosts() {
     });
   }, [profile._id]);
 
-  console.log('bloggg', blog);
 
   return (
     <>

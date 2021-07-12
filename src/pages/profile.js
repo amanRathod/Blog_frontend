@@ -33,9 +33,6 @@ const Profile = () => {
     getUser(username);
   }, [username]);
 
-  console.log('profilesese', profile);
-  console.log('idd', _id);
-  console.log('followerere', followers);
 
   return (
     <div className="bg-gray-background">

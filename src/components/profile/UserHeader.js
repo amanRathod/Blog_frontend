@@ -16,7 +16,6 @@ const UserHeader = ({
 }) => {
   const profile = useContext(ProfileContext);
   const { username } = useParams();
-  console.log('profileelelel', profile);
   const [userProfile, setUserProfile] = useState({});
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;

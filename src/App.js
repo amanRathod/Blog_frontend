@@ -13,6 +13,7 @@ const ForgetPassword = lazy(() => import('./pages/forgetPassword'));
 const ResetPassword = lazy(() => import('./pages/resetPassword'));
 const Profile = lazy(() => import('./pages/profile'));
 const WriteStory = lazy(() => import('./components/story/write-story'));
+const ReadStory = lazy(() => import('./components/blogContainer'));
 
 const renderLoader = () => <p>Loading...</p>;
 
@@ -31,6 +32,7 @@ function App() {
             <Route path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
             <Route path={ROUTES.PROFILE} component={Profile} />
             <Route path={ROUTES.WRITE_STORY} component={WriteStory} />
+            <Route path={ROUTES.READ_STORY} component={ReadStory} />
           </Switch>
         </Suspense>
       </Router>

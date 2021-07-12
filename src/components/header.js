@@ -10,7 +10,7 @@ import WriteStory from './story/write-story';
 import UserContext from '../context/user';
 
 const Header = () => {
-  const { user } = useContext(UserContext);
+  const  { user }  = useContext(UserContext);
   const history = useHistory();
 
   const handleLogOut = (e) => {

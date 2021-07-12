@@ -6,22 +6,20 @@ import axios from 'axios';
 import { func } from 'prop-types';
 
 export async function getUserByUserId(followers) {
-  console.log('id', followers);
   try {
     const responseObject = await axios.get(`http://localhost:4444/getData/userId/${followers}`);
     return responseObject;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
 export async function getAllPosts() {
   try {
     const responseObject = await axios.get(`http://localhost:4444/getData/allPosts`);
-    console.log('All posts', responseObject);
     return responseObject;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -36,7 +34,6 @@ export async function getSingleUserByUserId(userId) {
 
 export async function getPostsByUserId(userId) {
   try {
-    console.log('backeend call id', userId);
     const response = await axios.get(`http://localhost:4444/getData/postsBYId/${userId}`);
     return response;
   } catch (err) {
@@ -66,13 +63,11 @@ export async function isUserFollow(loggedInUser, profileId) {
 
 export async function togglefollowers(loggedInUsername, profileUsername, toggleValue) {
   try {
-    console.log('loggge', loggedInUsername);
     const response = await axios.put(
       `http://localhost:4444/getData/changeFollower?loggedInUsername=${loggedInUsername}&profileUsername=${profileUsername}&toggleValue=${toggleValue}`
     );
-    console.log('success', response.data);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }

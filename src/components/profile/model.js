@@ -3,13 +3,15 @@
 import axios  from 'axios';
 import React, { useState, Fragment, useContext } from 'react';
 import ProfileContext from '../../context/profile';
+import UserContext from '../../context/login_user';
 
 export default function Model() {
 
   const profile = useContext(ProfileContext);
+  const user = useContext(UserContext);
   const [description, setDescription] = useState(profile.bio);
   const [showModal, setShowModal] = useState(false);
-
+  const btnEdit = profile.username && profile.username === user.username;
 
   const updateDescription = async (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ export default function Model() {
 
   return (
     <>
+    
       <button
         type="button"
         className="m-2 border-2 border-orange-base px-4 py-1 focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base"
@@ -86,7 +89,7 @@ export default function Model() {
                     data-dismiss="modal"
                     onClick={() => setShowModal(false)}
                   >
-                    Close
+                    Cancel
                   </button>
                   <button
                     className="text-lg h-10 w-3/2  text-white text-md rounded bg-orange-base hover:bg-orange-secondary focus:outline-none"
@@ -103,6 +106,7 @@ export default function Model() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black" />
         </>
       ) : null}
+      
     </>
   );
 }

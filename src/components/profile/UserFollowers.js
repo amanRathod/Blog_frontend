@@ -11,9 +11,7 @@ import { getUserByUserId } from '../../service/backened_call';
 
 const fetchData = async (followers) => {
   try {
-    console.log('followersss', followers);
     const response = await getUserByUserId(followers);
-    console.log('fetch follow', response.data);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -29,7 +27,6 @@ const UserFollowers = () => {
       setUser(userData);
     });
   }, [profile.followers]);
-  console.log('user follower', user);
 
   return (
     <div className={`flex mx-auto max-w-screen-lg `}>
