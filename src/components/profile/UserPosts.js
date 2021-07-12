@@ -41,7 +41,7 @@ export default function UserPosts() {
             <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
               {blog[blogsData].title}
             </h1>
-            <p className="text-gray-500 text-sm sm:text-base line-clamp-3">
+            <p className="overflow-hidden text-gray-500 text-sm sm:text-base line-clamp-3">
               {blog[blogsData].content}
             </p>
             <div className="flex gap-4 mt-auto">

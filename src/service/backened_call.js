@@ -71,3 +71,13 @@ export async function togglefollowers(loggedInUsername, profileUsername, toggleV
     console.error(err);
   }
 }
+
+export async function updateComment(blogId, comment, loggedInUserId) {
+  try {
+    const response = await axios.post(`http://localhost:4444/getData/postComment?blogId=${blogId}&comment=${comment}&loggedInUserId=${loggedInUserId}` );
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
+
+}

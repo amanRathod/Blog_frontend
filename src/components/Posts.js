@@ -26,11 +26,11 @@ const Timeline = () => {
 
   return (
     <div className="container mx-auto max-w-screen-lg h-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
         {Object.keys(posts).map((postsKey, idx) => (
           <div className="hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
             <div className="flex items-center space-x-2 mb-10">
-              <PostsHeader userId={posts[postsKey].userId} date={posts[postsKey]} />
+              <PostsHeader userId={posts[postsKey].userId} date={posts[postsKey]} boolDate/>
             </div>
 
             <img className="w-full rounded-xl" src={posts[postsKey].photo} alt="" />
@@ -43,7 +43,7 @@ const Timeline = () => {
             </h1>
 
             <div className="max-w-full">
-              <p className="text-base font-medium tracking-wide text-gray-600 mt-1">
+              <p className="truncate text-base font-medium tracking-wide text-gray-600 mt-1">
                 {posts[postsKey].content}
               </p>
             </div>

@@ -15,9 +15,9 @@ const fecthData = async (userId) => {
   }
 };
 
-const PostsHeader = ({ userId, date }) => {
+const PostsHeader = ({ userId, date, boolDate }) => {
   const [user, setUser] = useState({});
-
+  const [bool, setBool] = useState(boolDate);
 
   useEffect(() => {
     fecthData(userId).then((randomData) => {
@@ -39,7 +39,7 @@ const PostsHeader = ({ userId, date }) => {
       <div>
         <p className="text-gray-900 font-semibold">{user.fullName}</p>
         <p className="text-gray-500 font-semibold text-sm">
-          {format(new Date(), 'dd/MM/yyy')} &middot; 0 min read
+        {bool && format(new Date(), 'dd/MM/yyy')} { boolDate && '. 0 min read' }
         </p>
       </div>
     </>
