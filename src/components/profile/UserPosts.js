@@ -4,6 +4,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import { getPostsByUserId } from '../../service/backened_call';
 import ProfileContext from '../../context/profile';
 
@@ -19,6 +20,7 @@ const fetchData = async (userId) => {
 export default function UserPosts() {
   const profile = useContext(ProfileContext);
   const [blog, setBlog] = useState([]);
+  console.log('proo', profile);
 
   useEffect(() => {
     fetchData(profile._id).then((randomData) => {
@@ -41,7 +43,7 @@ export default function UserPosts() {
             <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
               {blog[blogsData].title}
             </h1>
-            <p className="overflow-hidden text-gray-500 text-sm sm:text-base line-clamp-3">
+            <p className="overflow-hidden  text-gray-500 text-sm sm:text-base line-clamp-3">
               {blog[blogsData].content}
             </p>
             <div className="flex gap-4 mt-auto">
@@ -73,9 +75,11 @@ export default function UserPosts() {
                 </svg>
                 <span>{blog[blogsData].comments.length}</span>
               </button>
+              <Link  key={Math.random()} to={{pathname: `/blog/${profile.username}/${blog[blogsData].title}`, state: {blogData: blog[blogsData], userData: profile} }}>
               <button className="ml-auto flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary">
                 <span>Read more</span>
               </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -100,3 +100,12 @@ export async function addLikesId(userId, blogId) {
     console.error(err)
   }
 }
+
+export async function addLikesIntoComments(blogId, userId) {
+  try  {
+    const response = await axios.post(`http://localhost:4444/getData/addLikesforComments?userId=${userId}&blogId=${blogId}`);
+    return response.data;
+  } catch(err) {
+    console.error(err)
+  }
+}

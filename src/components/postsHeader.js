@@ -28,6 +28,8 @@ const PostsHeader = ({ userId, date, boolDate }) => {
 
   return (
     <>
+      <div className="flex">
+
       <Link to={`/profile/${user.username}`}>
         <img
           className="w-10 h-10 object-cover object-center rounded-full"
@@ -36,11 +38,13 @@ const PostsHeader = ({ userId, date, boolDate }) => {
         />
       </Link>
 
-      <div>
+      <div className="ml-2 ">
         <p className="text-gray-900 font-semibold">{user.fullName}</p>
         <p className="text-gray-500 font-semibold text-sm">
         {bool && format(new Date(), 'dd/MM/yyy')} { boolDate && '. 0 min read' }
+        {!bool && <p className="text-gray-base">{user.bio}</p>}
         </p>
+      </div>
       </div>
     </>
   );

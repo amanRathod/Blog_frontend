@@ -18,6 +18,7 @@ const Profile = () => {
   const [fullName, setFullName] = useState(profile.fullName);
   const [image, setImage] = useState(profile.image);
   const [bio, setBio] = useState(profile.bio);
+  
 
   useEffect(() => {
     async function getUser(username) {
@@ -29,6 +30,7 @@ const Profile = () => {
       setFullName(UserData.data.fullName);
       setImage(UserData.data.image);
       setBio(UserData.data.bio);
+
     }
 
     getUser(username);
