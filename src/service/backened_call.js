@@ -81,3 +81,22 @@ export async function updateComment(blogId, comment, loggedInUserId) {
   }
 
 }
+
+export async function getPostByPostId(Id) {
+  try { 
+    const response = await axios.get(`http://localhost:4444/getData/postById/${Id}`);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function addLikesId(userId, blogId) {
+  try {
+    const response = await axios.post(`http://localhost:4444/getData/addLikesId?userId=${userId}&blogId=${blogId}`);
+    console.log(response);
+    return response.data
+  } catch (err) {
+    console.error(err)
+  }
+}

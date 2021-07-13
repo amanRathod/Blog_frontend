@@ -16,8 +16,8 @@ const ReadBlog = () => {
 
   return (
     <>
-      <div className=" col-span-2">
-        <div className="container bg-white shadow-md p-10">
+      <div className=" col-span-5">
+        <div className="container bg-gray-background shadow-md p-10">
           <PostsHeader userId={blog.userId} date={blog.date} boolDate />
           <div className="mt-4 font-bold text-center">
             {blog.title}

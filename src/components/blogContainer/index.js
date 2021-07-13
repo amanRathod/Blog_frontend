@@ -6,6 +6,8 @@ import Headers from '../header';
 import ReadBlog from './readblog';
 import Appreciate from './appreciate';
 import BlogContext from '../../context/blogs';
+import Comments from './comments';
+import { getPostByPostId } from '../../service/backened_call';
 
 
 const Index = () => {
@@ -22,22 +24,28 @@ const Index = () => {
   const [userId, setUserId] = useState(blogData.userId);
   const [date, setDate] = useState(blogData.updatedAt)
   const [id, setId] = useState(blogData._id);
-  // useEffect(() => {
+  
+  useEffect(() => {
     
-  //   setUserData(data.propData.userData);
-  //   setBlogData(data.propData.blogData);
-  //   setContent(data.propData.blogData.content);
+    const getPosts = async (Id) => {
+      const response = await getPostByPostId(Id);
+      setComments(response.comments);
+      setLikes(response.likes)
+    }
+    getPosts(blogData._id);
 
-  // }, [data.propData])
+    return () => {getPosts()};
+
+  }, [blogData._id, id])
 
   return(
     <>
       <Headers />  
-      <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
-        <BlogContext.Provider value={{commentInput, userData, id, userId, date, content, title, comments, setComments, likes, setLikes}} >
+      <div className="grid grid-cols-6 gap-4 justify-between mx-auto max-w-screen-lg">
+        <BlogContext.Provider value={{ commentInput, userData, id, userId, date, content, title, comments, setComments, likes, setLikes}} >
           <ReadBlog />
+          <Appreciate />
         </BlogContext.Provider>
-        <Appreciate />
       </div>
 
     </>
