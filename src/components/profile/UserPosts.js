@@ -20,8 +20,7 @@ const fetchData = async (userId) => {
 export default function UserPosts() {
   const profile = useContext(ProfileContext);
   const [blog, setBlog] = useState([]);
-  console.log('proo', profile);
-
+    
   useEffect(() => {
     fetchData(profile._id).then((randomData) => {
       setBlog(randomData);

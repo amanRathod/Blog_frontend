@@ -4,7 +4,7 @@ import { ReplyIcon, ThumbUpIcon } from '@heroicons/react/solid';
 import BlogContext from '../../context/blogs';
 import PostsHeader from '../postsHeader';
 import UserContext from '../../context/user';
-import { addLikesIntoComments } from '../../service/backened_call';
+import { addLikesIntoComments } from '../../service/post_backenedCalls';
 
 const ReplyComments = () => {
   const blog = useContext(BlogContext);

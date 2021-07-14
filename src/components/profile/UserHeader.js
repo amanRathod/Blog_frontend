@@ -7,8 +7,19 @@ import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import Model from './model.js';
-import { isUserFollow, togglefollowers } from '../../service/backened_call';
+import { isUserFollow, getPostsByUserId } from '../../service/backened_call';
+import { togglefollowers } from '../../service/put_backenedCall';
 import ProfileContext from '../../context/profile';
+import BlogContext from '../../context/blogs';
+
+const fetchData = async (userId) => {
+  try {
+    const response = await getPostsByUserId(userId);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const UserHeader = ({
   // eslint-disable-next-line react/prop-types
@@ -16,6 +27,8 @@ const UserHeader = ({
 }) => {
   const profile = useContext(ProfileContext);
   const { username } = useParams();
+  const [blog, setBlog] = useState([])
+  console.log('randdede', blog)
   const [userProfile, setUserProfile] = useState({});
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;
@@ -23,6 +36,12 @@ const UserHeader = ({
   useEffect(() => {
     document.title = 'Profile-Blog';
     setUserProfile(profile);
+
+   
+      fetchData(profile._id).then((randomData) => {
+        setBlog(randomData);
+        console.log('randdd',randomData.length)
+      });
 
     const isUserFollowing = async (loggedInusername, profileId) => {
       const data = await isUserFollow(loggedInusername, profileId);
@@ -90,7 +109,7 @@ const UserHeader = ({
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">0</span>{' '}
+                    <span className="font-bold text-2xl">{ Object.keys(blog).length}</span>{' '}
                     <span className="text-sm text-gray-base">Blog</span>{' '}
                   </div>
                   <div className="flex flex-col">
@@ -137,3 +156,6 @@ UserHeader.propTypes = {
     image: PropTypes.string
   }).isRequired
 };
+
+
+

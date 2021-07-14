@@ -17,7 +17,7 @@ export default function Model() {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`http://localhost:4444/getData/updateBio?bio=${description}&id=${profile._id}`);
+      const response = await axios.put(`http://localhost:4444/putData/updateBio?bio=${description}&id=${profile._id}`);
       profile.setBio(response.data.bio);
       
     } catch (err) {

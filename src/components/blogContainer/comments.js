@@ -4,7 +4,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import BlogContext from '../../context/blogs';
 import UserContext from '../../context/user';
 import PostsHeader from '../postsHeader';
-import { updateComment } from '../../service/backened_call';
+import { updateComment } from '../../service/post_backenedCalls';
 import ReplyComments from './replyComments';
 
 const Comments = () => {
