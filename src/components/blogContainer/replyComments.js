@@ -9,16 +9,26 @@ import { addLikesIntoComments } from '../../service/post_backenedCalls';
 const ReplyComments = () => {
   const blog = useContext(BlogContext);
   const {user} = useContext(UserContext);
-
-  const handleLikeClick = async (e) => {
-    e.preventDefault();
+  
+  const handleLikeClick = async (commentId) => {
     console.log('hit like')
     try {
-      const response = await addLikesIntoComments(blog.id, user.id);
-      console.log(response);
-      blog.setLikes(response);
+      const response = await addLikesIntoComments(blog.id, user.id, commentId);
+      if(response.status === 200){
+      blog.setComments(response.data);
+      }
+      
     } catch (err) {
       console.error(err)
+    }
+  }
+
+  const handleReplyClick = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('hit reply')
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -35,18 +45,19 @@ const ReplyComments = () => {
                 <PostsHeader userId={comments.loggedInUserId} boolDate={false} />
                 <div className="bg-white w-auto py-4  pt-3 pl-11">{comments.comment}</div>
                 <div className="flex justify-start">
-                  <div className="flex relative">
-                    <ThumbUpIcon className="h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary" 
-                      aria-hidden="true"
-                      onClick={handleLikeClick}
+                  <div className="flex relative">  
+                    <ThumbUpIcon className="absolute h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary" 
+                      aria-hidden="false"
+                      onClick={() => handleLikeClick(comments._id)}
                     />
-                    <p className="absolute text-gray-base pl-12  pt-6">{comments.likes.length}</p>
+                    <p className=" text-gray-base pl-12  pt-6">{comments.likes.length}</p>
                   </div>
-                  <div className="flex relative ml-5">
-                    <ReplyIcon className="h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary"
+                  <div className="flex  ml-5">
+                    <ReplyIcon className="absolute h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary"
                       aria-hidden="true"
+                      onClick={handleReplyClick}
                     />
-                    <p className="absolute text-gray-base pl-12  pt-6">Reply</p>
+                    <p className=" text-gray-base pl-12  pt-6">Reply</p>
                   </div>
                 </div>
               </div>

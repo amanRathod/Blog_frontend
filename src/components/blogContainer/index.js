@@ -19,6 +19,7 @@ const Index = () => {
 
   const [content, setContent] = useState(blogData.content);
   const [comments, setComments] = useState(blogData.comments);
+  console.log('comenene', comments);
   const [likes, setLikes] = useState(blogData.likes);
   const [title, setTitle] = useState(blogData.title)
   const [userId, setUserId] = useState(blogData.userId);
