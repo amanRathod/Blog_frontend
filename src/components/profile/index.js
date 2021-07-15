@@ -9,7 +9,8 @@ import UserData from './UserData';
 import ProfileContext from '../../context/profile';
 
 const Profile = ({ loggedInUser }) => {
-  const { profile } = useContext(ProfileContext);
+  const profile  = useContext(ProfileContext);
+  console.log('profile header', profile);
 
   return (
     <>

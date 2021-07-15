@@ -5,7 +5,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as ROUTES from '../constants/routes';
-import WriteStory from './story/write-story';
+import Index from './blog';
 
 import UserContext from '../context/user';
 
@@ -34,7 +34,7 @@ const Header = () => {
   const handleWriteBlog = (e) => {
     e.preventDefault();
 
-    history.push(WriteStory);
+    history.push(Index);
   };
 
   return (

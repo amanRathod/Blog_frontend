@@ -13,13 +13,13 @@ import { getPostByPostId } from '../../service/backened_call';
 const Index = () => {
   const commentInput = useRef(null);
   const location = useLocation();
+  console.log('lock',location.state);
   const [userData, setUserData] = useState(location.state.userData);
   const [blogData, setBlogData] = useState(location.state.blogData);
 
 
   const [content, setContent] = useState(blogData.content);
   const [comments, setComments] = useState(blogData.comments);
-  console.log('comenene', comments);
   const [likes, setLikes] = useState(blogData.likes);
   const [title, setTitle] = useState(blogData.title)
   const [userId, setUserId] = useState(blogData.userId);

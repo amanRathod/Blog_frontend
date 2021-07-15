@@ -26,9 +26,9 @@ const UserHeader = ({
   loggedInUser
 }) => {
   const profile = useContext(ProfileContext);
+  console.log('pro userheader', profile)
   const { username } = useParams();
   const [blog, setBlog] = useState([])
-  console.log('randdede', blog)
   const [userProfile, setUserProfile] = useState({});
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;
@@ -40,7 +40,6 @@ const UserHeader = ({
    
       fetchData(profile._id).then((randomData) => {
         setBlog(randomData);
-        console.log('randdd',randomData.length)
       });
 
     const isUserFollowing = async (loggedInusername, profileId) => {

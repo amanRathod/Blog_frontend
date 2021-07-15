@@ -79,13 +79,13 @@ export default function UserData() {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
-                <div className={tab === 1 ? 'block' : 'hidden'} id="link1">
+                <div className={tab === 1 ? 'block' : 'hidden'} >
                   <UserPosts />
                 </div>
                 <div className={tab === 2 ? 'block' : 'hidden'} >
                   <UserFollowers />
                 </div>
-                <div className={tab === 3 ? 'block' : 'hidden'} id="link3">
+                <div className={tab === 3 ? 'block' : 'hidden'} >
                   <UserFollowing />
                 </div>
               </div>
