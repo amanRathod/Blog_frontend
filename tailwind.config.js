@@ -23,7 +23,9 @@ module.exports = {
       black: {
         left: '#17191ad0',
         right: '#352d2d',
-        borders: ''
+        borders: '',
+        base: '#414141',
+        dark: '#222831'
 
       },
       gray: {

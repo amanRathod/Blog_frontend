@@ -5,7 +5,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as ROUTES from '../constants/routes';
-import Index from './blog';
 
 import UserContext from '../context/user';
 
@@ -31,11 +30,11 @@ const Header = () => {
     }
   };
 
-  const handleWriteBlog = (e) => {
-    e.preventDefault();
+  // const handleWriteBlog = (e) => {
+  //   e.preventDefault();
 
-    history.push(Index);
-  };
+  //   history.push(Index);
+  // };
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -53,7 +52,7 @@ const Header = () => {
           <div className="text-center flex items-center align-items">
             {user ? (
               <>
-                <Link to={ROUTES.WRITE_STORY} aria-label="Write-Story">
+                <Link to={`/write-blog/${user.username}`} aria-label="Write-Story">
                   <button type="submit" className="focus:outline-none">
                     <svg
                       className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base "
