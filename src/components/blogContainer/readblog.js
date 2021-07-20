@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
+import parse from 'html-react-parser';
+import DOMPurify from 'dompurify';
 import BlogContext from '../../context/blogs';
 import ProfileContext  from '../../context/profile';
 import PostsHeader from '../postsHeader';
@@ -23,7 +25,8 @@ const ReadBlog = () => {
             {blog.title}
           </div>
           <div className="mt-4">
-            {blog.content}
+      
+            {parse(DOMPurify.sanitize(blog.content))}
           </div>
         </div>
         <div className="bg-white shadow-md mt-4 p-10">

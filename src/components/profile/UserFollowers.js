@@ -2,11 +2,11 @@
 /* eslint-disable import/named */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import Skelton from 'react-loading-skeleton';
 import ProfileContext from '../../context/profile';
+import UserContext from '../../context/user';
 import { getUserByUserId } from '../../service/backened_call';
 
 const fetchData = async (followers) => {
@@ -20,19 +20,20 @@ const fetchData = async (followers) => {
 
 const UserFollowers = () => {
   const profile = useContext(ProfileContext);
-  const [user, setUser] = useState([]);
-
+  const [profileFollower, setProfileFollower] = useState([]);
+  const { user } = useContext(UserContext);
+  console.log('useridddd', user);
   useEffect(() => {
     fetchData(profile.followers).then((userData) => {
-      setUser(userData);
+      setProfileFollower(userData);
     });
   }, [profile.followers]);
 
   return (
     <div className={`flex mx-auto max-w-screen-lg `}>
       <div className="flex flex-wrap justify-between">
-        {user
-          ? user.map((UserKey, idx) => (
+        {profileFollower
+          ? profileFollower.map((UserKey, idx) => (
               <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
                 <img
                   className="max-h-20 w-full opacity-80 absolute top-0 "
@@ -63,12 +64,17 @@ const UserFollowers = () => {
                   )}
                 </div>
                 <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-                  {UserKey.fullName ? (
+                  {user.followers.includes(UserKey._id) ? (
                     <div className=" border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base ">
-                      Follow
+                      Following
                     </div>
                   ) : (
-                    <Skelton rect height={30} width={70} />
+                    <div
+                      className={`border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base 
+                      ${user.id === UserKey._id ? 'hidden' : 'block'}`}
+                    >
+                      Follow
+                    </div>
                   )}
                 </div>
               </div>

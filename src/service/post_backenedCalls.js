@@ -13,10 +13,10 @@ export async function addLikesId(userId, blogId) {
   }
 }
 
-export async function addLikesIntoComments(blogId, userId, commentId) {
+export async function addLikesIntoComments(blogId, userId, commentId, liketoggle) {
   try {
     const response = await axios.post(
-      `http://localhost:4444/postData/addLikesforComments?userId=${userId}&blogId=${blogId}&commentId=${commentId}`
+      `http://localhost:4444/postData/addLikesforComments?userId=${userId}&blogId=${blogId}&commentId=${commentId}&liketoggle=${liketoggle}`
     );
     return response;
   } catch (err) {

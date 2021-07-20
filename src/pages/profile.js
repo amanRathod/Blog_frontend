@@ -24,7 +24,6 @@ const Profile = () => {
     async function getUser(username) {
       const UserData = await getUserByUsername(username);
       setId(UserData.data._id);
-      console.log('hellooo')
       setFollowers(UserData.data.followers);
       setFollowing(UserData.data.following);
       setFullName(UserData.data.fullName);

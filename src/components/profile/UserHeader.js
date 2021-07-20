@@ -26,7 +26,6 @@ const UserHeader = ({
   loggedInUser
 }) => {
   const profile = useContext(ProfileContext);
-  console.log('pro userheader', profile)
   const { username } = useParams();
   const [blog, setBlog] = useState([])
   const [userProfile, setUserProfile] = useState({});

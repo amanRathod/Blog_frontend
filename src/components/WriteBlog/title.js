@@ -20,7 +20,7 @@ const Title = () => {
       required="true"
         placeholder="Title ..."    
         className="w-full bg-gray-background h-20 pl-6 mb-4 text-xl focus:outline-none "
-        value={blog.title}
+        value={ blog.title}
         onChange={(e) => blog.setTitle(e.target.value)}
       />
       <div className="flex justify-between mb-4">

@@ -11,3 +11,13 @@ export async function togglefollowers(loggedInUsername, profileUsername, toggleV
     console.error(err);
   }
 }
+
+export async function saveBlog(blog) {
+  try {
+    console.log('put blog dtaa', blog);
+    const response = await axios.put('http://localhost:4444/putData/saveBLog', blog);
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}

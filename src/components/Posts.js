@@ -3,10 +3,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/style-prop-object */
 import React, { useContext, useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
-import { getAllPosts, getSingleUserByUserId} from '../service/backened_call';
+import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
+import DOMPurify from 'dompurify';
+import { getAllPosts, getSingleUserByUserId } from '../service/backened_call';
 import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
+import DropDown from './dropdown';
+import UserContext from '../context/user';
 
 const fetchData = async () => {
   const response = await getAllPosts();
@@ -15,13 +19,13 @@ const fetchData = async () => {
 
 const Timeline = () => {
   const [posts, setPosts] = useState([]);
-  
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     fetchData().then((randomData) => {
       const data = randomData;
       setPosts(data);
     });
-
   }, []);
 
   return (
@@ -29,8 +33,15 @@ const Timeline = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
         {Object.keys(posts).map((postsKey, idx) => (
           <div className="hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
-            <div className="flex items-center space-x-2 mb-10">
-              <PostsHeader userId={posts[postsKey].userId} date={posts[postsKey]} boolDate/>
+            <div className="flex justify-between">
+              <div className="flex items-center space-x-2 mb-10">
+                <PostsHeader userId={posts[postsKey].userId} date={posts[postsKey]} boolDate />
+              </div>
+              {posts[postsKey].userId === user.id ? (
+                <div>
+                  <DropDown setPosts={setPosts} postData={posts[postsKey]} />
+                </div>
+              ) : null}
             </div>
 
             <img className="w-full rounded-xl" src={posts[postsKey].photo} alt="" />
@@ -44,7 +55,7 @@ const Timeline = () => {
 
             <div className="max-w-full">
               <p className="truncate text-base font-medium tracking-wide text-gray-600 mt-1">
-                {posts[postsKey].content}
+                {parse(DOMPurify.sanitize(posts[postsKey].content))}
               </p>
             </div>
             <div className="flex gap-4 mt-5">
@@ -76,7 +87,7 @@ const Timeline = () => {
                 </svg>
                 <span>{posts[postsKey].comments.length}</span>
               </button>
-              <ReadMore postsData={posts[postsKey]}/>
+              <ReadMore postsData={posts[postsKey]} />
             </div>
           </div>
         ))}

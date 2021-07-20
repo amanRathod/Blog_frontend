@@ -21,6 +21,8 @@ const Index = () => {
   const [comments, setComments] = useState(blogData.comments);
   const [likes, setLikes] = useState(blogData.likes);
   const [title, setTitle] = useState(blogData.title)
+  console.log('titleeee', title);
+  console.log('datasss', blogData);
   const [userId, setUserId] = useState(blogData.userId);
   const [date, setDate] = useState(blogData.updatedAt)
   const [id, setId] = useState(blogData._id);
