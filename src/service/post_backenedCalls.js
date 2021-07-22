@@ -37,7 +37,6 @@ export async function updateComment(blogId, comment, loggedInUserId) {
 
 export async function addBlog(blog) {
   try {
-    console.log('bloggggg', blog);
     const response = await axios.post(`http://localhost:4444/postData/addblog`, blog);
     console.log(response);
     return response.data;

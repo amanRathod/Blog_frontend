@@ -42,7 +42,7 @@ export async function getPostsByUserId(userId) {
 export async function getUserByUsername(username) {
   try {
     const response = await axios.get(`http://localhost:4444/getData/UserByUsername/${username}`);
-    return response;
+    return response.data;
   } catch (err) {
     console.error(err);
   }

@@ -8,17 +8,12 @@ import UserHeader from './UserHeader';
 import UserData from './UserData';
 import ProfileContext from '../../context/profile';
 
-const Profile = ({ loggedInUser }) => {
-  const profile  = useContext(ProfileContext);
-  console.log('profile header', profile);
-
-  return (
+const Profile = ({ loggedInUser }) => (
     <>
       <UserHeader loggedInUser={loggedInUser} />
       <UserData />
     </>
   );
-};
 
 export default Profile;
 

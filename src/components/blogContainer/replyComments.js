@@ -11,7 +11,6 @@ const ReplyComments = () => {
   const {user} = useContext(UserContext);
   
   const handleLikeClick = async (commentId) => {
-    console.log('hit like')
     try {
       const response = await addLikesIntoComments(blog.id, user.id, commentId);
       if(response.status === 200){

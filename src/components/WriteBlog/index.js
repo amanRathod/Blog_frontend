@@ -15,10 +15,10 @@ const Index = () => {
   const userId = user.id;
   const [title, setTitle] = useState(blogData? blogData.title: '');
   const [tags, setTags] = useState(blogData? blogData.tags: '');
-  const [category, setCategory] = useState(blogData? blogData.category: 'Web Developmen');
+  const [category, setCategory] = useState(blogData? blogData.category: 'Web Development');
   const [status, setStatus] = useState(blogData? blogData.status: 'Public');
   const [content, setContent] =  useState(blogData? blogData.content: '');
- 
+  console.log('content', content);
   return (
     <>
       <Header />

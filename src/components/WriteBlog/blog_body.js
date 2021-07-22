@@ -4,7 +4,7 @@ import Title from './title';
 import Publish from './publish-button';
 
 const BlogBody = () => (
-  <div className="container mx-auto max-w-screen-lg">
+  <div className="container  h-full mx-auto max-w-screen-lg">
     <Title />
     <WriteBlog />
     <Publish />

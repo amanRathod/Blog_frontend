@@ -6,11 +6,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
+import { DotsVerticalIcon } from '@heroicons/react/solid';
 import Model from './model.js';
 import { isUserFollow, getPostsByUserId } from '../../service/backened_call';
 import { togglefollowers } from '../../service/put_backenedCall';
 import ProfileContext from '../../context/profile';
 import BlogContext from '../../context/blogs';
+import VerticalDot from './verticalDot.js';
 
 const fetchData = async (userId) => {
   try {
@@ -27,7 +29,7 @@ const UserHeader = ({
 }) => {
   const profile = useContext(ProfileContext);
   const { username } = useParams();
-  const [blog, setBlog] = useState([])
+  const [blog, setBlog] = useState([]);
   const [userProfile, setUserProfile] = useState({});
   const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== loggedInUser.username;
@@ -36,10 +38,9 @@ const UserHeader = ({
     document.title = 'Profile-Blog';
     setUserProfile(profile);
 
-   
-      fetchData(profile._id).then((randomData) => {
-        setBlog(randomData);
-      });
+    fetchData(profile._id).then((randomData) => {
+      setBlog(randomData);
+    });
 
     const isUserFollowing = async (loggedInusername, profileId) => {
       const data = await isUserFollow(loggedInusername, profileId);
@@ -79,21 +80,26 @@ const UserHeader = ({
         <div className="w-full">
           {userProfile.image ? (
             <div className="bg-white p-3 rounded shadow-xl hover:shadow-sm text-center py-5">
-              <div className="flex justify-center">
-                <img
-                  className="rounded-full"
-                  src={`${profile.image}`}
-                  width="100"
-                  alt={`${profile.fullName} Profile`}
-                />
+              {/* <VerticalDot /> */}
+              <div className="flex justify-around">
+                <div>
+                  <img
+                    className="rounded-full ml-36"
+                    src={`${profile.image}`}
+                    width="100"
+                    alt={`${profile.fullName} Profile`}
+                  />
+                </div>
+                <div>
+                  <VerticalDot />
+                </div>
               </div>
+
               <div className="text-center">
                 <h1 className="text-2xl mt-2">{profile.fullName}</h1>
                 <div className="px-5 text-sm">
-                  <p className="text-justify">
-                   {profile.bio}
-                  </p>
-                  <Model />
+                  <p className="text-justify">{profile.bio}</p>
+                  {/* <Model /> */}
                 </div>
                 <div className="flex justify-between mt-3 px-4">
                   <div className="flex flex-col">
@@ -107,7 +113,7 @@ const UserHeader = ({
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{ Object.keys(blog).length}</span>{' '}
+                    <span className="font-bold text-2xl">{Object.keys(blog).length}</span>{' '}
                     <span className="text-sm text-gray-base">Blog</span>{' '}
                   </div>
                   <div className="flex flex-col">
@@ -154,6 +160,3 @@ UserHeader.propTypes = {
     image: PropTypes.string
   }).isRequired
 };
-
-
-

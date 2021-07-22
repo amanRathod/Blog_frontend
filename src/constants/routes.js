@@ -6,3 +6,4 @@ export const RESET_PASSWORD = '/resetPassword/:token';
 export const PROFILE = '/profile/:username';
 export const WRITE_BLOG = '/write-blog/:username';
 export const READ_STORY = '/blog/:username/:title';
+export const SETTING = '/setting';

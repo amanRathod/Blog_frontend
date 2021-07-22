@@ -10,29 +10,32 @@ import ProfileContext from '../context/profile';
 const Profile = () => {
   const { username } = useParams();
   const { user } = useContext(UserContext);
-  const [profile, setProfile] = useState({});
 
-  const [_id, setId] = useState(profile._id);
-  const [followers, setFollowers] = useState(profile.followers);
-  const [following, setFollowing] = useState(profile.following);
-  const [fullName, setFullName] = useState(profile.fullName);
-  const [image, setImage] = useState(profile.image);
-  const [bio, setBio] = useState(profile.bio);
-  
+  const [_id, setId] = useState();
+  const [followers, setFollowers] = useState();
+  const [following, setFollowing] = useState();
+  const [fullName, setFullName] = useState();
+  const [image, setImage] = useState();
+  const [bio, setBio] = useState();
+  const [email, setEmail] = useState();
 
   useEffect(() => {
     async function getUser(username) {
       const UserData = await getUserByUsername(username);
-      setId(UserData.data._id);
-      setFollowers(UserData.data.followers);
-      setFollowing(UserData.data.following);
-      setFullName(UserData.data.fullName);
-      setImage(UserData.data.image);
-      setBio(UserData.data.bio);
-
+      setId(UserData._id);
+      setFollowers(UserData.followers);
+      setFollowing(UserData.following);
+      setFullName(UserData.fullName);
+      setImage(UserData.image);
+      setBio(UserData.bio);
+      setEmail(UserData.email);
     }
 
     getUser(username);
+
+    return () => {
+      getUser();
+    }
   }, [username]);
 
 
@@ -41,7 +44,7 @@ const Profile = () => {
       <Header />
       <div className="mx-auto max-w-screen-lg">
         <ProfileContext.Provider
-          value={{ _id, fullName, image, bio, setBio, followers, following, setFollowers, setFollowing }}
+          value={{ _id, email, fullName, image, bio, setBio, followers, following, setFollowers, setFollowing }}
         >
           <UserProfile loggedInUser={user} />
         </ProfileContext.Provider>

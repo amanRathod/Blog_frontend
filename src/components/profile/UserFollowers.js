@@ -22,7 +22,6 @@ const UserFollowers = () => {
   const profile = useContext(ProfileContext);
   const [profileFollower, setProfileFollower] = useState([]);
   const { user } = useContext(UserContext);
-  console.log('useridddd', user);
   useEffect(() => {
     fetchData(profile.followers).then((userData) => {
       setProfileFollower(userData);

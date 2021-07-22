@@ -59,5 +59,5 @@ module.exports = {
       visibility: ['hover', 'focus'],
       divideColor: ['group-hover'],
     }
-  }
- };
+  },
+};

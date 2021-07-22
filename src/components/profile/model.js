@@ -8,7 +8,6 @@ import UserContext from '../../context/login_user';
 export default function Model() {
 
   const profile = useContext(ProfileContext);
-  console.log('popopo', profile);
   const user = useContext(UserContext);
   const [description, setDescription] = useState(profile.bio);
   const [showModal, setShowModal] = useState(false);
