@@ -22,10 +22,12 @@
 .editor-class {
   background-color:rgb(255, 255, 255);
   padding: 1rem;
+  min-height: 30rem;
   border: 1px solid rgb(255, 255, 255);
 }
 .toolbar-class {
   border: 4px double #f32c2c;
+  background-color: #f7d5d5a2;
 }
 
 .preview {

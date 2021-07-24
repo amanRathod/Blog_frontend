@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
+import draftToHtml from 'draftjs-to-html';
 import { getAllPosts, getSingleUserByUserId } from '../service/backened_call';
 import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
@@ -55,7 +56,7 @@ const Timeline = () => {
 
             <div className="max-w-full">
               <p className="truncate text-base font-medium tracking-wide text-gray-600 mt-1">
-                {parse(DOMPurify.sanitize(posts[postsKey].content))}
+                {parse(DOMPurify.sanitize(((posts[postsKey].content))))}
               </p>
             </div>
             <div className="flex gap-4 mt-5">

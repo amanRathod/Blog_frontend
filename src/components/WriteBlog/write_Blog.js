@@ -1,39 +1,30 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useContext } from 'react';
-import { EditorState, ContentState } from 'draft-js';
+import React, { useState, useContext, useEffect } from 'react';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './style.css';
-import { convertFromHTML, convertToHTML } from 'draft-convert';
-import {stateFromHTML} from 'draft-js-import-html';
 import WriteBlogContext from '../../context/writeBlog';
 
-
 const WriteBlog = () => {
+  const { content, setContent } = useContext(WriteBlogContext);
 
-  const { content, setContent }= useContext(WriteBlogContext);
-
-  // function getText(html){
-  //   const divContainer= document.createElement('div');
-  //   divContainer.innerHTML = html;
-  //   return divContainer.textContent || divContainer.innerText || '';
-  // }
-  
-  console.log('hello', stateFromHTML(content))
-  const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(stateFromHTML(content))
-  );
-  console.log('editorstatee', editorState);
+  const [editorState, setEditorState] = useState();
+  useEffect(() => {
+    if (content) {
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content))));
+    } else {
+      setEditorState(EditorState.createEmpty());
+    }
+  }, []);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
-    const currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setContent(currentContentAsHTML);
-  }
-
-    // const createMarkup = (html) => ({
-    //   __html: DOMPurify.sanitize(html)
-    // })
+    const contentState = editorState.getCurrentContent();
+    console.log('content state', convertToRaw(contentState));
+    const rawContentState = convertToRaw(contentState);
+    setContent(JSON.stringify(convertToRaw(contentState)));
+  };
 
   return (
     <>
@@ -44,9 +35,22 @@ const WriteBlog = () => {
           wrapperClassName="wrapper-class"
           editorClassName="editor-class"
           toolbarClassName="toolbar-class"
+          mention={{
+            separator: ' ',
+            trigger: '#',
+            suggestions: [
+              { text: 'react', value: 'react', url: 'react' },
+              { text: 'react-hooks', value: 'react-hooks', url: 'react-hooks' },
+              { text: 'javascript', value: 'javascript', url: 'javascript' },
+              { text: 'aws', value: 'aws', url: 'aws' },
+              { text: 'draftjs', value: 'draftjs', url: 'draftjs' },
+              { text: 'python', value: 'python', url: 'python' },
+              { text: 'c++', value: 'c++', url: 'c++' },
+              { text: 'data-structure', value: 'data-structure', url: 'data-structure' },
+            ],
+          }}
+          hashtag={{}}
         />
-       {/* <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)} /> */}
-      
       </div>
     </>
   );
