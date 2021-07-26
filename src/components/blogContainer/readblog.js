@@ -13,7 +13,9 @@ import PostsHeader from '../postsHeader';
 import Comments from './comments';
 
 const ReadBlog = () => {
-  const { content, title, userId, date } = useContext(BlogContext);
+  const { content,comments, title, userId, date, tags } = useContext(BlogContext);
+  console.log('tagsss', tags)
+  console.log(comments)
   useEffect(() => {
     document.title = 'Blog';
   }, []);
@@ -23,11 +25,17 @@ const ReadBlog = () => {
   return (
     <>
       <div className=" col-span-5">
+      <div className="mt-4 font-bold text-6xl">{title}</div>
+  
+          {tags.map((tag, idx) => (
+
+          <li key={tag.id} className="bg-red-light m-2 ml-3 px-2 rounded-lg  inline-block hover:underline cursor-pointer">{tag.text}</li>
+
+        ))}
         <div className="container bg-gray-background shadow-md p-10">
           <PostsHeader userId={userId} date={date} boolDate />
-          <div className="mt-4 font-bold text-center">{title}</div>
-          <div className="mt-4">
-            {parse((tt))}
+          <div className="mt-4 text-lg">
+            {parse(tt)}
             {/* {renderHTML((tt))} */}
             {/* <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(tt)}} /> */}
           </div>

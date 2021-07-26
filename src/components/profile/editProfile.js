@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import Header from '../header';
 import BasicInfo from './profileUpdate/BasicInfo';
 import ProfileInfo from './profileUpdate/profileIdentity';
@@ -24,13 +25,24 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
+      console.log('pict',picture)
       formData.append('file', picture);
       formData.append('fullName', fullName);
       formData.append('bio', bio);
       formData.append('username', username);
-
+      console.log('formmm', formData);
+    //   const config = {
+    //     headers: {
+    //         'content-type': 'multipart/form-data'
+    //     }
+    // };
+    //   axios.post('http://localhost:4444/putData/updateProfile', formData, config)
+    //   .then((response) => {
+    //     alert('The file is successfully uploaded');
+    //   }).catch((error) => {
+    //     console.log(error);
+    //   });
       const response = await updateProfileData(formData);
-      console.log(response);
       history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.log(err);

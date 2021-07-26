@@ -17,12 +17,6 @@ const BasicInfo = () => {
 
   };
   
-  // useEffect( () => {
-  //   if(img){
-  //     setImage(img);
-  //   }
-  // },[img])
-  
   const reloadSrc = e => { 
     if(fallback){
       e.target.src = `/img/blank_profile.png`;
@@ -75,7 +69,7 @@ const BasicInfo = () => {
                 src={`${image}`}
                 alt={`${fullName} Profile`}
               /> */}
-              <img src={`${image}`} className='thumbnail__img' onError={reloadSrc} alt="profile"/>
+              <img src={`${image}`} className='' onError={reloadSrc} alt="profile"/>
             </span>
             {/* <button
               type="button"
@@ -86,6 +80,7 @@ const BasicInfo = () => {
             </button> */}
             <input 
               type="file"
+              name="file"
               onChange={handleImageUpload}
             />
           </div>

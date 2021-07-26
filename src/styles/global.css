@@ -1,10 +1,10 @@
-.form {
+/* .form {
   position: relative;
   /* width: 400px;
   height: 400px;
   display: grid;
   place-content: center; */
-
+/* 
   background: rgba(78, 69, 69, 0.582);
   border-top: 2px solid rgb(27, 16, 16);
   border-left: 2px solid rgba(29, 20, 20, 0.993);
@@ -14,9 +14,9 @@
   backdrop-filter: blur(12px);
   box-shadow: 0 26px 42px rgba(0, 0, 0, 0.2);
   font-family: "Montserrat", sans-serif;
-}
+} */
 
-input,
+/* input,
 button {
   font-size: 16px;
   display: block;
@@ -31,4 +31,129 @@ button {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 26px 42px rgba(0, 0, 0, 0.2);
   width: 300px;
+} */ */
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-bottom: 5vh;
+  text-align: center;
 }
+.App-link {
+  color: #2fb0d4;
+}
+
+.wrapper-class {
+  padding: 1rem;
+  border: 1px solid rgb(255, 255, 255);
+}
+.editor-class {
+  background-color:rgb(255, 255, 255);
+  padding: 1rem;
+  min-height: 30rem;
+  border: 1px solid rgb(255, 255, 255);
+}
+.toolbar-class {
+  border: 4px double #f32c2c;
+  background-color: #f7d5d5a2;
+}
+
+
+/* Example Styles for React Tags*/
+.app {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Example Styles for React Tags*/
+
+.container {
+  margin: auto;
+  width: 100%;
+} 
+.ReactTags__tags {
+  position: relative;
+} 
+
+/* Styles for the input */
+.ReactTags__tagInput {
+  width: 200px;
+  border-radius: 2px;
+  display: inline-block;
+  outline: none;
+}
+*:focus {
+  outline: none;
+}
+
+.ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+  height: 40px;
+  margin: 5;
+  font-size: 20px;
+  width: 100%;
+  border: 0px solid #f32c2c;
+  background-color: #FDFAF6;
+}
+
+/* Styles for selected tags */
+.ReactTags__selected span.ReactTags__tag {
+  border: 0px solid rgb(233, 46, 46);
+  background: #f32c2c;
+  color: white;
+  font-size: 14px;
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 0 3px;
+  border-radius: 40px;
+}
+.ReactTags__selected a.ReactTags__remove {
+  color: rgb(252, 20, 20);
+  margin-left: 20px;
+  cursor: wait;
+}
+
+/* Styles for suggestions */
+.ReactTags__suggestions {
+  position: absolute;
+}
+.ReactTags__suggestions ul {
+  list-style-type: none;
+  box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+  background: white;
+  width: 200px;
+}
+.ReactTags__suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px;
+  margin: 0;
+  
+}
+.ReactTags__suggestions li mark {
+  text-decoration: underline;
+  background: none;
+  font-weight: 600;
+}
+.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+  background: #fc4032;
+  cursor: pointer;
+}
+.ReactTags__suggestions ul li.ReactTags__activeSuggestion :hover {
+  color: white;
+}
+
+.ReactTags__remove {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: white;
+}
+
+

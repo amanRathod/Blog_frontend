@@ -3,7 +3,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/style-prop-object */
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
 import draftToHtml from 'draftjs-to-html';
@@ -12,6 +11,14 @@ import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
 import DropDown from './dropdown';
 import UserContext from '../context/user';
+
+const  mystyle ={
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 4,
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+}
 
 const fetchData = async () => {
   const response = await getAllPosts();
@@ -45,18 +52,21 @@ const Timeline = () => {
               ) : null}
             </div>
 
-            <img className="w-full rounded-xl" src={posts[postsKey].photo} alt="" />
 
-            <p className="text-indigo-500 font-semibold text-base mt-2">
-              {posts[postsKey].category}
-            </p>
-            <h1 className="font-semibold text-gray-900 leading-none text-xl mt-1 capitalize truncate">
+            <h1 className="font-semibold text-gray-900 leading-none text-xl mt-1  capitalize truncate">
               {posts[postsKey].title}
             </h1>
+            {
+              posts[postsKey].tags.map((tag, idx) => (
+                <li key={tag.id} className="text-sm text-gray-base ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base">#{tag.text}</li>
+              ))
+            }
+            <img className="w-full rounded-xl" src={posts[postsKey].photo} alt="" />
 
-            <div className="max-w-full">
-              <p className="truncate text-base font-medium tracking-wide text-gray-600 mt-1">
-                {parse(DOMPurify.sanitize(((posts[postsKey].content))))}
+            <div style={mystyle} className=" max-w-full">
+              <p className=" text-gray-formbg text-center font-medium  mt-1">
+                {parse(draftToHtml((JSON.parse(posts[postsKey].content))))}
+                
               </p>
             </div>
             <div className="flex gap-4 mt-5">

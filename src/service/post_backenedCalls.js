@@ -37,7 +37,10 @@ export async function updateComment(blogId, comment, loggedInUserId) {
 
 export async function addBlog(blog) {
   try {
-    const response = await axios.post(`http://localhost:4444/postData/addblog`, blog);
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' }
+    };
+    const response = await axios.post(`http://localhost:4444/postData/addblog`, blog, config);
     console.log(response);
     return response.data;
   } catch (err) {

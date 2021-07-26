@@ -7,8 +7,18 @@ import PropTypes from 'prop-types';
 import {Link, useHistory, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
+import draftToHtml from 'draftjs-to-html';
 import { getPostsByUserId } from '../../service/backened_call';
 import ProfileContext from '../../context/profile';
+
+const  mystyle ={
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 4,
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+}
+
 
 const fetchData = async (userId) => {
   try {
@@ -52,9 +62,11 @@ export default function UserPosts() {
             <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
               {blog[blogsData].title}
             </h1>
-            <p className="overflow-hidden  text-gray-500 text-sm sm:text-base line-clamp-3">
-              {parse(DOMPurify.sanitize(blog[blogsData].content))}
+            <div style={mystyle}>
+              <p className="overflow-hidden  text-gray-500 text-sm sm:text-base ">
+              {parse(draftToHtml(JSON.parse(blog[blogsData].content)))}
             </p>
+            </div>
             <div className="flex gap-4 mt-auto">
               <button className="flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary">
                 <svg

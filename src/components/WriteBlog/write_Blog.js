@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './style.css';
+import '../../styles/global.css';
 import WriteBlogContext from '../../context/writeBlog';
 
 const WriteBlog = () => {
@@ -21,8 +21,6 @@ const WriteBlog = () => {
   const handleEditorChange = (state) => {
     setEditorState(state);
     const contentState = editorState.getCurrentContent();
-    console.log('content state', convertToRaw(contentState));
-    const rawContentState = convertToRaw(contentState);
     setContent(JSON.stringify(convertToRaw(contentState)));
   };
 

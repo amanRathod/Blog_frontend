@@ -15,7 +15,10 @@ export async function togglefollowers(loggedInUsername, profileUsername, toggleV
 
 export async function saveBlog(blog) {
   try {
-    const response = await axios.put('http://localhost:4444/putData/saveBLog', blog);
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data' }
+  }  
+    const response = await axios.put('http://localhost:4444/putData/saveBLog', blog, config);
     return response.data;
   } catch (err) {
     console.log(err.message);
@@ -24,6 +27,7 @@ export async function saveBlog(blog) {
 
 export async function updateProfileData(formData) {
   try {
+    console.log(formData);
     const config = {     
       headers: { 'content-type': 'multipart/form-data' }
   }  

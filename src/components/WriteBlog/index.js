@@ -8,21 +8,40 @@ import UserContext from '../../context/user';
 
 const Index = () => {
   const data = useLocation();
-  const [blogData, setBlogData] = useState(data.state? data.state.blogData: '');
-  
+  const [blogData, setBlogData] = useState(data.state ? data.state.blogData : '');
+
   const { username } = useParams();
   const { user } = useContext(UserContext);
   const userId = user.id;
-  const [title, setTitle] = useState(blogData? blogData.title: '');
-  const [tags, setTags] = useState(blogData? blogData.tags: '');
-  const [category, setCategory] = useState(blogData? blogData.category: 'Web Development');
-  const [status, setStatus] = useState(blogData? blogData.status: 'Public');
-  const [content, setContent] =  useState(blogData? blogData.content: '');
+  const [imageSrc, setImageSrc] = useState('');
+  const [coverPicture, setCoverPicture] = useState(blogData ? blogData.photo : '');
+  const [title, setTitle] = useState(blogData ? blogData.title : '');
+  const [tags, setTags] = useState(blogData ? blogData.tags : []);
+  const [status, setStatus] = useState(blogData ? blogData.status : 'Public');
+  const [content, setContent] = useState(blogData ? blogData.content : '');
+
   console.log('content', content);
   return (
     <>
       <Header />
-      <WriteBlogContext.Provider value={{blogData, userId, title, setTitle, tags, setTags, category, setCategory, status, setStatus, content, setContent}}>
+      <WriteBlogContext.Provider
+        value={{
+          imageSrc,
+          setImageSrc,
+          coverPicture,
+          setCoverPicture,
+          blogData,
+          userId,
+          title,
+          setTitle,
+          tags,
+          setTags,
+          status,
+          setStatus,
+          content,
+          setContent
+        }}
+      >
         <BlogBody />
       </WriteBlogContext.Provider>
     </>

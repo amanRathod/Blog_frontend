@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Headers from '../header';
 import ReadBlog from './readblog';
@@ -24,6 +24,7 @@ const Index = () => {
   const [userId, setUserId] = useState(blogData.userId);
   const [date, setDate] = useState(blogData.updatedAt)
   const [id, setId] = useState(blogData._id);
+  const [tags, setTags] = useState(blogData.tags);
   
   useEffect(() => {
     
@@ -42,7 +43,7 @@ const Index = () => {
     <>
       <Headers />  
       <div className="grid grid-cols-6 gap-4 justify-between mx-auto max-w-screen-lg">
-        <BlogContext.Provider value={{ commentInput, userData, id, userId, date, content, title, comments, setComments, likes, setLikes}} >
+        <BlogContext.Provider value={{tags, commentInput, userData, id, userId, date, content, title, comments, setComments, likes, setLikes}} >
           <ReadBlog />
           <Appreciate />
         </BlogContext.Provider>
