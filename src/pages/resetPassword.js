@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -30,7 +27,7 @@ export default function ForgetPassword() {
       if (response.status === 302) {
         setError(response.data.message);
       }
-      if(response.status === 200){
+      if (response.status === 200) {
         history.push(ROUTES.LOGIN);
       }
     });
@@ -64,6 +61,7 @@ export default function ForgetPassword() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button
+          type="submit"
           disabled={isValid}
           className={`px-3 py-2 border-4 rounded1
       ${isValid && 'opcaity-70'}`}

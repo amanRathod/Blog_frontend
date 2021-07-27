@@ -10,7 +10,7 @@ import ProfileContext from '../../context/profile';
 
 const Profile = ({ loggedInUser }) => (
     <>
-      <UserHeader loggedInUser={loggedInUser} />
+      <UserHeader />
       <UserData />
     </>
   );

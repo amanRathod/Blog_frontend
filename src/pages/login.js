@@ -37,7 +37,7 @@ export default function Login() {
             email: res.data.email,
             image: res.data.image,
             following: res.data.following,
-            followers: res.data.followers,
+            followers: res.data.followers
           };
           localStorage.setItem('user', JSON.stringify(storedata));
           history.push(ROUTES.DASHBOARD);
@@ -54,15 +54,16 @@ export default function Login() {
   const handleGithubAuth = (e) => {
     e.preventDefault();
 
-      fetch('http://localhost:4444/auth/github'
-        // method: 'GET',
-        // mode: 'cors',
-        // headers: {
-        //   Accept: 'application/json',
-        //   'Content-Type': 'application/json',
-        //   'Access-Control-Allow-Credentials': true,
-        // }
-      )
+    fetch(
+      'http://localhost:4444/auth/github'
+      // method: 'GET',
+      // mode: 'cors',
+      // headers: {
+      //   Accept: 'application/json',
+      //   'Content-Type': 'application/json',
+      //   'Access-Control-Allow-Credentials': true,
+      // }
+    )
       .then((response) => {
         const storeData = {
           id: response.data._id,
@@ -71,13 +72,12 @@ export default function Login() {
           username: response.data.username,
           image: response.data.image
         };
-        if(response.status === 200){
-        localStorage.setItem('user', JSON.stringify(storeData));
-        history.push(ROUTES.DASHBOARD);
+        if (response.status === 200) {
+          localStorage.setItem('user', JSON.stringify(storeData));
+          history.push(ROUTES.DASHBOARD);
         }
       })
-      .catch(error => {
-      });
+      .catch((error) => {});
   };
 
   const handleGoogleAuth = (e) => {
@@ -86,7 +86,7 @@ export default function Login() {
       axios({
         url: 'http://localhost:4444/auth/google',
         credentials: true,
-        method: 'GET',
+        method: 'GET'
       }).then((response) => {
         const storeData = {
           id: response.data._id,
@@ -95,7 +95,7 @@ export default function Login() {
           username: response.data.username,
           image: response.data.image,
           followers: response.data.followers,
-          following: response.data.following,
+          following: response.data.following
         };
         localStorage.setItem('user', JSON.stringify(storeData));
         history.push(ROUTES.DASHBOARD);

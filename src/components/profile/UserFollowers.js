@@ -1,9 +1,9 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/button-has-type */
 /* eslint-disable import/named */
-/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
 import ProfileContext from '../../context/profile';
 import UserContext from '../../context/user';
@@ -19,14 +19,14 @@ const fetchData = async (followers) => {
 };
 
 const UserFollowers = () => {
-  const profile = useContext(ProfileContext);
+  const { fullName, followers } = useContext(ProfileContext);
   const [profileFollower, setProfileFollower] = useState([]);
   const { user } = useContext(UserContext);
   useEffect(() => {
-    fetchData(profile.followers).then((userData) => {
+    fetchData(followers).then((userData) => {
       setProfileFollower(userData);
     });
-  }, [profile.followers]);
+  }, [followers]);
 
   return (
     <div className={`flex mx-auto max-w-screen-lg `}>
@@ -78,9 +78,14 @@ const UserFollowers = () => {
                 </div>
               </div>
             ))
-          : `${profile.fullName} doesn't have follower 🙄`}
+          : `${fullName} doesn't have follower 🙄`}
       </div>
     </div>
   );
 };
 export default UserFollowers;
+
+UserFollowers.propTypes = {
+  followers: PropTypes.array,
+  fullName: PropTypes.string
+};

@@ -1,18 +1,13 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/button-has-type */
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
-import { DotsVerticalIcon } from '@heroicons/react/solid';
-import Model from './model.js';
 import { isUserFollow, getPostsByUserId } from '../../service/backened_call';
 import { togglefollowers } from '../../service/put_backenedCall';
 import ProfileContext from '../../context/profile';
-import BlogContext from '../../context/blogs';
 import VerticalDot from './verticalDot.js';
+import UserContext from '../../context/user';
 
 const fetchData = async (userId) => {
   try {
@@ -23,22 +18,17 @@ const fetchData = async (userId) => {
   }
 };
 
-const UserHeader = ({
-  // eslint-disable-next-line react/prop-types
-  loggedInUser
-}) => {
-  const profile = useContext(ProfileContext);
-  const { username } = useParams();
+const UserHeader = () => {
+  const { _id, followers, setFollowers, following, setFollowing, image, fullName, bio, username } = useContext(ProfileContext);
   const [blog, setBlog] = useState([]);
-  const [userProfile, setUserProfile] = useState({});
-  const [userFollow, setUserFollow] = useState(false);
-  const btnFollow = username && username !== loggedInUser.username;
+  const { user } = useContext(UserContext);
+   const [userFollow, setUserFollow] = useState(false);
+  const btnFollow = username && username !== user.username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
-    setUserProfile(profile);
 
-    fetchData(profile._id).then((randomData) => {
+    fetchData(_id).then((randomData) => {
       setBlog(randomData);
     });
 
@@ -47,20 +37,19 @@ const UserHeader = ({
       setUserFollow(data);
     };
 
-    if (profile._id) {
-      isUserFollowing(loggedInUser.username, profile._id);
+    if (_id) {
+      isUserFollowing(user.username, _id);
     }
-  }, [loggedInUser.username, profile, userProfile._id]);
+  }, [user.username, _id]);
 
   const handleFollowClick = async (e) => {
     e.preventDefault();
 
     setUserFollow((userFollow) => !userFollow);
-    const data = await togglefollowers(loggedInUser.id, userProfile._id, !userFollow);
-
-    profile.setFollowers(data.profile.followers);
-    profile.setFollowing(data.profile.following);
-    setUserProfile(data.profile);
+    const data = await togglefollowers(user.id, _id, !userFollow);
+    console.log('dataaa', data);
+    setFollowers(data.profile.followers);
+    setFollowing(data.profile.following);
 
     const storeData = {
       id: data.loggedIn._id,
@@ -78,16 +67,16 @@ const UserHeader = ({
     <div classNameName="h-screen w-full py-20 px-3">
       <div className="max-w-md mx-auto md:max-w-lg ">
         <div className="w-full">
-          {userProfile.image ? (
+          {image ? (
             <div className="bg-white p-3 rounded shadow-xl hover:shadow-sm text-center py-5">
               {/* <VerticalDot /> */}
               <div className="flex justify-around">
                 <div>
                   <img
                     className="rounded-full ml-36"
-                    src={`${profile.image}`}
+                    src={`${image}`}
                     width="100"
-                    alt={`${profile.fullName} Profile`}
+                    alt={`${fullName} Profile`}
                   />
                 </div>
                 <div>
@@ -96,17 +85,17 @@ const UserHeader = ({
               </div>
 
               <div className="text-center">
-                <h1 className="text-2xl mt-2">{profile.fullName}</h1>
+                <h1 className="text-2xl mt-2">{fullName}</h1>
                 <div className="px-5 text-sm">
-                  <p className="text-justify">{profile.bio}</p>
+                  <p className="text-justify">{bio}</p>
                   {/* <Model /> */}
                 </div>
                 <div className="flex justify-between mt-3 px-4">
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{profile.followers.length}</span>{' '}
+                    <span className="font-bold text-2xl">{followers.length}</span>{' '}
                     <span className="text-sm  text-gray-base">
-                      {profile.followers.length === 1 || profile.followers.length === 0
+                      {followers.length === 1 || followers.length === 0
                         ? `Follower`
                         : `Followers`}
                     </span>{' '}
@@ -118,13 +107,14 @@ const UserHeader = ({
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{profile.following.length}</span>{' '}
+                    <span className="font-bold text-2xl">{following.length}</span>{' '}
                     <span className="text-sm text-gray-base">Following</span>{' '}
                   </div>
                 </div>
                 {btnFollow && (
                   <div className="flex flex-row justify-center px-4 mt-4">
                     <button
+                      type="submit"
                       className="text-lg h-10 w-2/6  text-white text-md rounded bg-orange-base hover:bg-orange-secondary focus:outline-none"
                       onClick={handleFollowClick}
                     >
@@ -148,15 +138,3 @@ const UserHeader = ({
 };
 
 export default UserHeader;
-
-UserHeader.propTypes = {
-  profile: PropTypes.shape({
-    id: PropTypes.number,
-    fullName: PropTypes.string,
-    username: PropTypes.string,
-    email: PropTypes.string,
-    following: PropTypes.array,
-    followers: PropTypes.array,
-    image: PropTypes.string
-  }).isRequired
-};

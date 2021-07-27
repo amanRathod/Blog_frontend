@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -16,13 +15,14 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState([]);
-  const isInvalid = fullName === '' ||  username === '' || email === '' || password === '' || confirmPassword === ''
-  
-  const handlesubmit =  (e) => {
+  const isInvalid =
+    fullName === '' || username === '' || email === '' || password === '' || confirmPassword === '';
+
+  const handlesubmit = (e) => {
     e.preventDefault();
     // setError([]);
 
-    try{
+    try {
       axios({
         method: 'POST',
         data: {
@@ -30,44 +30,34 @@ export default function Signup() {
           username,
           email,
           password,
-          confirmPassword,      
+          confirmPassword
         },
         credentails: true,
-        url: 'http://localhost:4444/user/register',
+        url: 'http://localhost:4444/user/register'
       }).then((res) => {
+        /** Best way to set values into array */
+        // setError([...error, ...res.data.error]);
 
-          /** Best way to set values into array */
-          // setError([...error, ...res.data.error]);
-
-          const objValue=[];
-          if(res.status === 203) {
-            Object.keys(res.data.error).forEach((errorKey, idx) => {
-
-              const value = res.data.error[errorKey];
-              // setError([...error, value]);
-              objValue.push(value)
-
-            })
-            setError(objValue)
-            }
-          else {
-            history.push(ROUTES.LOGIN)
-          }
-          
-        
+        const objValue = [];
+        if (res.status === 203) {
+          Object.keys(res.data.error).forEach((errorKey, idx) => {
+            const value = res.data.error[errorKey];
+            // setError([...error, value]);
+            objValue.push(value);
+          });
+          setError(objValue);
+        } else {
+          history.push(ROUTES.LOGIN);
+        }
       });
+    } catch (err) {
+      console.error(err);
     }
-    catch(err){
-      console.error(err)
-    }
-    
-   
   };
-  
+
   useEffect(() => {
-    document.title = 'Sign Up - Blog'
-    
-  })
+    document.title = 'Sign Up - Blog';
+  });
 
   return (
     <div className=" flex  items-center justify-center h-screen bg-gradient-to-l from-black-left  to-black-right">
@@ -77,16 +67,15 @@ export default function Signup() {
             SIGN-UP
           </h1>
           {/* {error && <p>{error}</p>} */}
-            <ol>
-              {
-                error.map((errorValue, errorIdx) => (
-                  <li key={errorIdx} className="text-xl overflow-hidden  text-center text-red-primary">{errorValue}</li>
-                ))
-              }
-            </ol>
-          
-          
-          <form >
+          <ol>
+            {error.map((errorValue, errorIdx) => (
+              <li key={errorIdx} className="text-xl overflow-hidden  text-center text-red-primary">
+                {errorValue}
+              </li>
+            ))}
+          </ol>
+
+          <form>
             <div>
               <input
                 aria-label="Enter your Full Name"
@@ -155,16 +144,13 @@ export default function Signup() {
             </div>
           </form>
 
-          <hr className="text-white opacity-70 w-80 mt-2"/>
+          <hr className="text-white opacity-70 w-80 mt-2" />
           <div className="flex justify-center items-center mt-3">
-          <p className="text-lg text-white opacity-30">
-            Have an account?{` `}</p>
+            <p className="text-lg text-white opacity-30">Have an account?{` `}</p>
             <Link to={ROUTES.LOGIN} className="font-bold px-2 text-white bg-opacity-0">
               Login
             </Link>
-          
-        </div>
-        
+          </div>
         </div>
       </div>
     </div>

@@ -31,9 +31,6 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space, KeyCodes.tab
 const Tags = () => {
   const { tags, setTags } = useContext(WriteBlogContext);
 
-  // const [tags, setTags] = useState([]);
-  console.log('tagssss', tags);
-
   const handleDelete = (i) => {
     setTags(tags.filter((tag, index) => index !== i));
   };
@@ -69,3 +66,16 @@ const Tags = () => {
   );
 };
 export default Tags;
+
+Tags.prototype = {
+  tags: PropTypes.array,
+  setTags: PropTypes.func,
+  handleDelete: PropTypes.func,
+  handleAddition: PropTypes.func,
+  handleDrag: PropTypes.func,
+  suggestions: PropTypes.array,
+  delimiters: PropTypes.array,
+  autocomplete: PropTypes.bool,
+  inputFieldPosition: PropTypes.string,
+  placeholder: PropTypes.string
+};

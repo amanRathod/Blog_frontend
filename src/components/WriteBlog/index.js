@@ -20,7 +20,6 @@ const Index = () => {
   const [status, setStatus] = useState(blogData ? blogData.status : 'Public');
   const [content, setContent] = useState(blogData ? blogData.content : '');
 
-  console.log('content', content);
   return (
     <>
       <Header />

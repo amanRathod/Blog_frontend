@@ -1,31 +1,31 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import UpdateProfile from '../../../context/editProfile';
 
 const BasicInfo = () => {
-  const {fullName, setFullName, bio, setBio, image, setImage, setPicture} = useContext(UpdateProfile);
+  const { fullName, setFullName, bio, setBio, image, setImage, setPicture } =
+    useContext(UpdateProfile);
   const [fallback, setFallback] = useState(false);
-  
+
   const handleImageUpload = (e) => {
     e.preventDefault();
     const fileImage = e.target.files[0];
     const src = URL.createObjectURL(fileImage);
-    console.log('filemafge', fileImage);
-    console.log('sercc', src);
     setImage(src);
     setPicture(fileImage);
-
   };
-  
-  const reloadSrc = e => { 
-    if(fallback){
+
+  const reloadSrc = (e) => {
+    if (fallback) {
       e.target.src = `/img/blank_profile.png`;
-    }else{
-      e.target.src = image
-      setFallback(true)
+    } else {
+      e.target.src = image;
+      setFallback(true);
     }
-  }
-  
+  };
+
   return (
     <>
       <div className="container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
@@ -42,7 +42,6 @@ const BasicInfo = () => {
             className="px-3 py-3 placeholder-gray-borderbg text-gray-base relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full focus:ring-orange-base"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-
           />
         </div>
         <div className="mb-6">
@@ -69,7 +68,7 @@ const BasicInfo = () => {
                 src={`${image}`}
                 alt={`${fullName} Profile`}
               /> */}
-              <img src={`${image}`} className='' onError={reloadSrc} alt="profile"/>
+              <img src={`${image}`} className="" onError={reloadSrc} alt="profile" />
             </span>
             {/* <button
               type="button"
@@ -78,11 +77,7 @@ const BasicInfo = () => {
             >
               Change
             </button> */}
-            <input 
-              type="file"
-              name="file"
-              onChange={handleImageUpload}
-            />
+            <input type="file" name="file" onChange={handleImageUpload} />
           </div>
         </div>
       </div>
@@ -90,3 +85,13 @@ const BasicInfo = () => {
   );
 };
 export default BasicInfo;
+
+BasicInfo.propTypes = {
+  fullName: PropTypes.string,
+  setFullName: PropTypes.func,
+  bio: PropTypes.string,
+  setBio: PropTypes.func,
+  image: PropTypes.string,
+  setImage: PropTypes.func,
+  setPicture: PropTypes.func
+};

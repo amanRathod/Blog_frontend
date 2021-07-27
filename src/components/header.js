@@ -1,15 +1,12 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable prettier/prettier */
-
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as ROUTES from '../constants/routes';
-
 import UserContext from '../context/user';
 
 const Header = () => {
-  const  { user }  = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const history = useHistory();
 
   const handleLogOut = (e) => {

@@ -1,23 +1,22 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Tags from './tags';
 import WriteBlogContext from '../../context/writeBlog';
 
-
 const Title = () => {
   const { username } = useParams();
-  const {imageSrc, setImageSrc, title, setTitle, coverPicture, setCoverPicture} = useContext(WriteBlogContext);
+  const { imageSrc, setImageSrc, title, setTitle, coverPicture, setCoverPicture } =
+    useContext(WriteBlogContext);
 
-  // const [title, setTitle] = useState('');
-  // const [tags, setTags] = useState('');
   const handleFileUpload = (e) => {
     const linkObject = e.target.files[0];
     const temperoryLink = URL.createObjectURL(linkObject);
     setImageSrc(temperoryLink);
     setCoverPicture(linkObject);
-  }
+  };
   useEffect(() => {
     document.title = `${username}-Blog`;
   }, [username]);
@@ -25,10 +24,10 @@ const Title = () => {
   return (
     <>
       <input
-      required="true"
-        placeholder="Title ..."    
+        required="true"
+        placeholder="Title ..."
         className="w-full bg-gray-background h-20 pl-6 mb-4 text-5xl focus:outline-none "
-        value={ title}
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <div className="flex justify-between mb-4">
@@ -45,14 +44,16 @@ const Title = () => {
           </label>
         </div> */}
         <div className="">
-        <img src={`${imageSrc || coverPicture}`} alt="Cover Photo" />
-        <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
-        <input type="file"
-          name="file"
-          style={{display: 'none'}}
-          onChange={handleFileUpload}
-        /> Add Cover Photo
-        </label>
+          <img src={`${imageSrc || coverPicture}`} alt="Cover Photo" />
+          <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
+            <input
+              type="file"
+              name="file"
+              style={{ display: 'none' }}
+              onChange={handleFileUpload}
+            />{' '}
+            Add Cover Photo
+          </label>
         </div>
       </div>
     </>
@@ -60,3 +61,13 @@ const Title = () => {
 };
 
 export default Title;
+
+Title.propTypes = {
+  username: PropTypes.string.isRequired,
+  imageSrc: PropTypes.string,
+  title: PropTypes.string,
+  coverPicture: PropTypes.string,
+  setTitle: PropTypes.func,
+  setImageSrc: PropTypes.func,
+  setCoverPicture: PropTypes.func
+};

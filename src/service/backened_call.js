@@ -1,6 +1,3 @@
-/* eslint-disable no-empty */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable prettier/prettier */
 import axios from 'axios';
 
 export async function getUserByUserId(followers) {
@@ -59,13 +56,11 @@ export async function isUserFollow(loggedInUser, profileId) {
   }
 }
 
-
 export async function getPostByPostId(Id) {
-  try { 
+  try {
     const response = await axios.get(`http://localhost:4444/getData/postById/${Id}`);
     return response.data;
   } catch (err) {
     console.error(err);
   }
 }
-

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
 export async function addLikesId(userId, blogId) {
@@ -6,7 +5,6 @@ export async function addLikesId(userId, blogId) {
     const response = await axios.post(
       `http://localhost:4444/postData/addLikesId?userId=${userId}&blogId=${blogId}`
     );
-    console.log(response);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -41,7 +39,6 @@ export async function addBlog(blog) {
       headers: { 'content-type': 'multipart/form-data' }
     };
     const response = await axios.post(`http://localhost:4444/postData/addblog`, blog, config);
-    console.log(response);
     return response.data;
   } catch (err) {
     console.error(err);

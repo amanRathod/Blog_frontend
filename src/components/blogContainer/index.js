@@ -9,47 +9,61 @@ import BlogContext from '../../context/blogs';
 import Comments from './comments';
 import { getPostByPostId } from '../../service/backened_call';
 
-
 const Index = () => {
   const commentInput = useRef(null);
   const location = useLocation();
   const [userData, setUserData] = useState(location.state.userData);
   const [blogData, setBlogData] = useState(location.state.blogData);
 
-
   const [content, setContent] = useState(blogData.content);
   const [comments, setComments] = useState(blogData.comments);
   const [likes, setLikes] = useState(blogData.likes);
-  const [title, setTitle] = useState(blogData.title)
+  const [title, setTitle] = useState(blogData.title);
   const [userId, setUserId] = useState(blogData.userId);
-  const [date, setDate] = useState(blogData.updatedAt)
+  const [date, setDate] = useState(blogData.updatedAt);
   const [id, setId] = useState(blogData._id);
   const [tags, setTags] = useState(blogData.tags);
-  
+  const [photo, setPhoto] = useState(blogData.photo);
+
   useEffect(() => {
-    
     const getPosts = async (Id) => {
       const response = await getPostByPostId(Id);
       setComments(response.comments);
-      setLikes(response.likes)
-    }
+      setLikes(response.likes);
+    };
     getPosts(blogData._id);
 
-    return () => {getPosts()};
+    return () => {
+      getPosts();
+    };
+  }, [blogData._id, id]);
 
-  }, [blogData._id, id])
-
-  return(
+  return (
     <>
-      <Headers />  
+      <Headers />
       <div className="grid grid-cols-6 gap-4 justify-between mx-auto max-w-screen-lg">
-        <BlogContext.Provider value={{tags, commentInput, userData, id, userId, date, content, title, comments, setComments, likes, setLikes}} >
+        <BlogContext.Provider
+          value={{
+            photo,
+            tags,
+            commentInput,
+            userData,
+            id,
+            userId,
+            date,
+            content,
+            title,
+            comments,
+            setComments,
+            likes,
+            setLikes
+          }}
+        >
           <ReadBlog />
           <Appreciate />
         </BlogContext.Provider>
       </div>
-
     </>
   );
-}
+};
 export default Index;

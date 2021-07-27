@@ -34,23 +34,24 @@ export default function UserPosts() {
   const history = useHistory();
   const { username } = useParams();
   const [blog, setBlog] = useState([]);
-    
+  console.log('blogg', blog);
   useEffect(() => {
     fetchData(profile._id).then((randomData) => {
       setBlog(randomData);
     });
   }, [profile._id]);
-
+  console.log('proo', profile);
   const goToNextPage = (blogDatas) => {
+    const UserProfileData = JSON.parse(JSON.stringify(profile));
     history.push({
       pathname: `/blog/${username}/${blogDatas.title}`,
-      state: {blogData: blogDatas, userData: profile}
+      state: {blogData: blogDatas, userData: UserProfileData}
     });
   }
 
   return (
     <>
-      {Object.keys(blog).map((blogsData, _idx) => (
+      {blog? Object.keys(blog).map((blogsData, _idx) => (
         <div  className="bg-white mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
           <div
             style={{
@@ -98,7 +99,6 @@ export default function UserPosts() {
               </button>
               {/* <Link  key={Math.random()} to={{pathname: `/blog/${username}/${blog[blogsData].title}`, state: {blogData: blog[blogsData], userData: profile} }}> */}
               <button className="ml-auto flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary"
-                // onClick={goToNextPage(blog[blogsData])}
               >
                 <span>Read more</span>
               </button>
@@ -106,7 +106,12 @@ export default function UserPosts() {
             </div>
           </div>
         </div>
-      ))}
+      ))
+      : null}
     </>
   );
+}
+
+UserPosts.prototype = {
+
 }

@@ -1,5 +1,6 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable react/no-unused-prop-types */
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 import UserContext from '../context/user';
 import UserProfile from '../components/profile';
@@ -35,18 +36,29 @@ const Profile = () => {
 
     return () => {
       getUser();
-    }
+    };
   }, [username]);
-
 
   return (
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
         <ProfileContext.Provider
-          value={{ _id, email, fullName, image, bio, setBio, followers, following, setFollowers, setFollowing }}
+          value={{
+            _id,
+            email,
+            fullName,
+            image,
+            bio,
+            setBio,
+            followers,
+            following,
+            setFollowers,
+            setFollowing,
+            username
+          }}
         >
-          <UserProfile loggedInUser={user} />
+          <UserProfile />
         </ProfileContext.Provider>
       </div>
     </div>
@@ -54,3 +66,20 @@ const Profile = () => {
 };
 
 export default Profile;
+
+Profile.propTypes = {
+  username: PropTypes.string,
+  user: PropTypes.object,
+  followers: PropTypes.number,
+  following: PropTypes.number,
+  fullName: PropTypes.string,
+  image: PropTypes.string,
+  bio: PropTypes.string,
+  email: PropTypes.string,
+  setBio: PropTypes.func,
+  setEmail: PropTypes.func,
+  setFullName: PropTypes.func,
+  setImage: PropTypes.func,
+  setFollowers: PropTypes.func,
+  setFollowing: PropTypes.func
+};

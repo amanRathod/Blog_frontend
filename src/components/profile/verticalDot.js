@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
@@ -23,17 +25,14 @@ const VerticalDot = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
- console.log('typeee', typeof profile);
- console.log('profielee', profile);
- const obj = JSON.parse(JSON.stringify(profile));
- console.log('objj', obj);
- obj.username = username;
+  const obj = JSON.parse(JSON.stringify(profile));
+  obj.username = username;
   const goToEditPage = () => {
     history.push({
       pathname: '/setting',
-      state: {profile: obj}
-    })
-  }
+      state: { profile: obj }
+    });
+  };
 
   return (
     <>
@@ -64,7 +63,6 @@ const VerticalDot = () => {
                 onClick={goToEditPage}
               >
                 Edit Profile
-              
               </button>
 
               <button
@@ -83,3 +81,8 @@ const VerticalDot = () => {
 };
 
 export default VerticalDot;
+
+VerticalDot.propTypes = {
+  username: PropTypes.string.isRequired,
+  
+}

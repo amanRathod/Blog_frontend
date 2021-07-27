@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import UserFollowers from './UserFollowers';
 import UserPosts from './UserPosts';
 import UserFollowing from './UserFollowing';

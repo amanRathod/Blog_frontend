@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -44,8 +46,8 @@ const WriteBlog = () => {
               { text: 'draftjs', value: 'draftjs', url: 'draftjs' },
               { text: 'python', value: 'python', url: 'python' },
               { text: 'c++', value: 'c++', url: 'c++' },
-              { text: 'data-structure', value: 'data-structure', url: 'data-structure' },
-            ],
+              { text: 'data-structure', value: 'data-structure', url: 'data-structure' }
+            ]
           }}
           hashtag={{}}
         />
@@ -55,3 +57,8 @@ const WriteBlog = () => {
 };
 
 export default WriteBlog;
+
+WriteBlog.propTypes = {
+  content: PropTypes.string,
+  setContent: PropTypes.func
+};

@@ -1,24 +1,25 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import axios  from 'axios';
+import PropTypes from 'prop-types';
 import React, { useState, Fragment, useContext } from 'react';
 import ProfileContext from '../../context/profile';
 import UserContext from '../../context/login_user';
 
 export default function Model() {
 
-  const profile = useContext(ProfileContext);
+  const { username, bio, setBio, _id} = useContext(ProfileContext);
   const user = useContext(UserContext);
-  const [description, setDescription] = useState(profile.bio);
+  const [description, setDescription] = useState(bio);
   const [showModal, setShowModal] = useState(false);
-  const btnEdit = profile.username && profile.username === user.username;
+  const btnEdit = username && username === user.username;
 
   const updateDescription = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`http://localhost:4444/putData/updateBio?bio=${description}&id=${profile._id}`);
-      profile.setBio(response.data.bio);
+      const response = await axios.put(`http://localhost:4444/putData/updateBio?bio=${description}&id=${_id}`);
+      setBio(response.data.bio);
       
     } catch (err) {
       console.error(err.message);
@@ -73,7 +74,7 @@ export default function Model() {
                 <div className="relative  flex-auto mb-3 pt-0">
                   <input
                     type="text"
-                    className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                    className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
@@ -109,4 +110,13 @@ export default function Model() {
       
     </>
   );
+}
+
+Model.prototype = {
+  propTypes: {
+    username: PropTypes.string,
+    bio: PropTypes.string,
+    setBio: PropTypes.func,
+    _id: PropTypes.objectOf(PropTypes.number),
+  }
 }

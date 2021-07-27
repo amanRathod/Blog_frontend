@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { ReplyIcon, ThumbUpIcon } from '@heroicons/react/solid';
 import BlogContext from '../../context/blogs';
 import PostsHeader from '../postsHeader';
@@ -7,14 +8,15 @@ import UserContext from '../../context/user';
 import { addLikesIntoComments } from '../../service/post_backenedCalls';
 
 const ReplyComments = () => {
-  const blog = useContext(BlogContext);
+  const { id, comments, setComments} = useContext(BlogContext);
   const {user} = useContext(UserContext);
   
   const handleLikeClick = async (commentId) => {
     try {
-      const response = await addLikesIntoComments(blog.id, user.id, commentId);
+      console.log(typeof id);
+      const response = await addLikesIntoComments(id, user.id, commentId);
       if(response.status === 200){
-      blog.setComments(response.data);
+      setComments(response.data);
       }
       
     } catch (err) {
@@ -33,9 +35,9 @@ const ReplyComments = () => {
 
   return (
     <>
-      {blog.comments ? (
+      {comments ? (
         <div className="bg-gray-background p-10  shadow-md  hover:shadow-sm">
-          {blog.comments.map((comments, idx) => (
+          {comments.map((comments, idx) => (
             <>
               <div
                 key={idx}
@@ -71,3 +73,9 @@ const ReplyComments = () => {
 };
 
 export default ReplyComments;
+
+ReplyComments.prototype = {
+  comments: PropTypes.array,
+  setComments: PropTypes.func,
+  id: PropTypes.string,
+}

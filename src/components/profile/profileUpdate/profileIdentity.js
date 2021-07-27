@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import UpdateProfile from '../../../context/editProfile';
 
 const ProfileInfo = () => {
@@ -44,3 +45,12 @@ const ProfileInfo = () => {
 };
 
 export default ProfileInfo;
+
+ProfileInfo.prototype = {
+  propTypes: {
+    username: PropTypes.string,
+    email: PropTypes.string,
+    setUsername: PropTypes.func,
+    setEmail: PropTypes.func,   
+  }
+}

@@ -1,6 +1,9 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
 import draftToHtml from 'draftjs-to-html';
@@ -13,33 +16,35 @@ import PostsHeader from '../postsHeader';
 import Comments from './comments';
 
 const ReadBlog = () => {
-  const { content,comments, title, userId, date, tags } = useContext(BlogContext);
-  console.log('tagsss', tags)
-  console.log(comments)
+  const { content, title, userId, date, tags, photo } = useContext(BlogContext);
   useEffect(() => {
     document.title = 'Blog';
   }, []);
-  const tt = draftToHtml((JSON.parse(content)))
-  console.log(draftToHtml((JSON.parse(content))))
-
+  const htmlText = draftToHtml(JSON.parse(content));
   return (
     <>
       <div className=" col-span-5">
-      <div className="mt-4 font-bold text-6xl">{title}</div>
-  
-          {tags.map((tag, idx) => (
+        {photo && <img src={`${photo}`} alt="Cover Photo" />}
+        <div className="mt-4 font-bold text-6xl">{title}</div>
 
-          <li key={tag.id} className="bg-red-light m-2 ml-3 px-2 rounded-lg  inline-block hover:underline cursor-pointer">{tag.text}</li>
-
+        {tags.map((tag, idx) => (
+          <li
+            key={tag.id}
+            className="bg-red-light m-2 ml-3 px-2 rounded-lg  inline-block hover:underline cursor-pointer"
+          >
+            {tag.text}
+          </li>
         ))}
         <div className="container bg-gray-background shadow-md p-10">
           <PostsHeader userId={userId} date={date} boolDate />
           <div className="mt-4 text-lg">
-            {parse(tt)}
-            {/* {renderHTML((tt))} */}
-            {/* <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(tt)}} /> */}
+            {parse(htmlText)}
+            {/* {renderHTML((htmlText))} */}
+            {/* <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(htmlText)}} /> */}
           </div>
-          {/* <Markup content={tt} /> */}
+
+          {/*  <Markup content={htmlText} /> */}
+
           {/* {htmlText} */}
           {/* {tt} */}
         </div>
@@ -52,3 +57,13 @@ const ReadBlog = () => {
 };
 
 export default ReadBlog;
+
+ReadBlog.propTypes = {
+  content: PropTypes.string,
+  comments: PropTypes.array,
+  title: PropTypes.string,
+  userId: PropTypes.string,
+  date: PropTypes.string,
+  tags: PropTypes.array,
+  photo: PropTypes.string
+};

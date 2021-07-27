@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import WriteBlogContext from '../../context/writeBlog';
 import { addBlog } from '../../service/post_backenedCalls';
@@ -8,15 +10,15 @@ import * as ROUTES from '../../constants/routes';
 import UserContext from '../../context/user';
 
 const Publish = () => {
-  const {blogData, title, tags, coverPicture, content, status, setStatus} = useContext(WriteBlogContext);
+  const { blogData, title, tags, coverPicture, content, status, setStatus } =
+    useContext(WriteBlogContext);
   const history = useHistory();
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handlePublish = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      console.log(tags)
       formData.append('title', title);
       formData.append('tags', JSON.stringify(tags));
       formData.append('file', coverPicture);
@@ -34,17 +36,13 @@ const Publish = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      console.log(tags)
-      console.log('coeverr', coverPicture);
       formData.append('file', coverPicture);
       formData.append('title', title);
       formData.append('tags', JSON.stringify(tags));
       formData.append('content', content);
       formData.append('status', status);
-      console.log('blofff', blogData._id);
       formData.append('blogId', blogData._id);
       const response = await saveBlog(formData);
-      console.log('resopnse', response);
       history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.log(err);
@@ -85,3 +83,13 @@ const Publish = () => {
 };
 
 export default Publish;
+
+Publish.propTypes = {
+  blogData: PropTypes.object,
+  title: PropTypes.string,
+  tags: PropTypes.array,
+  coverPicture: PropTypes.object,
+  content: PropTypes.string,
+  status: PropTypes.string,
+  setStatus: PropTypes.func,
+}

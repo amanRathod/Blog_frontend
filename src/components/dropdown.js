@@ -1,8 +1,6 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { createPopper } from '@popperjs/core';
@@ -65,6 +63,7 @@ const DropDown = ({ postData, setPosts }) => {
               style={{ minWidth: '12rem' }}
             >
               <button
+                type="button"
                 className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light"
                 onClick={goToNextPage}
               >
@@ -72,6 +71,7 @@ const DropDown = ({ postData, setPosts }) => {
               </button>
 
               <button
+                type="button"
                 href="#pab"
                 className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light"
                 onClick={(e) => handleDelete(e)}
@@ -87,3 +87,8 @@ const DropDown = ({ postData, setPosts }) => {
 };
 
 export default DropDown;
+
+DropDown.propTypes = {
+  postData: PropTypes.object.isRequired,
+  setPosts: PropTypes.func.isRequired
+};

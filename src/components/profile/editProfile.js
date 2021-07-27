@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import Header from '../header';
 import BasicInfo from './profileUpdate/BasicInfo';
 import ProfileInfo from './profileUpdate/profileIdentity';
@@ -25,24 +26,23 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      console.log('pict',picture)
       formData.append('file', picture);
       formData.append('fullName', fullName);
       formData.append('bio', bio);
       formData.append('username', username);
-      console.log('formmm', formData);
-    //   const config = {
-    //     headers: {
-    //         'content-type': 'multipart/form-data'
-    //     }
-    // };
-    //   axios.post('http://localhost:4444/putData/updateProfile', formData, config)
-    //   .then((response) => {
-    //     alert('The file is successfully uploaded');
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   });
       const response = await updateProfileData(formData);
+      console.log('ress', response);
+      const storeData = {
+        id: response._id,
+        email: response.email,
+        fullName: response.fullName,
+        username: response.username,
+        image: response.image,
+        followers: response.followers,
+        following: response.following
+      };
+  
+      localStorage.setItem('user', JSON.stringify(storeData));
       history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.log(err);
@@ -84,3 +84,20 @@ const EditProfile = () => {
 };
 
 export default EditProfile;
+
+EditProfile.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  setProfile: PropTypes.func.isRequired,
+  fullName: PropTypes.string.isRequired,
+  bio: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setFullName: PropTypes.func.isRequired,
+  setBio: PropTypes.func.isRequired,
+  setPicture: PropTypes.func.isRequired
+};

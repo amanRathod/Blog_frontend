@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -48,7 +47,11 @@ export default function ForgetPassword() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button className="px-3 mt-2 py-2 bg-orange-base border-4 rounded" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="px-3 mt-2 py-2 bg-orange-base border-4 rounded"
+          onClick={handleSubmit}
+        >
           Reset Password
         </button>
       </div>
