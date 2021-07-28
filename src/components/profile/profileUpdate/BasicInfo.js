@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { EditProfileSkeleton, EditProfileSkeletons } from '../../skeleton';
 import UpdateProfile from '../../../context/editProfile';
 
 const BasicInfo = () => {
@@ -28,6 +29,7 @@ const BasicInfo = () => {
 
   return (
     <>
+    { image ? (
       <div className="container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
         <h1 className="mb-5 text-xl font-bold text-gray-formbg">Basic Info</h1>
         <div className="mb-6">
@@ -64,23 +66,25 @@ const BasicInfo = () => {
           </label>
           <div className="mt-1 flex items-center">
             <span className="inline-block h-40 w-40 rounded-full overflow-hidden bg-gray-100">
-              {/* <img 
-                src={`${image}`}
-                alt={`${fullName} Profile`}
-              /> */}
               <img src={`${image}`} className="" onError={reloadSrc} alt="profile" />
             </span>
-            {/* <button
-              type="button"
-              className="ml-5 bg-orange-base py-2 px-3 border-transparent border-gray-base rounded-md shadow-sm text-md leading-4 font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-base hover:shadow-lg"
-              onClick={handleImageUpload}
-            >
-              Change
-            </button> */}
-            <input type="file" name="file" onChange={handleImageUpload} />
+            <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base hover:bg-orange-secondary text-white  rounded-md shadow-lg px-3 py-1 mb-4">
+            <input
+              type="file"
+              name="file"
+              style={{ display: 'none' }}
+              onChange={handleImageUpload}
+            />{' '}
+            Update Image
+          </label>
           </div>
         </div>
       </div>
+    ) : (
+      <>
+        <EditProfileSkeleton />
+      </>
+    )}
     </>
   );
 };

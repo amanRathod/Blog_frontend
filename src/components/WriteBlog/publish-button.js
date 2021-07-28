@@ -1,8 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import WriteBlogContext from '../../context/writeBlog';
 import { addBlog } from '../../service/post_backenedCalls';
 import { saveBlog } from '../../service/put_backenedCall';
@@ -13,6 +12,7 @@ const Publish = () => {
   const { blogData, title, tags, coverPicture, content, status, setStatus } =
     useContext(WriteBlogContext);
   const history = useHistory();
+  const { username } = useParams();
   const { user } = useContext(UserContext);
 
   const handlePublish = async (e) => {
@@ -25,6 +25,7 @@ const Publish = () => {
       formData.append('content', content);
       formData.append('status', status);
       formData.append('userId', user.id);
+      formData.append('username', username);
       const response = await addBlog(formData);
       history.push(ROUTES.DASHBOARD);
     } catch (err) {
@@ -91,5 +92,5 @@ Publish.propTypes = {
   coverPicture: PropTypes.object,
   content: PropTypes.string,
   status: PropTypes.string,
-  setStatus: PropTypes.func,
-}
+  setStatus: PropTypes.func
+};

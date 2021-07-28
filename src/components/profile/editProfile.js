@@ -31,7 +31,6 @@ const EditProfile = () => {
       formData.append('bio', bio);
       formData.append('username', username);
       const response = await updateProfileData(formData);
-      console.log('ress', response);
       const storeData = {
         id: response._id,
         email: response.email,

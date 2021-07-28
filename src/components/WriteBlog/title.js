@@ -63,7 +63,7 @@ const Title = () => {
 export default Title;
 
 Title.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   imageSrc: PropTypes.string,
   title: PropTypes.string,
   coverPicture: PropTypes.string,

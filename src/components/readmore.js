@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
-import { getSingleUserByUserId } from '../service/backened_call';
-import BlogContext from '../context/blogs';
+import { useHistory } from 'react-router-dom';
+import { getSingleUser } from '../service/backened_call';
 
 const ReadMore = ({ postsData }) => {
   const [user, setUser] = useState({});
   const history = useHistory();
+
   useEffect(() => {
-    const getUsername = async (userId) => {
-      const response = await getSingleUserByUserId(userId);
-      setUser(response.data);
+    const getUsername = async (username) => {
+      const response = await getSingleUser(username);
+      setUser(response);
     };
-    getUsername(postsData.userId);
-  }, [postsData]);
+    if (postsData.username) {
+      getUsername(postsData.username);
+    }
+  }, []);
 
   const goToNextPage = () => {
     history.push({

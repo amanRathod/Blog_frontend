@@ -16,7 +16,7 @@ export async function saveBlog(blog) {
     const config = {
       headers: { 'content-type': 'multipart/form-data' }
     };
-    const response = await axios.put('http://localhost:4444/putData/saveBLog', blog, config);
+    const response = await axios.put('http://localhost:4444/putData/updateBLog', blog, config);
     return response.data;
   } catch (err) {
     console.log(err.message);

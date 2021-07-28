@@ -2,35 +2,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Skelton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
-import { isUserFollow, getPostsByUserId } from '../../service/backened_call';
+import { isUserFollow } from '../../service/backened_call';
 import { togglefollowers } from '../../service/put_backenedCall';
+import { ProfileSKeleton } from '../skeleton';
 import ProfileContext from '../../context/profile';
 import VerticalDot from './verticalDot.js';
 import UserContext from '../../context/user';
 
-const fetchData = async (userId) => {
-  try {
-    const response = await getPostsByUserId(userId);
-    return response.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 const UserHeader = () => {
-  const { _id, followers, setFollowers, following, setFollowing, image, fullName, bio, username } = useContext(ProfileContext);
-  const [blog, setBlog] = useState([]);
+  const { _id, followers, setFollowers, following, setFollowing, image, fullName, bio, username, blog } = useContext(ProfileContext);
   const { user } = useContext(UserContext);
    const [userFollow, setUserFollow] = useState(false);
   const btnFollow = username && username !== user.username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
-
-    fetchData(_id).then((randomData) => {
-      setBlog(randomData);
-    });
 
     const isUserFollowing = async (loggedInusername, profileId) => {
       const data = await isUserFollow(loggedInusername, profileId);
@@ -47,7 +33,6 @@ const UserHeader = () => {
 
     setUserFollow((userFollow) => !userFollow);
     const data = await togglefollowers(user.id, _id, !userFollow);
-    console.log('dataaa', data);
     setFollowers(data.profile.followers);
     setFollowing(data.profile.following);
 
@@ -126,9 +111,7 @@ const UserHeader = () => {
             </div>
           ) : (
             <>
-              <Skelton circle className="flex ml-40" height={100} width={100} />
-              <Skelton text className="ml-11 h-10" width={300} />
-              <Skelton rect className="" height={80} width={400} />
+              <ProfileSKeleton />
             </>
           )}
         </div>

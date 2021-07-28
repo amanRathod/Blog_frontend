@@ -16,10 +16,14 @@ import PostsHeader from '../postsHeader';
 import Comments from './comments';
 
 const ReadBlog = () => {
-  const { content, title, userId, date, tags, photo } = useContext(BlogContext);
+  const { content, title, date, tags, photo, username } = useContext(BlogContext);
   useEffect(() => {
     document.title = 'Blog';
   }, []);
+  console.log('innser content', content);
+  
+  // const htmlText = content;
+ 
   const htmlText = draftToHtml(JSON.parse(content));
   return (
     <>
@@ -36,7 +40,7 @@ const ReadBlog = () => {
           </li>
         ))}
         <div className="container bg-gray-background shadow-md p-10">
-          <PostsHeader userId={userId} date={date} boolDate />
+          <PostsHeader username={username} date={date} boolDate />
           <div className="mt-4 text-lg">
             {parse(htmlText)}
             {/* {renderHTML((htmlText))} */}
@@ -54,6 +58,7 @@ const ReadBlog = () => {
       </div>
     </>
   );
+  
 };
 
 export default ReadBlog;

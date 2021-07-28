@@ -12,7 +12,7 @@ import { getUserByUserId } from '../../service/backened_call';
 const fetchData = async (followers) => {
   try {
     const response = await getUserByUserId(followers);
-    return response.data;
+    return response;
   } catch (err) {
     console.error(err);
   }

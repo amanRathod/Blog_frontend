@@ -7,13 +7,13 @@ import UserContext from '../../context/user';
 import { addLikesId } from '../../service/post_backenedCalls';
 
 const Appreciate = () => {
-  const {id, likes, comments, setLikes} = useContext(BlogContext);
+  const {id, likes, comments, setLikes, username} = useContext(BlogContext);
   const { user } = useContext(UserContext);
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
-      const response = await addLikesId(user.id, id);
+      const response = await addLikesId(user.username, id);
       setLikes(response);
     } catch (err) {
       console.error(err);

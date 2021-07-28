@@ -3,34 +3,25 @@ import axios from 'axios';
 export async function getUserByUserId(followers) {
   try {
     const responseObject = await axios.get(`http://localhost:4444/getData/userId/${followers}`);
-    return responseObject;
+    return responseObject.data;
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
 }
 
 export async function getAllPosts() {
   try {
     const responseObject = await axios.get(`http://localhost:4444/getData/allPosts`);
-    return responseObject;
+    return responseObject.data;
   } catch (err) {
     console.error(err);
   }
 }
 
-export async function getSingleUserByUserId(userId) {
+export async function getSingleUser(username) {
   try {
-    const response = await axios.get(`http://localhost:4444/getData/singleId/${userId}`);
-    return response;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-export async function getPostsByUserId(userId) {
-  try {
-    const response = await axios.get(`http://localhost:4444/getData/postsBYId/${userId}`);
-    return response;
+    const response = await axios.get(`http://localhost:4444/getData/singleUserData/${username}`);
+    return response.data;
   } catch (err) {
     console.error(err);
   }

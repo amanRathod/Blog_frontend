@@ -10,7 +10,7 @@ import ProfileContext from '../../context/profile';
 const fetchData = async (following) => {
   try {
     const response = await getUserByUserId(following);
-    return response.data;
+    return response;
   } catch (err) {
     console.error(err);
   }

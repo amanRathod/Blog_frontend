@@ -1,12 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { EditProfileSkeletons } from '../../skeleton';
 import UpdateProfile from '../../../context/editProfile';
 
 const ProfileInfo = () => {
   const { email, setEmail, username, setUsername } = useContext(UpdateProfile);
   return (
     <>
+    {email? (
       <div className="container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
         <h1 className="mb-5 text-xl font-bold text-gray-formbg">User Info</h1>
         <div className="mb-6">
@@ -40,6 +42,9 @@ const ProfileInfo = () => {
           />
         </div>
       </div>
+    ) : (
+      <EditProfileSkeletons />
+    )}
     </>
   );
 };

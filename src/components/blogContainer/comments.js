@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import BlogContext from '../../context/blogs';
 import UserContext from '../../context/user';
 import PostsHeader from '../postsHeader';
-import { updateComment } from '../../service/post_backenedCalls';
+import { addComment } from '../../service/post_backenedCalls';
 import ReplyComments from './replyComments';
 
 const Comments = () => {
-  const {commentInput, id, setComments} = useContext(BlogContext);
+  const {commentInput, id, setComments, username} = useContext(BlogContext);
   const { user } = useContext(UserContext);
   const [inputComment, setInputComment] = useState('');
 
@@ -17,9 +17,10 @@ const Comments = () => {
     e.preventDefault();
 
     try {
-      const response = await updateComment(id, inputComment, user.id);
+      const response = await addComment(id, inputComment, user.username);
       // setCommentContent( [...commentContent, {comment: inputComment, userId: user.id}] )
-      setComments(response.data.posts.comments);
+      console.log('com', response)
+      setComments(response.comments);
       setInputComment('');
     } catch (err) {
       console.error(err.message);
@@ -38,7 +39,7 @@ const Comments = () => {
             placeholder="Discuss ..."
             type="text"
             name="add-comment"
-            className="border"
+            className="border focus:outline-none"
             value={inputComment}
             onChange={(e) => setInputComment(e.target.value)}
             ref={commentInput}

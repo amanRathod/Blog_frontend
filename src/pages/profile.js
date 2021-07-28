@@ -19,10 +19,11 @@ const Profile = () => {
   const [image, setImage] = useState();
   const [bio, setBio] = useState();
   const [email, setEmail] = useState();
+  const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-    async function getUser(username) {
-      const UserData = await getUserByUsername(username);
+    const getProfileData = async () => {
+      const { UserData, UserBlogs } = await getUserByUsername(username);
       setId(UserData._id);
       setFollowers(UserData.followers);
       setFollowing(UserData.following);
@@ -30,12 +31,13 @@ const Profile = () => {
       setImage(UserData.image);
       setBio(UserData.bio);
       setEmail(UserData.email);
+      setBlog(UserBlogs);
+    };
+    if (username) {
+      getProfileData(username);
     }
-
-    getUser(username);
-
     return () => {
-      getUser();
+      getProfileData();
     };
   }, [username]);
 
@@ -55,7 +57,8 @@ const Profile = () => {
             following,
             setFollowers,
             setFollowing,
-            username
+            username,
+            blog
           }}
         >
           <UserProfile />

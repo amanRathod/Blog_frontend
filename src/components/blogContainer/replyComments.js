@@ -9,16 +9,15 @@ import { addLikesIntoComments } from '../../service/post_backenedCalls';
 
 const ReplyComments = () => {
   const { id, comments, setComments} = useContext(BlogContext);
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   
   const handleLikeClick = async (commentId) => {
     try {
-      console.log(typeof id);
-      const response = await addLikesIntoComments(id, user.id, commentId);
+      const response = await addLikesIntoComments(id, user.username, commentId);
       if(response.status === 200){
-      setComments(response.data);
+        setComments(response.data); 
+        console.log(typeof comments);
       }
-      
     } catch (err) {
       console.error(err)
     }
@@ -38,12 +37,12 @@ const ReplyComments = () => {
       {comments ? (
         <div className="bg-gray-background p-10  shadow-md  hover:shadow-sm">
           {comments.map((comments, idx) => (
-            <>
+            
               <div
                 key={idx}
                 className="bg-white border mt-2 p-4 rounded-xl shadow-lg hover:shadow-sm border-gray-primary hover:border-red-secondary"
               >
-                <PostsHeader userId={comments.loggedInUserId} boolDate={false} />
+                <PostsHeader username={comments.username} boolDate={false} />
                 <div className="bg-white w-auto py-4  pt-3 pl-11">{comments.comment}</div>
                 <div className="flex justify-start">
                   <div className="flex relative">  
@@ -62,7 +61,7 @@ const ReplyComments = () => {
                   </div>
                 </div>
               </div>
-            </>
+            
           ))}
         </div>
       ) : (

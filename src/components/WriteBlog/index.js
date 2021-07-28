@@ -19,6 +19,16 @@ const Index = () => {
   const [tags, setTags] = useState(blogData ? blogData.tags : []);
   const [status, setStatus] = useState(blogData ? blogData.status : 'Public');
   const [content, setContent] = useState(blogData ? blogData.content : '');
+  // console.log('contentt', content);
+  // console.log('blogDatata', blogData);
+  // console.log('data', data);
+  // useEffect(() => {
+  //   setCoverPicture(blogData.photo);
+  //   setTitle(blogData.title);
+  //   setTags(blogData.tags);
+  //   setContent(blogData.content);
+  //   setStatus(blogData.status);
+  // }, [blogData] )
 
   return (
     <>

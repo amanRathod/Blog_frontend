@@ -12,31 +12,35 @@ import { getPostByPostId } from '../../service/backened_call';
 const Index = () => {
   const commentInput = useRef(null);
   const location = useLocation();
-  const [userData, setUserData] = useState(location.state.userData);
-  const [blogData, setBlogData] = useState(location.state.blogData);
-
+  const [userData, setUserData] = useState(location.state? location.state.userData: '');
+  const [blogData, setBlogData] = useState(location.state? location.state.blogData: '');
+  
   const [content, setContent] = useState(blogData.content);
   const [comments, setComments] = useState(blogData.comments);
+  
   const [likes, setLikes] = useState(blogData.likes);
   const [title, setTitle] = useState(blogData.title);
-  const [userId, setUserId] = useState(blogData.userId);
   const [date, setDate] = useState(blogData.updatedAt);
   const [id, setId] = useState(blogData._id);
   const [tags, setTags] = useState(blogData.tags);
   const [photo, setPhoto] = useState(blogData.photo);
+  const [username, setUsername] = useState(blogData.username);
 
   useEffect(() => {
-    const getPosts = async (Id) => {
-      const response = await getPostByPostId(Id);
+    document.title = 'Read Blog'
+    console.log('useEffect called')
+    const getPosts = async () => {
+      const response = await getPostByPostId(id);
       setComments(response.comments);
       setLikes(response.likes);
     };
-    getPosts(blogData._id);
+    getPosts();
 
     return () => {
       getPosts();
     };
-  }, [blogData._id, id]);
+    // window.history.replaceState({}, document.title)
+  }, [blogData, id]);
 
   return (
     <>
@@ -49,7 +53,7 @@ const Index = () => {
             commentInput,
             userData,
             id,
-            userId,
+            username,
             date,
             content,
             title,
