@@ -32,6 +32,8 @@ const Index = () => {
 
   return (
     <>
+      <div className="bg-white dark:bg-darkMode-base">
+
       <Header />
       <WriteBlogContext.Provider
         value={{
@@ -51,8 +53,9 @@ const Index = () => {
           setContent
         }}
       >
-        <BlogBody />
+        <BlogBody/>
       </WriteBlogContext.Provider>
+      </div>
     </>
   );
 };

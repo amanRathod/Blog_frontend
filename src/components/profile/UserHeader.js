@@ -53,16 +53,17 @@ const UserHeader = () => {
       <div className="max-w-md mx-auto md:max-w-lg ">
         <div className="w-full">
           {image ? (
-            <div className="bg-white p-3 rounded shadow-xl hover:shadow-sm text-center py-5">
+            <div className="container  bg-white dark:text-white dark:bg-darkMode-primary rounded shadow-xl hover:shadow-sm text-center py-5">
               {/* <VerticalDot /> */}
               <div className="flex justify-around">
                 <div>
                   <img
-                    className="rounded-full ml-36"
+                    className="rounded-full ml-16 sm:ml-36"
                     src={`${image}`}
                     width="100"
                     alt={`${fullName} Profile`}
                   />
+                  <h1 className="text-2xl mt-2 ml-12 sm:ml-32">{fullName}</h1>
                 </div>
                 <div>
                   <VerticalDot />
@@ -70,7 +71,7 @@ const UserHeader = () => {
               </div>
 
               <div className="text-center">
-                <h1 className="text-2xl mt-2">{fullName}</h1>
+                {/* <h1 className="text-2xl mt-2 ">{fullName}</h1> */}
                 <div className="px-5 text-sm">
                   <p className="text-justify">{bio}</p>
                   {/* <Model /> */}

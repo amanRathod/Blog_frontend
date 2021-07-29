@@ -7,6 +7,7 @@ import ReadBlog from './readblog';
 import Appreciate from './appreciate';
 import BlogContext from '../../context/blogs';
 import Comments from './comments';
+import ReplyComments from './replyComments';
 import { getPostByPostId } from '../../service/backened_call';
 
 const Index = () => {
@@ -44,8 +45,10 @@ const Index = () => {
 
   return (
     <>
+      <div className="bg-white dark:bg-darkMode-base">
+
       <Headers />
-      <div className="grid grid-cols-6 gap-4 justify-between mx-auto max-w-screen-lg">
+      <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg">
         <BlogContext.Provider
           value={{
             photo,
@@ -63,9 +66,10 @@ const Index = () => {
             setLikes
           }}
         >
-          <ReadBlog />
-          <Appreciate />
+          <ReadBlog/>
+          <ReplyComments />
         </BlogContext.Provider>
+      </div>
       </div>
     </>
   );

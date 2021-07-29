@@ -11,7 +11,6 @@ const UserAuthListener = () => {
       setUser(null);
     }
   };
-
   useEffect(() => {
     UserExists();
   }, []);

@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as ROUTES from '../constants/routes';
 import UserContext from '../context/user';
+import DarkMode from './darkMode';
 
 const Header = () => {
   const { user } = useContext(UserContext);
@@ -28,7 +29,7 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-gray-primary mb-8">
+    <header className="h-16 bg-white dark:bg-darkMode-base dark:text-white border-b border-gray-primary ">
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
           <div className=" text-center felx items-center align-items cursor-pointer">
@@ -46,7 +47,7 @@ const Header = () => {
                 <Link to={`/write-blog/${user.username}`} aria-label="Write-Story">
                   <button type="submit" className="focus:outline-none">
                     <svg
-                      className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base "
+                      className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base dark:hover:text-darkMode-orange"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -73,7 +74,7 @@ const Header = () => {
                   type="button"
                 >
                   <svg
-                    className="w-8 mr-6 text-black-light cursor-pointer hover:text-orange-base"
+                    className="w-8 mr-6 text-black-light cursor-pointer hover:text-orange-base dark:hover:text-darkMode-orange"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -120,6 +121,7 @@ const Header = () => {
                 </Link>
               </>
             )}
+            <DarkMode />
           </div>
         </div>
       </div>

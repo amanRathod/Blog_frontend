@@ -21,9 +21,9 @@ const Appreciate = () => {
   };
 
   return (
-    <div className=" container col-span-1">
-      <div className="ml-6 mt-10">
-        <div className="flex ">
+    <div className=" container  ">
+      <div className="ml-10 sm:ml-56 md:ml-4 md:mt-10 flex md:flex-col">
+        <div className="flex">
           <ThumbUpIcon
             className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
             aria-hidden="true"
@@ -31,17 +31,19 @@ const Appreciate = () => {
           />
           <p className="mt-8 text-gray-base">{likes.length}</p>
         </div>
-        <div className="flex ">
+        <div className=" flex">
           <AnnotationIcon
-            className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
+            className="h-10 w-10 m-5  hover:text-orange-base focus:text-orange-secondary"
             aria-hidden="true"
           />
           <p className="mt-8 text-gray-base">{comments.length}</p>
         </div>
+        <div className="flex">
         <ShareIcon
           className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
           aria-hidden="true"
         />
+        </div>
       </div>
     </div>
   );

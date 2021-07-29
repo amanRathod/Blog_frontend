@@ -42,10 +42,10 @@ const Timeline = () => {
     <>
     
       <div className="container mx-auto max-w-screen-lg h-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
           {posts ? (
             Object.keys(posts).map((postsKey, idx) => (
-              <div key={idx} className="hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
+              <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 mb-10">
                     <PostsHeader
@@ -61,13 +61,13 @@ const Timeline = () => {
                   ) : null}
                 </div>
 
-                <h1 className="font-semibold text-gray-900 leading-none text-xl mt-1  capitalize truncate">
+                <h1 className="font-semibold dark:text-white leading-none text-xl mt-1  capitalize truncate">
                   {posts[postsKey].title}
                 </h1>
                 {posts[postsKey].tags.map((tag, idx) => (
                   <li
                     key={tag.id}
-                    className="text-sm text-gray-base ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
+                    className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
                   >
                     #{tag.text}
                   </li>
@@ -75,14 +75,14 @@ const Timeline = () => {
                 <img className="w-full rounded-xl" src={posts[postsKey].photo} alt="" />
 
                 <div style={mystyle} className=" max-w-full">
-                  <div className=" text-gray-formbg text-center font-medium  mt-1">
+                  <div className="dark:text-white dark:text-opacity-80 text-gray-formbg text-center font-medium  mt-1">
                     {parse(draftToHtml(JSON.parse(posts[postsKey].content)))}
                   </div>
                 </div>
                 <div className="flex gap-4 mt-5">
                   <button
                     type="button"
-                    className="flex items-center gap-1 h-10 border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
+                    className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10 border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
                   >
                     <svg
                       stroke="currentColor"
@@ -99,7 +99,7 @@ const Timeline = () => {
                   </button>
                   <button
                     type="button"
-                    className="flex items-center gap-1 h-10  border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
+                    className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10  border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
                   >
                     <svg
                       stroke="currentColor"

@@ -50,7 +50,7 @@ const Tags = () => {
   };
 
   return (
-    <div className="w-full bg-gray-background h-20 pl-6 mb-4 text-xl focus:outline-none ">
+    <div className="w-full bg-gray-background dark:bg-darkMode-base h-20 pl-6 mb-4 text-xl focus:outline-none ">
       <ReactTags
         tags={tags}
         suggestions={Geeks}

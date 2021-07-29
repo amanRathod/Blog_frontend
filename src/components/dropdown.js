@@ -41,7 +41,7 @@ const DropDown = ({ postData, setPosts }) => {
 
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className=" flex flex-wrap ">
         <div className="w-full sm:w-6/12 md:w-4/12 px-4">
           <div className="relative inline-flex align-middle w-full">
             <button
@@ -59,12 +59,12 @@ const DropDown = ({ postData, setPosts }) => {
             <div
               ref={popoverDropdownRef}
               className={`${dropdownPopoverShow ? 'block ' : 'hidden '}
-          bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1`}
+              dark:bg-darkMode-base bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1`}
               style={{ minWidth: '12rem' }}
             >
               <button
                 type="button"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light"
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base  dark:hover:bg-darkMode-primary  dark:text-opacity-90 "
                 onClick={goToNextPage}
               >
                 Edit
@@ -73,7 +73,7 @@ const DropDown = ({ postData, setPosts }) => {
               <button
                 type="button"
                 href="#pab"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light"
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base dark:hover:bg-darkMode-primary  dark:text-opacity-90 "
                 onClick={(e) => handleDelete(e)}
               >
                 Delete

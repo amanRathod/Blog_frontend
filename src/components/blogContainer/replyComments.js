@@ -35,29 +35,29 @@ const ReplyComments = () => {
   return (
     <>
       {comments ? (
-        <div className="bg-gray-background p-10  shadow-md  hover:shadow-sm">
+        <div className="bg-gray-background dark:bg-darkMode-base p-10 container grid grid-cols-6 ">
           {comments.map((comments, idx) => (
             
               <div
                 key={idx}
-                className="bg-white border mt-2 p-4 rounded-xl shadow-lg hover:shadow-sm border-gray-primary hover:border-red-secondary"
+                className="col-span-6 lg:col-span-5 bg-white dark:bg-darkMode-primary w-full border mt-2 p-2 sm:p-4 rounded-xl shadow-sm  border-gray-primary hover:border-red-secondary dark:hover:border-darkMode-orange"
               >
                 <PostsHeader username={comments.username} boolDate={false} />
-                <div className="bg-white w-auto py-4  pt-3 pl-11">{comments.comment}</div>
-                <div className="flex justify-start">
-                  <div className="flex relative">  
-                    <ThumbUpIcon className="absolute h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary" 
-                      aria-hidden="false"
+                <div className=" w-auto py-4  pt-3 pl-11">{comments.comment}</div>
+                <div className="container flex">
+                  <div className="flex ">  
+                    <ThumbUpIcon className=" h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary" 
+                      aria-hidden="true"
                       onClick={() => handleLikeClick(comments._id)}
                     />
-                    <p className=" text-gray-base pl-12  pt-6">{comments.likes.length}</p>
+                    <p className=" text-gray-base pt-6">{comments.likes.length}</p>
                   </div>
-                  <div className="flex  ml-5">
-                    <ReplyIcon className="absolute h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary"
+                  <div className="">
+                    <ReplyIcon className=" h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary"
                       aria-hidden="true"
                       onClick={handleReplyClick}
                     />
-                    <p className=" text-gray-base pl-12  pt-6">Reply</p>
+                    {/* <p className=" text-gray-base pl-12  pt-6">Reply</p> */}
                   </div>
                 </div>
               </div>

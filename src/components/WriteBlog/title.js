@@ -26,7 +26,7 @@ const Title = () => {
       <input
         required="true"
         placeholder="Title ..."
-        className="w-full bg-gray-background h-20 pl-6 mb-4 text-5xl focus:outline-none "
+        className="w-full bg-gray-background dark:bg-darkMode-primary dark:text-white dark:text-opacity-70 h-20 pl-6 mb-4 text-5xl focus:outline-none "
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -44,8 +44,8 @@ const Title = () => {
           </label>
         </div> */}
         <div className="">
-          <img src={`${imageSrc || coverPicture}`} alt="Cover Photo" />
-          <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
+          <img src={`${imageSrc || coverPicture}`} alt="" />
+          <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base dark:bg-darkMode-orange dark:text-darkMode-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
             <input
               type="file"
               name="file"

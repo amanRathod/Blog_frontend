@@ -8,7 +8,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="bg-gray-background">
+    <div className="bg-gray-background dark:bg-darkMode-base">
       <Header />
       <Timeline />
     </div>

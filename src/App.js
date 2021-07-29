@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import UserAuthListener from './hooks/user-auth-listener';
+import Theme from './hooks/theme';
 import UserContext from './context/user';
+import ThemeContext from './context/theme';
 import * as ROUTES from './constants/routes';
-import PrivateRoute from './helper/private-route.js';
-import IsUserLoggedIn from './helper/is-user-loggedIn';
 
 const Login = lazy(() => import('./pages/login'));
 const Signup = lazy(() => import('./pages/signup'));
@@ -20,24 +20,28 @@ const renderLoader = () => <p>Loading...</p>;
 
 function App() {
   const user = UserAuthListener();
+  const { theme, setTheme } = Theme();
+  console.log('theme', theme);
   console.log('User Data', user);
   return (
     <UserContext.Provider value={{ user }}>
-      <Router>
-        <Suspense fallback={renderLoader()}>
-          <Switch>
-            <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
-            <Route path={ROUTES.LOGIN} component={Login} />
-            <Route path={ROUTES.SIGNUP} component={Signup} />
-            <Route path={ROUTES.PASS_FORGET} component={ForgetPassword} />
-            <Route path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
-            <Route path={ROUTES.PROFILE} component={Profile} />
-            <Route path={ROUTES.WRITE_BLOG} component={WriteBlog} />
-            <Route path={ROUTES.READ_STORY} component={ReadStory} />
-            <Route path={ROUTES.SETTING} component={Setting} />
-          </Switch>
-        </Suspense>
-      </Router>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <Router>
+          <Suspense fallback={renderLoader()}>
+            <Switch>
+              <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+              <Route path={ROUTES.LOGIN} component={Login} />
+              <Route path={ROUTES.SIGNUP} component={Signup} />
+              <Route path={ROUTES.PASS_FORGET} component={ForgetPassword} />
+              <Route path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
+              <Route path={ROUTES.PROFILE} component={Profile} />
+              <Route path={ROUTES.WRITE_BLOG} component={WriteBlog} />
+              <Route path={ROUTES.READ_STORY} component={ReadStory} />
+              <Route path={ROUTES.SETTING} component={Setting} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </ThemeContext.Provider>
     </UserContext.Provider>
   );
 }

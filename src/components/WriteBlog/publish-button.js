@@ -52,10 +52,10 @@ const Publish = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex-col">
         {!blogData ? (
           <button
-            className="px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary "
+            className="px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary dark:bg-darkMode-orange dark:text-darkMode-base"
             type="submit"
             onClick={handlePublish}
           >
@@ -63,7 +63,7 @@ const Publish = () => {
           </button>
         ) : (
           <button
-            className="px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary "
+            className=" px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary dark:bg-darkMode-orange dark:text-darkMode-base"
             type="submit"
             onClick={handleSave}
           >

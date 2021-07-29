@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 /* eslint-disable prettier/prettier */
-const tailwindcss = require('tailwindcss')
+// const tailwindcss = require('tailwindcss')
 
 module.exports = {
   future: {
@@ -9,6 +9,7 @@ module.exports = {
   purge: {
    content: ['./src/**/*.js', './src/**/**/*.js']
  },
+ darkMode: 'class',
  theme: {
    fill: (theme) => ({
      red: theme('colors.red.primary')
@@ -50,6 +51,11 @@ module.exports = {
      orange: {
        base: '#f32c2c',
        secondary: '#b30606'
+     },
+     darkMode: {
+       base: '#121212',
+       primary: '#272727',
+       orange: '#ffab91'
      }
    },
  },

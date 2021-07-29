@@ -36,8 +36,8 @@ const PostsHeader = ({ username, date, boolDate }) => {
           </Link>
 
           <div className="ml-2 ">
-            <p className="text-gray-900 font-semibold">{user.fullName}</p>
-            <div className="text-gray-500 font-semibold text-sm">
+            <p className="dark:text-white dark:text-opacity-70 font-semibold">{user.fullName}</p>
+            <div className="dark:text-white dark:text-opacity-50 font-semibold text-sm">
               {bool && format(new Date(), 'dd/MM/yyy')} {boolDate && '. 0 min read'}
               {!bool && <p className="text-gray-base">{user.bio}</p>}
             </div>
