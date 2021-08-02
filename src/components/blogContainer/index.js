@@ -8,11 +8,11 @@ import Appreciate from './appreciate';
 import BlogContext from '../../context/blogs';
 import Comments from './comments';
 import ReplyComments from './replyComments';
+import Footer from '../footer';
 import { getPostByPostId } from '../../service/backened_call';
 
 const Index = () => {
   const commentInput = useRef(null);
-  console.log('commeref', commentInput);
   const location = useLocation();
   const [userData, setUserData] = useState(location.state? location.state.userData: '');
   const [blogData, setBlogData] = useState(location.state? location.state.blogData: '');
@@ -69,6 +69,7 @@ const Index = () => {
         >
           <ReadBlog/>
           <ReplyComments />
+          <Footer  />
         </BlogContext.Provider>
       </div>
       </div>

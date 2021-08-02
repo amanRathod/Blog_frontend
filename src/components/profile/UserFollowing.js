@@ -39,22 +39,22 @@ const UserFollowing = () => {
                 />
                 <div className="profile w-full flex m-3 ml-4 text-white">
                   <img
-                    className="w-28 h-28 p-1 bg-white rounded-full z-10"
+                    className="w-28 h-28 p-1 bg-white dark:bg-darkMode-primary rounded-full z-10"
                     src={UserKey.image}
                     alt=""
                   />
                 </div>
-                <div className="flex flex-row ml-6 mb-2">
+                <div className="flex flex-row ml-6 mb-2 dark:text-white opacity-80">
                   <h1>{UserKey.fullName}</h1>
                 </div>
                 <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
                   {user.following.includes(UserKey._id) ? (
-                    <div className=" border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base ">
+                    <div className=" border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base dark:text-white dark:hover:text-darkMode-base opacity-80 dark:hover:bg-darkMode-orange ">
                       Following
                     </div>
                   ) : (
                     <div
-                      className={`border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base 
+                      className={`border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base dark:text-white dark:hover:text-darkMode-base opacity-80 dark:hover:bg-darkMode-orange 
                       ${user.id === UserKey._id ? 'hidden' : 'block'}`}
                     >
                       Follow
@@ -63,7 +63,7 @@ const UserFollowing = () => {
                 </div>
               </div>
             ))
-          : `${profile.fullName} is not following any one 😑`}
+          : <div className="dark:text-white opacity-80"> {profile.fullName} is not following any one 😑</div>}
       </div>
     </div>
   );

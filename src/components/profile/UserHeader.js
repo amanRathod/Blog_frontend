@@ -49,7 +49,7 @@ const UserHeader = () => {
     localStorage.setItem('user', JSON.stringify(storeData));
   };
   return (
-    <div classNameName="h-screen w-full py-20 px-3">
+    <div className="w-full py-20 px-3">
       <div className="max-w-md mx-auto md:max-w-lg ">
         <div className="w-full">
           {image ? (
@@ -101,10 +101,10 @@ const UserHeader = () => {
                   <div className="flex flex-row justify-center px-4 mt-4">
                     <button
                       type="submit"
-                      className="text-lg h-10 w-2/6  text-white text-md rounded bg-orange-base hover:bg-orange-secondary focus:outline-none"
+                      className="text-lg h-10 w-2/6  text-white text-md rounded bg-orange-base hover:bg-orange-secondary dark:bg-darkMode-orange dark:text-darkMode-base focus:outline-none"
                       onClick={handleFollowClick}
                     >
-                      {userFollow ? 'following' : 'follow'}
+                      {userFollow ? 'Following' : 'Follow'}
                     </button>
                   </div>
                 )}

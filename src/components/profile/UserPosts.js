@@ -34,7 +34,7 @@ export default function UserPosts() {
     <>
       {blog ? (
         Object.keys(blog).map((blogsData, _idx) => (
-          <div className="bg-white mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
+          <div className="bg-white dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
             <div
               style={{
                 backgroundImage: `url(${blog[blogsData].photo})`
@@ -42,16 +42,16 @@ export default function UserPosts() {
               className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-100 bg-center bg-cover"
             />
             <div className="flex sm:flex-1 flex-col gap-2 p-1">
-              <h1 className="text-lg sm:text-xl font-semibold  text-gray-600">
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-white  ">
                 {blog[blogsData].title}
               </h1>
               <div style={mystyle}>
-                <p className="overflow-hidden  text-gray-500 text-sm sm:text-base ">
+                <p className="overflow-hidden  dark:text-white dark:text-opacity-80 text-gray-formbg  text-sm sm:text-base ">
                   {parse(draftToHtml(JSON.parse(blog[blogsData].content)))}
                 </p>
               </div>
               <div className="flex gap-4 mt-auto">
-                <button className="flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary">
+                <button className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10 border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
@@ -65,7 +65,7 @@ export default function UserPosts() {
                   </svg>
                   <span>{blog[blogsData].likes.length}</span>
                 </button>
-                <button className="flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary">
+                <button  className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10  border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
@@ -80,7 +80,7 @@ export default function UserPosts() {
                   <span>{blog[blogsData].comments.length}</span>
                 </button>
                 {/* <Link  key={Math.random()} to={{pathname: `/blog/${username}/${blog[blogsData].title}`, state: {blogData: blog[blogsData], userData: profile} }}> */}
-                <button className="ml-auto flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-orange-base transition-colors focus:bg-orange-secondary focus:outline-none hover:text-white focus-visible:border-orange-secondary">
+                <button  className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base ml-auto flex items-center gap-1 h-15 border border-orange-base px-3  rounded-xl hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary">
                   <span>Read more</span>
                 </button>
                 {/* </Link> */}

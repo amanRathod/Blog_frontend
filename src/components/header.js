@@ -31,7 +31,7 @@ const Header = ({ search, setSearch }) => {
   };
 
   return (
-    <header className="h-16 bg-white dark:bg-darkMode-base dark:text-white border-b border-gray-primary ">
+    <header className="h-16 bg-white  dark:bg-darkMode-base dark:text-white  border-gray-base shadow-md  border-b ">
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
           <div className=" text-center felx items-center align-items cursor-pointer">

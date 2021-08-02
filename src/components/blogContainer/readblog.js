@@ -21,7 +21,6 @@ const ReadBlog = () => {
   useEffect(() => {
     document.title = 'Blog';
   }, []);
-  console.log('innser content', content);
 
   // const htmlText = content;
 

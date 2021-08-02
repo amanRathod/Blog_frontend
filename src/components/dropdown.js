@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { createPopper } from '@popperjs/core';
-import deleteBlog from '../service/delete_backenedCall';
+import { deleteBlog } from '../service/delete_backenedCall';
 import UserContext from '../context/user';
 
 const DropDown = ({ postData, setPosts, setFlash }) => {

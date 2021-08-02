@@ -24,8 +24,8 @@ export default function UserData() {
                 className={
                   `text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ${ 
                   tab === 1
-                    ? `text-white bg-orange-base`
-                    : `text-orange-base bg-white`}`
+                    ? `text-white bg-orange-base dark:text-darkMode-base dark:bg-darkMode-orange`
+                    : `text-orange-base bg-white dark:bg-darkMode-primary dark:text-white`}`
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -43,8 +43,8 @@ export default function UserData() {
                 className={
                   `text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ${ 
                   tab === 2
-                    ? `text-white bg-orange-base`
-                    : `text-orange-base bg-white`}`
+                    ? `text-white bg-orange-base dark:text-darkMode-base dark:bg-darkMode-orange`
+                    : `text-orange-base bg-white dark:bg-darkMode-primary dark:text-white`}`
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -62,8 +62,8 @@ export default function UserData() {
                 className={
                   `text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ${ 
                   tab === 3
-                    ? `text-white bg-orange-base`
-                    : `text-orange-base bg-white`}`
+                    ? `text-white bg-orange-base dark:text-darkMode-base dark:bg-darkMode-orange`
+                    : `text-orange-base bg-white dark:bg-darkMode-primary dark:text-white`}`
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -77,7 +77,7 @@ export default function UserData() {
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+          <div className="relative flex flex-col min-w-0 break-words bg-white dark:bg-darkMode-base w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={tab === 1 ? 'block' : 'hidden'} >

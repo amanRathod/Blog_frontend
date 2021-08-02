@@ -30,7 +30,7 @@ const BasicInfo = () => {
   return (
     <>
     { image ? (
-      <div className="container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
+      <div className="dark:bg-darkMode-base container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
         <h1 className="mb-5 text-xl font-bold text-gray-formbg">Basic Info</h1>
         <div className="mb-6">
           <label htmlFor="full-name" className="block mb-2 text-sm font-semibold text-gray-base">

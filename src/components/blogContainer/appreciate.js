@@ -10,13 +10,14 @@ const Appreciate = () => {
   const { id, likes, comments, setLikes, username } = useContext(BlogContext);
   const { user } = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
+  console.log('togg', toggle);
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
       setToggle(() => !toggle);
       console.log('togglee', toggle);
-      const response = await addLikesId(user.username, id);
+      const response = await addLikesId(user.username, id, !toggle);
       setLikes(response);
     } catch (err) {
       console.error(err);

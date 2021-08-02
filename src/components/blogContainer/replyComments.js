@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 import { ReplyIcon, ThumbUpIcon } from '@heroicons/react/solid';
 import BlogContext from '../../context/blogs';
 import PostsHeader from '../postsHeader';
+import DropDown from './dropDown';
 import UserContext from '../../context/user';
 import { addLikesIntoComments } from '../../service/post_backenedCalls';
 
 const ReplyComments = () => {
   const { id, comments, setComments} = useContext(BlogContext);
   const { user } = useContext(UserContext);
+  const [toggle, setToggle] = useState(false);
   
   const handleLikeClick = async (commentId) => {
     try {
-      const response = await addLikesIntoComments(id, user.username, commentId);
+      setToggle(() => !toggle);
+      const response = await addLikesIntoComments(id, user.username, commentId, !toggle);
       if(response.status === 200){
         setComments(response.data); 
-        console.log(typeof comments);
       }
     } catch (err) {
       console.error(err)
@@ -42,7 +44,10 @@ const ReplyComments = () => {
                 key={idx}
                 className="col-span-6 lg:col-span-5 bg-white dark:bg-darkMode-primary w-full border mt-2 p-2 sm:p-4 rounded-xl shadow-sm  border-gray-primary hover:border-red-secondary dark:hover:border-darkMode-orange"
               >
-                <PostsHeader username={comments.username} boolDate={false} />
+                <div className="flex justify-between">
+                  <PostsHeader username={comments.username} boolDate={false} />
+                  <DropDown commentsId={comments._id} blogId={id} setComments={setComments} />
+                </div>
                 <div className=" w-auto py-4  pt-3 pl-11">{comments.comment}</div>
                 <div className="container flex">
                   <div className="flex ">  

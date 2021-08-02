@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export async function addLikesId(loggedUsername, blogId) {
+export async function addLikesId(loggedUsername, blogId, toggle) {
   try {
     const response = await axios.post(
-      `http://localhost:4444/postData/addLikesId?loggedUsername=${loggedUsername}&blogId=${blogId}`
+      `http://localhost:4444/postData/addLikesId?loggedUsername=${loggedUsername}&blogId=${blogId}&toggle=${toggle}`
     );
     return response.data;
   } catch (err) {
@@ -11,11 +11,11 @@ export async function addLikesId(loggedUsername, blogId) {
   }
 }
 
-export async function addLikesIntoComments(blogId, loggedUsername, commentId) {
+export async function addLikesIntoComments(blogId, loggedUsername, commentId, toggle) {
   try {
     console.log(loggedUsername);
     const response = await axios.post(
-      `http://localhost:4444/postData/addLikesIntoComments?loggedUsername=${loggedUsername}&blogId=${blogId}&commentId=${commentId}`
+      `http://localhost:4444/postData/addLikesIntoComments?loggedUsername=${loggedUsername}&blogId=${blogId}&commentId=${commentId}&toggle=${toggle}`
     );
     return response;
   } catch (err) {

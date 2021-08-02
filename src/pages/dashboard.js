@@ -3,6 +3,7 @@ import Header from '../components/header';
 import Timeline from '../components/Posts';
 import { getAllPosts } from '../service/backened_call';
 import Flash from '../components/flash';
+import Footer from '../components/footer';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -28,6 +29,7 @@ const Dashboard = () => {
       <Header search={search} setSearch={setSearch} />
       <Timeline posts={posts} search={search} setPosts={setPosts} setFlash={setFlash} />
       <Flash flash={flash} setFlash={setFlash} />
+      <Footer />
     </div>
   );
 };

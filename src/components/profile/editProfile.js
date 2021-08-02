@@ -8,6 +8,7 @@ import Header from '../header';
 import BasicInfo from './profileUpdate/BasicInfo';
 import ProfileInfo from './profileUpdate/profileIdentity';
 import UpdateProfile from '../../context/editProfile';
+import Footer from '../footer';
 import { updateProfileData } from '../../service/put_backenedCall';
 import * as ROUTES from '../../constants/routes';
 import Flash from '../flash';
@@ -56,7 +57,7 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <div className=" container h-screen mx-auto max-w-screen-lg">
+      <div className=" dark:bg-darkMode-base container h-screen mx-auto max-w-screen-lg">
         <UpdateProfile.Provider
           value={{
             setPicture,
@@ -78,11 +79,12 @@ const EditProfile = () => {
         </UpdateProfile.Provider>
         <button
           type="submit"
-          className="mb-2 ml-10 bg-transparent hover:bg-orange-base text-orange-base font-semibold hover:text-white py-2 px-4 border border-orange-base hover:border-transparent rounded focus:ring-2 focus:ring-offset-2 duration-500  focus:ring-orange-base"
+          className=" mb-2 ml-10 bg-transparent hover:bg-orange-base text-orange-base font-semibold hover:text-white py-2 px-4 border border-orange-base hover:border-transparent rounded focus:ring-2 focus:ring-offset-2 duration-500  focus:ring-orange-base"
           onClick={handleUpdate}
         >
           Update Information
         </button>
+        <Footer />
       </div>
     </>
   );
