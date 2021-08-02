@@ -37,7 +37,8 @@ export default function Login() {
             email: res.data.email,
             image: res.data.image,
             following: res.data.following,
-            followers: res.data.followers
+            followers: res.data.followers,
+            
           };
           localStorage.setItem('user', JSON.stringify(storedata));
           history.push(ROUTES.DASHBOARD);

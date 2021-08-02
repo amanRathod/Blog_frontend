@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useContext } from 'react';
@@ -29,6 +30,7 @@ const Title = () => {
         className="w-full bg-gray-background dark:bg-darkMode-primary dark:text-white dark:text-opacity-70 h-20 pl-6 mb-4 text-5xl focus:outline-none "
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
       <div className="flex justify-between mb-4">
         {/* <div className="ml-4 h-10">
@@ -51,6 +53,7 @@ const Title = () => {
               name="file"
               style={{ display: 'none' }}
               onChange={handleFileUpload}
+              required
             />{' '}
             Add Cover Photo
           </label>

@@ -39,8 +39,14 @@ module.exports = {
        borderbg:'#6b6363',
        formbg: '#362525',
      },
+     yellow: {
+       base: '#fbc02d',
+       primary: '#ffff8d'
+     },
      green: {
-       light: '#4caf50'
+       light: '#4caf50',
+       primary: '#c8e6c9',
+       base: '#388e3c',
      },
      red: {
        primary: '#ed4956',

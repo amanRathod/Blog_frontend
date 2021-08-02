@@ -1,12 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-/* eslint-disable react/no-unused-prop-types */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import parse from 'html-react-parser';
 import draftToHtml from 'draftjs-to-html';
-import ContentLoader from 'react-content-loader';
-import Skelton from 'react-loading-skeleton';
 import { MyLoader } from './skeleton';
-import { getAllPosts } from '../service/backened_call';
 import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
 import DropDown from './dropdown';
@@ -20,32 +17,21 @@ const mystyle = {
   textOverflow: 'ellipsis'
 };
 
-const Timeline = () => {
-  const [posts, setPosts] = useState([]);
+const Timeline = ({ posts, search, setPosts, setFlash}) => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAllPosts();
-      console.log(response);
-      setPosts('')
-      setTimeout(() => setPosts(response), 1000)
-      // setPosts(response);
-    };
-    fetchData();
-    return () => {
-      fetchData();
-    };
-  }, []);
+
+  }, [posts]);
 
   return (
     <>
     
       <div className="container mx-auto max-w-screen-lg h-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
-          {posts ? (
-            Object.keys(posts).map((postsKey, idx) => (
-              <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
+        <div className=" grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
+          {posts ? [
+            (Object.keys(posts).map((postsKey, idx) => (
+                <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 mb-10">
                     <PostsHeader
@@ -56,7 +42,7 @@ const Timeline = () => {
                   </div>
                   {posts[postsKey].userId === user.id ? (
                     <div>
-                      <DropDown setPosts={setPosts} postData={posts[postsKey]} />
+                      <DropDown setPosts={setPosts} postData={posts[postsKey]} setFlash={setFlash} />
                     </div>
                   ) : null}
                 </div>
@@ -114,11 +100,12 @@ const Timeline = () => {
                     </svg>
                     <span>{posts[postsKey].comments.length}</span>
                   </button>
-                  <ReadMore postsData={posts[postsKey]} />
+                  <ReadMore postsData={posts[postsKey]} />          
                 </div>
               </div>
             ))
-          ) : (
+          )
+          ] : (
             <>
               <MyLoader />
               <MyLoader />

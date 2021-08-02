@@ -7,7 +7,7 @@ import { createPopper } from '@popperjs/core';
 import deleteBlog from '../service/delete_backenedCall';
 import UserContext from '../context/user';
 
-const DropDown = ({ postData, setPosts }) => {
+const DropDown = ({ postData, setPosts, setFlash }) => {
   const { user } = useContext(UserContext);
   const history = useHistory();
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -34,6 +34,7 @@ const DropDown = ({ postData, setPosts }) => {
     try {
       const response = await deleteBlog(postData._id);
       setPosts(response);
+      setFlash({ success: 'Blog deleted successfully' });
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +65,7 @@ const DropDown = ({ postData, setPosts }) => {
             >
               <button
                 type="button"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base  dark:hover:bg-darkMode-primary  dark:text-opacity-90 "
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none"
                 onClick={goToNextPage}
               >
                 Edit
@@ -73,7 +74,7 @@ const DropDown = ({ postData, setPosts }) => {
               <button
                 type="button"
                 href="#pab"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base dark:hover:bg-darkMode-primary  dark:text-opacity-90 "
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent  hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none"
                 onClick={(e) => handleDelete(e)}
               >
                 Delete
@@ -90,5 +91,6 @@ export default DropDown;
 
 DropDown.propTypes = {
   postData: PropTypes.object.isRequired,
-  setPosts: PropTypes.func.isRequired
+  setPosts: PropTypes.func.isRequired,
+  setFlash: PropTypes.func
 };

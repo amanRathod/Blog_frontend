@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ThumbUpIcon, ShareIcon, AnnotationIcon } from '@heroicons/react/solid';
 import BlogContext from '../../context/blogs';
@@ -7,12 +7,15 @@ import UserContext from '../../context/user';
 import { addLikesId } from '../../service/post_backenedCalls';
 
 const Appreciate = () => {
-  const {id, likes, comments, setLikes, username} = useContext(BlogContext);
+  const { id, likes, comments, setLikes, username } = useContext(BlogContext);
   const { user } = useContext(UserContext);
+  const [toggle, setToggle] = useState(false);
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
+      setToggle(() => !toggle);
+      console.log('togglee', toggle);
       const response = await addLikesId(user.username, id);
       setLikes(response);
     } catch (err) {
@@ -39,10 +42,10 @@ const Appreciate = () => {
           <p className="mt-8 text-gray-base">{comments.length}</p>
         </div>
         <div className="flex">
-        <ShareIcon
-          className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
-          aria-hidden="true"
-        />
+          <ShareIcon
+            className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </div>
@@ -55,5 +58,5 @@ Appreciate.prototype = {
   likes: PropTypes.number,
   setLikes: PropTypes.func,
   comments: PropTypes.number,
-  id: PropTypes.number,
-}
+  id: PropTypes.number
+};

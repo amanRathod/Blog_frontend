@@ -21,8 +21,6 @@ const renderLoader = () => <p>Loading...</p>;
 function App() {
   const user = UserAuthListener();
   const { theme, setTheme } = Theme();
-  console.log('theme', theme);
-  console.log('User Data', user);
   return (
     <UserContext.Provider value={{ user }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>

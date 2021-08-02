@@ -54,12 +54,12 @@ const VerticalDot = () => {
             <div
               ref={popoverDropdownRef}
               className={`${dropdownPopoverShow ? 'block ' : 'hidden '}
-              bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1`}
+              bg-white dark:bg-darkMode-base  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1`}
               style={{ minWidth: '12rem' }}
             >
               <button
                 type="submit"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light focus:outline-none"
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white  dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none"
                 onClick={goToEditPage}
               >
                 Edit Profile
@@ -67,7 +67,7 @@ const VerticalDot = () => {
 
               <button
                 type="submit"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-base hover:bg-red-light"
+                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90  focus:outline-none"
                 // onClick={(e) => handleDelete(e)}
               >
                 Delete

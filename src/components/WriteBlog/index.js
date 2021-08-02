@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../header';
 import BlogBody from './blog_body';
+import Flash from './flash';
 import WriteBlogContext from '../../context/writeBlog';
 import UserContext from '../../context/user';
 
@@ -14,6 +15,8 @@ const Index = () => {
   const { user } = useContext(UserContext);
   const userId = user.id;
   const [imageSrc, setImageSrc] = useState('');
+  const [flash, setFlash] = useState({});
+  console.log(flash);
   const [coverPicture, setCoverPicture] = useState(blogData ? blogData.photo : '');
   const [title, setTitle] = useState(blogData ? blogData.title : '');
   const [tags, setTags] = useState(blogData ? blogData.tags : []);
@@ -37,6 +40,8 @@ const Index = () => {
       <Header />
       <WriteBlogContext.Provider
         value={{
+          flash,
+          setFlash,
           imageSrc,
           setImageSrc,
           coverPicture,
@@ -54,6 +59,7 @@ const Index = () => {
         }}
       >
         <BlogBody/>
+        <Flash />
       </WriteBlogContext.Provider>
       </div>
     </>

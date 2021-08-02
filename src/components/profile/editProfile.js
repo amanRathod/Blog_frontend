@@ -10,6 +10,7 @@ import ProfileInfo from './profileUpdate/profileIdentity';
 import UpdateProfile from '../../context/editProfile';
 import { updateProfileData } from '../../service/put_backenedCall';
 import * as ROUTES from '../../constants/routes';
+import Flash from '../flash';
 
 const EditProfile = () => {
   const history = useHistory();
@@ -21,6 +22,7 @@ const EditProfile = () => {
   const [username, setUsername] = useState(profile.username);
   const [email, setEmail] = useState(profile.email);
   const [picture, setPicture] = useState();
+  const [flash, setFlash] = useState({});
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -42,7 +44,10 @@ const EditProfile = () => {
       };
   
       localStorage.setItem('user', JSON.stringify(storeData));
-      history.push(ROUTES.DASHBOARD);
+      setFlash({success: 'Profile Updated SuccessFully'});
+      
+      window.setTimeout(() => {history.push(ROUTES.DASHBOARD)}, 3000);
+     
     } catch (err) {
       console.log(err);
     }
@@ -69,6 +74,7 @@ const EditProfile = () => {
         >
           <BasicInfo />
           <ProfileInfo />
+          <Flash flash={flash} setFlash={setFlash} />
         </UpdateProfile.Provider>
         <button
           type="submit"

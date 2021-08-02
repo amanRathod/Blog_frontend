@@ -7,6 +7,7 @@ import UserProfile from '../components/profile';
 import Header from '../components/header';
 import { getUserByUsername } from '../service/backened_call';
 import ProfileContext from '../context/profile';
+import Flash from '../components/flash';
 
 const Profile = () => {
   const { username } = useParams();

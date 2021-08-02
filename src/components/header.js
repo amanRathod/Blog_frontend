@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
@@ -5,8 +6,9 @@ import axios from 'axios';
 import * as ROUTES from '../constants/routes';
 import UserContext from '../context/user';
 import DarkMode from './darkMode';
+import Search from './search';
 
-const Header = () => {
+const Header = ({ search, setSearch }) => {
   const { user } = useContext(UserContext);
   const history = useHistory();
 
@@ -36,11 +38,11 @@ const Header = () => {
             <h1 className="flex justify-center w-full">
               <Link to={ROUTES.DASHBOARD}>
                 <h1 className="wt-2 mt-6 ml-3 w-6/12">Blog</h1>
-                <hr className="  text-orange-base border-b-2 w-16 mt-2 hover:visible" />
+                <hr className="text-orange-base border-b-2 w-16 mt-2 hover:visible" />
               </Link>
             </h1>
           </div>
-
+          <Search search={search} setSearch={setSearch} />
           <div className="text-center flex items-center align-items">
             {user ? (
               <>
@@ -130,3 +132,8 @@ const Header = () => {
 };
 
 export default Header;
+
+Header.prototype = {
+  search: PropTypes.String,
+  setSearch: PropTypes.func
+};
