@@ -7,7 +7,7 @@ import '../styles/global.css';
 const Flash = ({ flash, setFlash}) => {
 
   useEffect(() => {
-    setTimeout(() => setFlash({}), 4000);
+    setTimeout(() => setFlash({}), 3000);
   }, [flash, setFlash]);
 
   return (

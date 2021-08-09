@@ -9,12 +9,12 @@ import '../../styles/global.css';
 import WriteBlogContext from '../../context/writeBlog';
 
 const WriteBlog = () => {
-  const { content, setContent } = useContext(WriteBlogContext);
+  const { state, dispatch } = useContext(WriteBlogContext);
 
   const [editorState, setEditorState] = useState();
   useEffect(() => {
-    if (content) {
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content))));
+    if (state.content) {
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(state.content))));
     } else {
       setEditorState(EditorState.createEmpty());
     }
@@ -23,7 +23,8 @@ const WriteBlog = () => {
   const handleEditorChange = (state) => {
     setEditorState(state);
     const contentState = editorState.getCurrentContent();
-    setContent(JSON.stringify(convertToRaw(contentState)));
+    const sanitizeContent = (JSON.stringify(convertToRaw(contentState)));
+    dispatch({type: 'content', fieldName: 'content', payload: sanitizeContent});
   };
 
   return (
@@ -60,5 +61,4 @@ export default WriteBlog;
 
 WriteBlog.propTypes = {
   content: PropTypes.string,
-  setContent: PropTypes.func
 };

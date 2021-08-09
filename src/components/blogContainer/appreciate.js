@@ -7,18 +7,16 @@ import UserContext from '../../context/user';
 import { addLikesId } from '../../service/post_backenedCalls';
 
 const Appreciate = () => {
-  const { id, likes, comments, setLikes, username } = useContext(BlogContext);
+  const {state, dispatch } = useContext(BlogContext);
   const { user } = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
-  console.log('togg', toggle);
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
       setToggle(() => !toggle);
-      console.log('togglee', toggle);
-      const response = await addLikesId(user.username, id, !toggle);
-      setLikes(response);
+      const response = await addLikesId(user.username, state.id, !toggle);
+      dispatch({type: 'likes', fieldName: 'likes', payload: response});
     } catch (err) {
       console.error(err);
     }
@@ -29,18 +27,19 @@ const Appreciate = () => {
       <div className="ml-10 sm:ml-56 md:ml-4 md:mt-10 flex md:flex-col">
         <div className="flex">
           <ThumbUpIcon
-            className="h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary"
+            className={`h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary
+            ${state.likes.includes(user.username) && `text-orange-base` } `}
             aria-hidden="true"
             onClick={handleLikeClick}
           />
-          <p className="mt-8 text-gray-base">{likes.length}</p>
+          <p className="mt-8 text-gray-base">{state.likes.length}</p>
         </div>
         <div className=" flex">
           <AnnotationIcon
             className="h-10 w-10 m-5  hover:text-orange-base focus:text-orange-secondary"
             aria-hidden="true"
           />
-          <p className="mt-8 text-gray-base">{comments.length}</p>
+          <p className="mt-8 text-gray-base">{state.comments.length}</p>
         </div>
         <div className="flex">
           <ShareIcon

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 import Header from '../header';
@@ -17,22 +17,53 @@ const EditProfile = () => {
   const history = useHistory();
   const location = useLocation();
   const [profile, setProfile] = useState(location.state.profile);
-  const [fullName, setFullName] = useState(profile.fullName);
-  const [bio, setBio] = useState(profile.bio);
-  const [image, setImage] = useState(profile.image);
-  const [username, setUsername] = useState(profile.username);
-  const [email, setEmail] = useState(profile.email);
-  const [picture, setPicture] = useState();
   const [flash, setFlash] = useState({});
+  console.log('poictrure', profile);
 
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'fullName': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      case 'image': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      case 'email': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      case 'picture': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      case 'username': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      case 'bio': {
+        return {...state, [action.fieldName]: action.payload};
+      }
+      default: {
+        return state;
+      }
+        
+    }
+  }
+  const initialState = {
+    fullName: profile.fullName,
+    bio: profile.bio,
+    image: profile.image,
+    username: profile.username,
+    email: profile.email,
+    picture: profile.image,
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('file', picture);
-      formData.append('fullName', fullName);
-      formData.append('bio', bio);
-      formData.append('username', username);
+      formData.append('file', state.picture);
+      formData.append('fullName', state.fullName);
+      formData.append('bio', state.bio);
+      formData.append('username', state.username);
       const response = await updateProfileData(formData);
       const storeData = {
         id: response._id,
@@ -45,9 +76,9 @@ const EditProfile = () => {
       };
   
       localStorage.setItem('user', JSON.stringify(storeData));
-      setFlash({success: 'Profile Updated SuccessFully'});
+      setFlash({success: 'Profile Updated Successfully'})
       
-      window.setTimeout(() => {history.push(ROUTES.DASHBOARD)}, 3000);
+      window.setTimeout(() => {history.push(ROUTES.DASHBOARD)}, 2000);
      
     } catch (err) {
       console.log(err);
@@ -60,17 +91,8 @@ const EditProfile = () => {
       <div className=" dark:bg-darkMode-base container h-screen mx-auto max-w-screen-lg">
         <UpdateProfile.Provider
           value={{
-            setPicture,
-            email,
-            setEmail,
-            username,
-            setUsername,
-            fullName,
-            setFullName,
-            bio,
-            setBio,
-            image,
-            setImage
+            state,
+            dispatch,
           }}
         >
           <BasicInfo />
@@ -96,15 +118,9 @@ EditProfile.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  setProfile: PropTypes.func.isRequired,
   fullName: PropTypes.string.isRequired,
   bio: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  setEmail: PropTypes.func.isRequired,
-  setUsername: PropTypes.func.isRequired,
-  setFullName: PropTypes.func.isRequired,
-  setBio: PropTypes.func.isRequired,
-  setPicture: PropTypes.func.isRequired
 };

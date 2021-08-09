@@ -9,18 +9,16 @@ import { addComment } from '../../service/post_backenedCalls';
 import ReplyComments from './replyComments';
 
 const Comments = () => {
-  const { commentInput, id, setComments, username } = useContext(BlogContext);
+  const { commentInput, state, dispatch } = useContext(BlogContext);
   const { user } = useContext(UserContext);
   const [inputComment, setInputComment] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await addComment(id, inputComment, user.username);
+      const response = await addComment(state.id, inputComment, user.username);
       // setCommentContent( [...commentContent, {comment: inputComment, userId: user.id}] )
-      console.log('com', response);
-      setComments(response.comments);
+      dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
       setInputComment('');
     } catch (err) {
       console.error(err.message);
@@ -64,6 +62,5 @@ export default Comments;
 
 Comments.prototype = {
   commentInput: PropTypes.string,
-  id: PropTypes.string,
   setComments: PropTypes.func
 };

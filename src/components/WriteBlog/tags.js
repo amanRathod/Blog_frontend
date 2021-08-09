@@ -29,30 +29,33 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space, KeyCodes.tab];
 
 const Tags = () => {
-  const { tags, setTags } = useContext(WriteBlogContext);
+  const { state, dispatch } = useContext(WriteBlogContext);
 
   const handleDelete = (i) => {
-    setTags(tags.filter((tag, index) => index !== i));
+    dispatch({
+      type: 'tags',
+      fieldName: 'tags',
+      payload: state.tags.filter((tag, index) => index !== i)
+    });
   };
 
   const handleAddition = (tag) => {
-    setTags([...tags, tag]);
+    dispatch({ type: 'tags', fieldName: 'tags', payload: [...state.tags, tag] });
   };
-
   const handleDrag = (tag, currPos, newPos) => {
-    const newTags = tags.slice();
+    const newTags = state.tags.slice();
 
     newTags.splice(currPos, 1);
     newTags.splice(newPos, 0, tag);
 
     // re-render
-    setTags(newTags);
+    dispatch({ type: 'tags', fieldName: 'tags', payload: newTags });
   };
 
   return (
     <div className="w-full bg-gray-background dark:bg-darkMode-base h-20 pl-6 mb-4 text-xl focus:outline-none ">
       <ReactTags
-        tags={tags}
+        tags={state.tags}
         suggestions={Geeks}
         delimiters={delimiters}
         handleDelete={handleDelete}
@@ -69,7 +72,6 @@ export default Tags;
 
 Tags.prototype = {
   tags: PropTypes.array,
-  setTags: PropTypes.func,
   handleDelete: PropTypes.func,
   handleAddition: PropTypes.func,
   handleDrag: PropTypes.func,

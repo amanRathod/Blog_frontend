@@ -7,9 +7,11 @@ import { createPopper } from '@popperjs/core';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import ProfileContext from '../../context/profile';
 import { deleteComment } from '../../service/delete_backenedCall';
+import BlogContext from '../../context/blogs';
 
-const DropDown = ({ commentId, blogId, setComments }) => {
+const DropDown = ({ commentId, blogId }) => {
   const history = useHistory();
+  const { dispatch } = useContext(BlogContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -26,8 +28,7 @@ const DropDown = ({ commentId, blogId, setComments }) => {
   const handleDelete = async () => {
     try {
       const response = await deleteComment(commentId, blogId);
-      console.log('res[onse', response);
-      setComments(response);
+      dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });
     } catch (err) {
       console.log(err);
     }

@@ -9,14 +9,13 @@ import WriteBlogContext from '../../context/writeBlog';
 
 const Title = () => {
   const { username } = useParams();
-  const { imageSrc, setImageSrc, title, setTitle, coverPicture, setCoverPicture } =
-    useContext(WriteBlogContext);
+  const { state, dispatch } = useContext(WriteBlogContext);
 
   const handleFileUpload = (e) => {
     const linkObject = e.target.files[0];
     const temperoryLink = URL.createObjectURL(linkObject);
-    setImageSrc(temperoryLink);
-    setCoverPicture(linkObject);
+    dispatch({ type: 'imageSrc', fieldName: 'imageSrc', payload: temperoryLink });
+    dispatch({ type: 'coverPicture', fieldName: 'coverPicture', payload: linkObject });
   };
   useEffect(() => {
     document.title = `${username}-Blog`;
@@ -28,8 +27,8 @@ const Title = () => {
         required="true"
         placeholder="Title ..."
         className="w-full bg-gray-background dark:bg-darkMode-primary dark:text-white dark:text-opacity-70 h-20 pl-6 mb-4 text-5xl focus:outline-none "
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={state.title}
+        onChange={(e) => dispatch({ type: 'title', fieldName: 'title', payload: e.target.value })}
         required
       />
       <div className="flex justify-between mb-4">
@@ -46,7 +45,7 @@ const Title = () => {
           </label>
         </div> */}
         <div className="">
-          <img src={`${imageSrc || coverPicture}`} alt="" />
+          <img src={`${state.imageSrc || state.picture}`} alt="" />
           <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base dark:bg-darkMode-orange dark:text-darkMode-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
             <input
               type="file"
@@ -69,8 +68,5 @@ Title.propTypes = {
   username: PropTypes.string,
   imageSrc: PropTypes.string,
   title: PropTypes.string,
-  coverPicture: PropTypes.string,
-  setTitle: PropTypes.func,
-  setImageSrc: PropTypes.func,
-  setCoverPicture: PropTypes.func
+  coverPicture: PropTypes.string
 };

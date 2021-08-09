@@ -12,7 +12,7 @@ import EditProfile from './editProfile';
 const VerticalDot = () => {
   const history = useHistory();
   const { username } = useParams();
-  const profile = useContext(ProfileContext);
+  const {state} = useContext(ProfileContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -25,7 +25,7 @@ const VerticalDot = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  const obj = JSON.parse(JSON.stringify(profile));
+  const obj = JSON.parse(JSON.stringify(state));
   obj.username = username;
   const goToEditPage = () => {
     history.push({

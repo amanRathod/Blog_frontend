@@ -10,10 +10,10 @@ import VerticalDot from './verticalDot.js';
 import UserContext from '../../context/user';
 
 const UserHeader = () => {
-  const { _id, followers, setFollowers, following, setFollowing, image, fullName, bio, username, blog } = useContext(ProfileContext);
+  const {state, dispatch} = useContext(ProfileContext);
   const { user } = useContext(UserContext);
    const [userFollow, setUserFollow] = useState(false);
-  const btnFollow = username && username !== user.username;
+  const btnFollow = state.username && state.username !== user.username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
@@ -23,18 +23,18 @@ const UserHeader = () => {
       setUserFollow(data);
     };
 
-    if (_id) {
-      isUserFollowing(user.username, _id);
+    if (state.id) {
+      isUserFollowing(user.username, state.id);
     }
-  }, [user.username, _id]);
+  }, [user.username, state.id]);
 
   const handleFollowClick = async (e) => {
     e.preventDefault();
 
     setUserFollow((userFollow) => !userFollow);
-    const data = await togglefollowers(user.id, _id, !userFollow);
-    setFollowers(data.profile.followers);
-    setFollowing(data.profile.following);
+    const data = await togglefollowers(user.id, state.id, !userFollow);
+    dispatch({type: 'followers', fieldName: 'followers', payload: data.profile.followers});
+    dispatch({type: 'following', fieldName: 'following', payload: data.profile.following});
 
     const storeData = {
       id: data.loggedIn._id,
@@ -52,18 +52,18 @@ const UserHeader = () => {
     <div className="w-full py-20 px-3">
       <div className="max-w-md mx-auto md:max-w-lg ">
         <div className="w-full">
-          {image ? (
+          {state.image ? (
             <div className="container  bg-white dark:text-white dark:bg-darkMode-primary rounded shadow-xl hover:shadow-sm text-center py-5">
               {/* <VerticalDot /> */}
               <div className="flex justify-around">
                 <div>
                   <img
-                    className="rounded-full ml-16 sm:ml-36"
-                    src={`${image}`}
-                    width="100"
-                    alt={`${fullName} Profile`}
+                    className="w-32 h-32 rounded-full ml-16 sm:ml-36"
+                    src={`${state.image}`}
+                    
+                    alt={`${state.fullName} Profile`}
                   />
-                  <h1 className="text-2xl mt-2 ml-12 sm:ml-32">{fullName}</h1>
+                  <h1 className="text-2xl mt-2 ml-12 sm:ml-32">{state.fullName}</h1>
                 </div>
                 <div>
                   <VerticalDot />
@@ -73,27 +73,27 @@ const UserHeader = () => {
               <div className="text-center">
                 {/* <h1 className="text-2xl mt-2 ">{fullName}</h1> */}
                 <div className="px-5 text-sm">
-                  <p className="text-justify">{bio}</p>
+                  <p className="text-justify">{state.bio}</p>
                   {/* <Model /> */}
                 </div>
                 <div className="flex justify-between mt-3 px-4">
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{followers.length}</span>{' '}
+                    <span className="font-bold text-2xl">{state.followers.length}</span>{' '}
                     <span className="text-sm  text-gray-base">
-                      {followers.length === 1 || followers.length === 0
+                      {state.followers.length === 1 || state.followers.length === 0
                         ? `Follower`
                         : `Followers`}
                     </span>{' '}
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{Object.keys(blog).length}</span>{' '}
+                    <span className="font-bold text-2xl">{Object.keys(state.blog).length}</span>{' '}
                     <span className="text-sm text-gray-base">Blog</span>{' '}
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{following.length}</span>{' '}
+                    <span className="font-bold text-2xl">{state.following.length}</span>{' '}
                     <span className="text-sm text-gray-base">Following</span>{' '}
                   </div>
                 </div>

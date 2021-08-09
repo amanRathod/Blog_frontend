@@ -5,10 +5,10 @@ import { EditProfileSkeletons } from '../../skeleton';
 import UpdateProfile from '../../../context/editProfile';
 
 const ProfileInfo = () => {
-  const { email, setEmail, username, setUsername } = useContext(UpdateProfile);
+  const {state, dispatch} = useContext(UpdateProfile);
   return (
     <>
-    {email? (
+    {state.email? (
       <div className="dark:bg-darkMode-base container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
         <h1 className="mb-5 text-xl font-bold text-gray-formbg">User Info</h1>
         <div className="mb-6">
@@ -22,8 +22,8 @@ const ProfileInfo = () => {
             id="email"
             placeholder="Email@"
             className="px-3 py-3 placeholder-gray-borderbg text-gray-base relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full focus:ring-orange-base"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={state.email}
+            onChange={(e) => dispatch({ type: 'email', fieldName: 'email', payload: e.target.value })}
           />
         </div>
         <div className="mb-6">
@@ -37,8 +37,8 @@ const ProfileInfo = () => {
             id="username"
             placeholder="Username"
             className="px-3 py-3 placeholder-gray-borderbg text-gray-base relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full focus:ring-orange-base"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={state.username}
+            onChange={(e) => dispatch({ type: 'username', fieldName: 'username', payload: e.target.value })}
           />
         </div>
       </div>
@@ -55,7 +55,5 @@ ProfileInfo.prototype = {
   propTypes: {
     username: PropTypes.string,
     email: PropTypes.string,
-    setUsername: PropTypes.func,
-    setEmail: PropTypes.func,   
   }
 }

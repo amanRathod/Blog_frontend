@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import React, { useEffect, useState, useRef, useContext, useReducer } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Headers from '../header';
 import ReadBlog from './readblog';
@@ -14,27 +14,41 @@ import { getPostByPostId } from '../../service/backened_call';
 const Index = () => {
   const commentInput = useRef(null);
   const location = useLocation();
-  const [userData, setUserData] = useState(location.state? location.state.userData: '');
   const [blogData, setBlogData] = useState(location.state? location.state.blogData: '');
   
-  const [content, setContent] = useState(blogData.content);
-  const [comments, setComments] = useState(blogData.comments);
-  
-  const [likes, setLikes] = useState(blogData.likes);
-  const [title, setTitle] = useState(blogData.title);
-  const [date, setDate] = useState(blogData.updatedAt);
-  const [id, setId] = useState(blogData._id);
-  const [tags, setTags] = useState(blogData.tags);
-  const [photo, setPhoto] = useState(blogData.photo);
-  const [username, setUsername] = useState(blogData.username);
-
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'likes': {
+        return {...state, [action.fieldName]: action.payload,};
+      }
+      case 'comments': {
+        return {...state,  [action.fieldName]: action.payload,};
+      }
+      default: {
+        return state;
+      }
+    }
+  }
+ 
+  const initialState =  {
+    content: blogData.content,
+    comments: blogData.comments,
+    likes: blogData.likes,
+    title: blogData.title,
+    date: blogData.date,
+    id: blogData._id,
+    tags: blogData.tags,
+    photo: blogData.photo,
+    username: blogData.username
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log('statee', state);
   useEffect(() => {
     document.title = 'Read Blog'
-    console.log('useEffect called')
     const getPosts = async () => {
-      const response = await getPostByPostId(id);
-      setComments(response.comments);
-      setLikes(response.likes);
+      const response = await getPostByPostId(state.id);
+      dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
+      dispatch({type: 'likes', fieldName: 'likes', payload: response.likes});
     };
     getPosts();
 
@@ -42,7 +56,7 @@ const Index = () => {
       getPosts();
     };
     // window.history.replaceState({}, document.title)
-  }, [blogData, id]);
+  }, []);
 
   return (
     <>
@@ -52,19 +66,9 @@ const Index = () => {
       <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg">
         <BlogContext.Provider
           value={{
-            photo,
-            tags,
-            commentInput,
-            userData,
-            id,
-            username,
-            date,
-            content,
-            title,
-            comments,
-            setComments,
-            likes,
-            setLikes
+            state,
+            dispatch,
+            commentInput
           }}
         >
           <ReadBlog/>

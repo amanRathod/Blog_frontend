@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 import UserContext from '../context/user';
@@ -13,26 +13,63 @@ const Profile = () => {
   const { username } = useParams();
   const { user } = useContext(UserContext);
 
-  const [_id, setId] = useState();
-  const [followers, setFollowers] = useState();
-  const [following, setFollowing] = useState();
-  const [fullName, setFullName] = useState();
-  const [image, setImage] = useState();
-  const [bio, setBio] = useState();
-  const [email, setEmail] = useState();
-  const [blog, setBlog] = useState([]);
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'id': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'fullName': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'email': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'bio': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'image': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'following': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'followers': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      case 'blog': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
+      default: {
+        return state;
+      }
+    }
+  };
+
+  const initialState = {
+    id: '',
+    followers: '',
+    following: '',
+    fullName: '',
+    username,
+    image: '',
+    bio: '',
+    email: '',
+    blog: ''
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const getProfileData = async () => {
       const { UserData, UserBlogs } = await getUserByUsername(username);
-      setId(UserData._id);
-      setFollowers(UserData.followers);
-      setFollowing(UserData.following);
-      setFullName(UserData.fullName);
-      setImage(UserData.image);
-      setBio(UserData.bio);
-      setEmail(UserData.email);
-      setBlog(UserBlogs);
+      dispatch({ type: 'id', fieldName: 'id', payload: UserData._id });
+      dispatch({ type: 'followers', fieldName: 'followers', payload: UserData.followers });
+      dispatch({ type: 'following', fieldName: 'following', payload: UserData.following });
+      dispatch({ type: 'fullName', fieldName: 'fullName', payload: UserData.fullName });
+      dispatch({ type: 'image', fieldName: 'image', payload: UserData.image });
+      dispatch({ type: 'bio', fieldName: 'bio', payload: UserData.bio });
+      dispatch({ type: 'email', fieldName: 'email', payload: UserData.email });
+      dispatch({ type: 'blog', fieldName: 'blog', payload: UserBlogs });
     };
     if (username) {
       getProfileData(username);
@@ -48,18 +85,8 @@ const Profile = () => {
       <div className="mx-auto max-w-screen-lg">
         <ProfileContext.Provider
           value={{
-            _id,
-            email,
-            fullName,
-            image,
-            bio,
-            setBio,
-            followers,
-            following,
-            setFollowers,
-            setFollowing,
-            username,
-            blog
+            state,
+            dispatch
           }}
         >
           <UserProfile />
@@ -79,11 +106,5 @@ Profile.propTypes = {
   fullName: PropTypes.string,
   image: PropTypes.string,
   bio: PropTypes.string,
-  email: PropTypes.string,
-  setBio: PropTypes.func,
-  setEmail: PropTypes.func,
-  setFullName: PropTypes.func,
-  setImage: PropTypes.func,
-  setFollowers: PropTypes.func,
-  setFollowing: PropTypes.func
+  email: PropTypes.string
 };
