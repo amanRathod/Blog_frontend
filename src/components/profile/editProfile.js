@@ -58,6 +58,7 @@ const EditProfile = () => {
   console.log(state);
   const handleUpdate = async (e) => {
     e.preventDefault();
+    console.log('ckick updateee')
     try {
       const formData = new FormData();
       formData.append('file', state.picture);

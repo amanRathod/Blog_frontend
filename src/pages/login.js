@@ -85,10 +85,17 @@ export default function Login() {
     e.preventDefault();
     try {
       axios({
-        url: 'http://localhost:4444/auth/google',
+        url: `http://localhost:4444/auth/google`,
+        method: 'GET',
+        mode: 'cors',
         credentials: true,
-        method: 'GET'
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+        }
       }).then((response) => {
+        console.log('google auth response', response);
         const storeData = {
           id: response.data._id,
           email: response.data.email,

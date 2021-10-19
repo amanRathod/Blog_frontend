@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect } from 'react';
 import parse from 'html-react-parser';
 import draftToHtml from 'draftjs-to-html';
 import { MyLoader } from './skeleton';
@@ -17,12 +17,11 @@ const mystyle = {
   textOverflow: 'ellipsis'
 };
 
-const Timeline = ({ posts, search, setPosts, setFlash}) => {
+const Timeline = ({ posts, setPosts, setFlash}) => {
   const { user } = useContext(UserContext);
+  // useEffect(() => {
 
-  useEffect(() => {
-
-  }, [posts]);
+  // }, [posts]);
 
   return (
     <>
@@ -40,7 +39,7 @@ const Timeline = ({ posts, search, setPosts, setFlash}) => {
                       boolDate
                     />
                   </div>
-                  {posts[postsKey].userId === user.id ? (
+                  {posts[postsKey].userId === user.id  ? (
                     <div>
                       <DropDown setPosts={setPosts} postData={posts[postsKey]} setFlash={setFlash} />
                     </div>
@@ -52,7 +51,7 @@ const Timeline = ({ posts, search, setPosts, setFlash}) => {
                 </h1>
                 {posts[postsKey].tags.map((tag, idx) => (
                   <li
-                    key={tag.id}
+                    key={idx}
                     className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
                   >
                     #{tag.text}

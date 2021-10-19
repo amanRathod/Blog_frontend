@@ -6,7 +6,7 @@ const UserAuthListener = () => {
   const UserExists = () => {
     const userExists = localStorage.getItem('user');
     if (userExists) {
-      setUser(JSON.parse(userExists));
+      setUser(userExists);
     } else {
       setUser(null);
     }
