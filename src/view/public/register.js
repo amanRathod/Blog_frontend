@@ -71,40 +71,47 @@ export default function RegisterView() {
     <div className="row h-screen bg-gradient">
       <ToastContainer />
       <div className="glass-morphism">
-        <h1 className="text-white font-black my-12 italic text-4xl tracking-widest font-mono">
-          SIGN-UP
-        </h1>
-        <form onSubmit={_handleSubmit} className="box2 bg-white">
+        <form onSubmit={_handleSubmit} className="box2">
           <fieldset>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="fullName">Full Name</label>
+                <label htmlFor="fullName" className="text-orange-fifty">
+                  Full Name
+                </label>
               </div>
               <FormInputName value={state.fullName} handleChange={handleChange} name="fullName" />
             </div>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="username">Role</label>
+                <label htmlFor="username" className="text-orange-fifty">
+                  Username
+                </label>
               </div>
               <FormInputName value={state.username} handleChange={handleChange} name="username" />
             </div>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="text-orange-fifty">
+                  Email
+                </label>
               </div>
               <FormInputEmail value={state.email} handleChange={handleChange} />
               {state.error1 && <p className="error -pt-6">{state.error1}</p>}
             </div>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="text-orange-fifty">
+                  Password
+                </label>
               </div>
               <FormInputPassword value={state.password} handleChange={handleChange} />
               {state.error2 && <p className="error">{state.error2}</p>}
             </div>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="text-orange-fifty">
+                  Confirm Password
+                </label>
               </div>
               <input
                 type="password"

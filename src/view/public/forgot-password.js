@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     email: '',
     error1: ''
   });
-  const isInputEmpty = state.email === '';
+  const isInputEmpty = state.email === '' || state.error1 !== '';
 
   const handleChange = (e) => {
     e.persist();
@@ -37,11 +37,13 @@ const ForgotPassword = () => {
     <div className="row h-screen bg-gradient">
       <ToastContainer />
       <div className="glass-morphism">
-        <form onSubmit={_handleSubmit} className="box2 bg-white">
+        <form onSubmit={_handleSubmit} className="box2 card-rounded">
           <fieldset>
             <div>
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="text-orange-fifty">
+                  Email
+                </label>
               </div>
               <FormInputEmail value={state.email} handleChange={handleChange} />
               {state.error1 && <p className="error">{state.error1}</p>}

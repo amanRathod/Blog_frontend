@@ -61,18 +61,22 @@ const SetPasswordView = () => {
     <div className="row h-screen bg-gradient">
       <ToastContainer />
       <div className="glass-morphism">
-        <form onSubmit={_handleSubmit} className="box2 card-rounded bg-white">
+        <form onSubmit={_handleSubmit} className="box2 card-rounded">
           <fieldset>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="text-orange-fifty">
+                  Password
+                </label>
               </div>
               <FormInputPassword value={state.password} handleChange={handleChange} />
               {state.error2 && <p className="error">{state.error2}</p>}
             </div>
             <div>
               <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="text-orange-fifty">
+                  Confirm Password
+                </label>
               </div>
               <input
                 type="password"

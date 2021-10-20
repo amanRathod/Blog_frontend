@@ -10,7 +10,7 @@
     @apply dark:bg-darkMode-primary dark:text-white;
   }
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-orange-seven focus:ring-opacity-60  focus:ring-offset-2 duration-500;
+    @apply focus:outline-none focus:ring-4 focus:ring-orange-seven focus:ring-offset-2 duration-500;
   }
   .bg-gradient {
     @apply bg-gradient-to-l from-black-left  to-black-right;
@@ -28,7 +28,7 @@
     @apply grid grid-cols-6 gap-4;
   }
   .box2 {
-    @apply w-96 col h-auto box1 border-gray-base border-opacity-10 p-4  border-2;
+    @apply w-96 col h-auto row border-gray-base border-opacity-10 p-4  border-2;
   }
   .large-x-y {
     @apply lg:px-8 lg:py-6;
@@ -49,15 +49,18 @@
     @apply w-80 bg-orange-fifty border-gray-base border-opacity-50 border-2 rounded-2xl p-2 mb-2  focus-ring
   }
   .input-control1 {
-    @apply m-4 w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid border-gray-700 shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none;
+    @apply  w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid  shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none;
   }
   .text-color {
     @apply dark-nine text-lg font-semibold ;
   }
   .glass-morphism {
-    @apply flex w-100 h-auto flex-col bg-gray-formbg  bg-opacity-30 items-center p-4  mb-4 rounded-2xl  border-2 border-gray-700 backdrop-blur-md shadow-2xl;
+    @apply flex w-96 h-auto flex-col bg-gray-formbg  bg-opacity-30 items-center p-4  mb-4 rounded-2xl  border-2 backdrop-blur-md shadow-2xl;
   }
   .card-rounded {
     @apply rounded-2xl shadow-2xl;
+  }
+  .underline-link {
+    @apply  border-b-4 cursor-pointer border-white  hover:border-orange-five dark:hover:border-orange-five dark:border-darkMode-base duration-500;
   }
 }

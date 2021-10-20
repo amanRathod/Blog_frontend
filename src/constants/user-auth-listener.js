@@ -4,7 +4,7 @@ const UserAuthListener = () => {
   const [user, setUser] = useState({});
 
   const UserExists = () => {
-    const userExists = localStorage.getItem('user');
+    const userExists = localStorage.getItem('token');
     if (userExists) {
       setUser(userExists);
     } else {

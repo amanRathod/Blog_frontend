@@ -17,7 +17,7 @@ export default function LoginView() {
     error1: ''
   });
 
-  const isInputEmpty = state.email === '' || state.password === '';
+  const isInputEmpty = state.email === '' || state.password === '' || state.error1 !== '';
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -34,8 +34,8 @@ export default function LoginView() {
       const response = await UserLogin(state);
       notify(response);
       if (response.type === 'success') {
-        localStorage.setItem('accessToken', response.token);
-        history.push(ROUTES.HOME);
+        localStorage.setItem('token', response.token);
+        history.push(ROUTES.DASHBOARD);
       }
     } catch (error) {
       console.log(error);
@@ -50,21 +50,22 @@ export default function LoginView() {
     <div className="row h-screen bg-gradient">
       <ToastContainer />
       <div className="glass-morphism">
-        <h1 className="text-white font-black my-12 italic text-4xl tracking-widest font-mono">
-          LOGIN
-        </h1>
-        <form className="box2 bg-white">
+        <form className="box2 ">
           <fieldset>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="text-orange-fifty">
+                  Email
+                </label>
               </div>
               <FormInputEmail value={state.email} handleChange={handleChange} />
               {state.error1 && <p className="error">{state.error1}</p>}
             </div>
-            <div>
+            <div className="mb-3">
               <div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="text-orange-fifty">
+                  Password
+                </label>
               </div>
               <FormInputPassword value={state.password} handleChange={handleChange} />
             </div>
@@ -85,7 +86,7 @@ export default function LoginView() {
               Login
             </button>
           </div>
-          <p className="mt-4">
+          <p className="mt-4 text-orange-fifty">
             Don't have an account?{' '}
             <Link to={ROUTES.SIGNUP} className="text-color">
               Singup
