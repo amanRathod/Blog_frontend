@@ -1,16 +1,19 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import UserAuthListener from '../hooks/user-auth-listener';
-import Theme from '../hooks/theme';
-import UserContext from '../context/user';
-import ThemeContext from '../context/theme';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import UserAuthListener from '../constants/user-auth-listener';
+import Theme from '../constants/theme';
+import UserContext from '../utilities/context/user';
+import ThemeContext from '../utilities/context/theme';
 import * as ROUTES from '../constants/routes';
 
-const Login = lazy(() => import('../pages/login'));
-const Signup = lazy(() => import('../pages/signup'));
+import PublicRoute from './public-route';
+import PrivateRoute from './private-route';
+
+const Login = lazy(() => import('../view/public/login'));
+const Signup = lazy(() => import('../view/public/register'));
 const Dashboard = lazy(() => import('../pages/dashboard'));
-const ForgetPassword = lazy(() => import('../pages/forgetPassword'));
-const ResetPassword = lazy(() => import('../pages/resetPassword'));
+const ForgetPassword = lazy(() => import('../view/public/forgot-password'));
+const ResetPassword = lazy(() => import('../view/public/set-password'));
 const Profile = lazy(() => import('../pages/profile'));
 const WriteBlog = lazy(() => import('../components/WriteBlog'));
 const ReadStory = lazy(() => import('../components/blogContainer'));
@@ -27,15 +30,15 @@ function App() {
         <Router>
           <Suspense fallback={renderLoader()}>
             <Switch>
-              <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
-              <Route path={ROUTES.LOGIN} component={Login} />
-              <Route path={ROUTES.SIGNUP} component={Signup} />
-              <Route path={ROUTES.PASS_FORGET} component={ForgetPassword} />
-              <Route path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
-              <Route path={ROUTES.PROFILE} component={Profile} />
-              <Route path={ROUTES.WRITE_BLOG} component={WriteBlog} />
-              <Route path={ROUTES.READ_STORY} component={ReadStory} />
-              <Route path={ROUTES.SETTING} component={Setting} />
+              <PublicRoute path={ROUTES.LOGIN} component={Login} />
+              <PublicRoute path={ROUTES.SIGNUP} component={Signup} />
+              <PublicRoute path={ROUTES.FORGOT_PASSWORD} component={ForgetPassword} />
+              <PublicRoute path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
+              <PrivateRoute path={ROUTES.DASHBOARD} component={Dashboard} exact />
+              <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
+              <PrivateRoute path={ROUTES.WRITE_BLOG} component={WriteBlog} />
+              <PrivateRoute path={ROUTES.READ_STORY} component={ReadStory} />
+              <PrivateRoute path={ROUTES.SETTING} component={Setting} />
             </Switch>
           </Suspense>
         </Router>

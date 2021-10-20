@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .dark-base {
+    @apply dark:bg-darkMode-base dark:text-white;
+  }
+  .dark-primary {
+    @apply dark:bg-darkMode-primary dark:text-white;
+  }
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-orange-seven focus:ring-opacity-60  focus:ring-offset-2 duration-500;
+  }
+  .bg-gradient {
+    @apply bg-gradient-to-l from-black-left  to-black-right;
+  }
+  .btn {
+    @apply py-2 max-w-xs px-4 mr-4 mt-4 font-bold rounded-2xl bg-orange-five text-white tracking-tighter text-base;
+  }
+  .row {
+    @apply flex items-center justify-center ;
+  }
+  .col {
+    @apply flex flex-col items-center justify-center;
+  }
+  .grids {
+    @apply grid grid-cols-6 gap-4;
+  }
+  .box2 {
+    @apply w-96 col h-auto box1 border-gray-base border-opacity-10 p-4  border-2;
+  }
+  .large-x-y {
+    @apply lg:px-8 lg:py-6;
+  }
+  .table-x-y {
+    @apply px-3 py-3;
+  }
+  .dark-eight {
+    @apply text-orange-eight dark:text-orange-one
+  }
+  .dark-nine {
+    @apply text-orange-nine dark:text-orange-two
+  }  
+  .error {
+    @apply text-red-primary mb-3 break-normal;
+  }
+  .input-control {
+    @apply w-80 bg-orange-fifty border-gray-base border-opacity-50 border-2 rounded-2xl p-2 mb-2  focus-ring
+  }
+  .input-control1 {
+    @apply m-4 w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid border-gray-700 shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none;
+  }
+  .text-color {
+    @apply dark-nine text-lg font-semibold ;
+  }
+  .glass-morphism {
+    @apply flex w-100 h-auto flex-col bg-gray-formbg  bg-opacity-30 items-center p-4  mb-4 rounded-2xl  border-2 border-gray-700 backdrop-blur-md shadow-2xl;
+  }
+  .card-rounded {
+    @apply rounded-2xl shadow-2xl;
+  }
+}

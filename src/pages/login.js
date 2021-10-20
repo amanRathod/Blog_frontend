@@ -163,7 +163,7 @@ export default function Login() {
 
           <div className="flex  items-center mb-5 justify-between">
             <span className="relative cursor-pointer text-white opacity-90 left-0 inset-y-0 flex items-center pl-4 pr-16 ">
-              <Link to={ROUTES.PASS_FORGET} className="font-bold">
+              <Link to={ROUTES.FORGOT_PASSWORD} className="font-bold">
                 Forgot Password
               </Link>
             </span>

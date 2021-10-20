@@ -7,7 +7,7 @@ import notify from '../../components/public/notification';
 import ValidateEmail from '../../utilities/validation/email';
 import FormInputEmail from '../../components/input/email';
 import * as ROUTES from '../../constants/routes';
-import { UserForgotPassword } from '../../services/auth';
+import { UserForgotPassword } from '../../service/auth';
 
 const ForgotPassword = () => {
   const [state, setState] = useState({
@@ -34,30 +34,32 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="box1 h-screen bg-gradient">
+    <div className="row h-screen bg-gradient">
       <ToastContainer />
-      <form onSubmit={_handleSubmit} className="box2 bg-white">
-        <fieldset>
-          <div>
+      <div className="glass-morphism">
+        <form onSubmit={_handleSubmit} className="box2 bg-white">
+          <fieldset>
             <div>
-              <label htmlFor="email">Email</label>
+              <div>
+                <label htmlFor="email">Email</label>
+              </div>
+              <FormInputEmail value={state.email} handleChange={handleChange} />
+              {state.error1 && <p className="error">{state.error1}</p>}
             </div>
-            <FormInputEmail value={state.email} handleChange={handleChange} />
-            {state.error1 && <p className="error">{state.error1}</p>}
+          </fieldset>
+          <button
+            disabled={isInputEmpty}
+            type="submit"
+            className={`btn focus-ring ${isInputEmpty && 'opacity-70 cursor-not-allowed'}`}
+            onClick={_handleSubmit}
+          >
+            Submit
+          </button>
+          <div className="text-center text-color mt-4 underline">
+            <Link to={ROUTES.LOGIN}>Back to login</Link>
           </div>
-        </fieldset>
-        <button
-          disabled={isInputEmpty}
-          type="submit"
-          className={`btn ${isInputEmpty && 'opacity-70 cursor-not-allowed'}`}
-          onClick={_handleSubmit}
-        >
-          Submit
-        </button>
-        <div className="text-center text-color mt-4 underline">
-          <Link to={ROUTES.LOGIN}>Back to login</Link>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

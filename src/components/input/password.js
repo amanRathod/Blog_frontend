@@ -15,7 +15,7 @@ export default function FormInputPassword({ value, handleChange }) {
         type={showPassword ? 'text' : 'password'}
         name="password"
         value={value}
-        className="input-control"
+        className="input-control1"
         onChange={handleChange}
         required
       />

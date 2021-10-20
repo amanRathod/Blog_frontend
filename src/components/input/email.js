@@ -7,7 +7,7 @@ export default function FormInputEmail({ value, handleChange }) {
       type="text"
       name="email"
       value={value}
-      className="input-control"
+      className="input-control1"
       onChange={handleChange}
       required
     />

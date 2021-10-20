@@ -9,14 +9,14 @@ import FormInputName from '../../components/input/name';
 import ValidateEmail from '../../utilities/validation/email';
 import ValidatePassword from '../../utilities/validation/password';
 import ValidateConfirmPassword from '../../utilities/validation/confirm-password';
-import { UserRegister } from '../../services/auth';
+import { UserRegister } from '../../service/auth';
 import notify from '../../components/public/notification';
-import Registration from '../../asserts/images/Registration.svg';
+import * as ROUTES from '../../constants/routes';
 
 export default function RegisterView() {
   const [state, setState] = useState({
-    name: '',
-    user_type: '',
+    fullName: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -25,8 +25,8 @@ export default function RegisterView() {
     error3: ''
   });
   const isInputEmpty =
-    state.name === '' ||
-    state.user_type === '' ||
+    state.fullName === '' ||
+    state.username === '' ||
     state.email === '' ||
     state.password === '' ||
     state.confirmPassword === '' ||
@@ -57,8 +57,8 @@ export default function RegisterView() {
     try {
       const response = await UserRegister(state);
       notify(response || {});
-      state.name = '';
-      state.user_type = '';
+      state.fullName = '';
+      state.username = '';
       state.email = '';
       state.password = '';
       state.confirmPassword = '';
@@ -68,74 +68,70 @@ export default function RegisterView() {
   };
 
   return (
-    <div className="box1 h-screen bg-gradient">
+    <div className="row h-screen bg-gradient">
       <ToastContainer />
-      <form onSubmit={_handleSubmit} className="box2 bg-white">
-        <img
-          src="https://bucket-007.s3.ap-south-1.amazonaws.com/Registration.svg"
-          alt="Register"
-          className="h-16 w-16"
-        />
-        <fieldset>
-          <div>
+      <div className="glass-morphism">
+        <h1 className="text-white font-black my-12 italic text-4xl tracking-widest font-mono">
+          SIGN-UP
+        </h1>
+        <form onSubmit={_handleSubmit} className="box2 bg-white">
+          <fieldset>
             <div>
-              <label htmlFor="name">Full Name</label>
+              <div>
+                <label htmlFor="fullName">Full Name</label>
+              </div>
+              <FormInputName value={state.fullName} handleChange={handleChange} name="fullName" />
             </div>
-            <FormInputName value={state.name} handleChange={handleChange} name="name" />
-          </div>
-          <div>
             <div>
-              <label htmlFor="user_type">Role</label>
+              <div>
+                <label htmlFor="username">Role</label>
+              </div>
+              <FormInputName value={state.username} handleChange={handleChange} name="username" />
             </div>
-            <select className="input-control" name="user_type" onBlur={handleChange} required>
-              <option value="Student">Student</option>
-              <option value="Admin">Admin</option>
-              <option value="TA">Teaching Assistant</option>
-            </select>
-          </div>
-          <div>
             <div>
-              <label htmlFor="email">Email</label>
+              <div>
+                <label htmlFor="email">Email</label>
+              </div>
+              <FormInputEmail value={state.email} handleChange={handleChange} />
+              {state.error1 && <p className="error -pt-6">{state.error1}</p>}
             </div>
-            <FormInputEmail value={state.email} handleChange={handleChange} />
-            {state.error1 && <p className="error -pt-6">{state.error1}</p>}
-          </div>
-          <div>
             <div>
-              <label htmlFor="password">Password</label>
+              <div>
+                <label htmlFor="password">Password</label>
+              </div>
+              <FormInputPassword value={state.password} handleChange={handleChange} />
+              {state.error2 && <p className="error">{state.error2}</p>}
             </div>
-            <FormInputPassword value={state.password} handleChange={handleChange} />
-            {state.error2 && <p className="error">{state.error2}</p>}
-          </div>
-          <div>
             <div>
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div>
+                <label htmlFor="confirmPassword">Confirm Password</label>
+              </div>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={state.confirmPassword}
+                className="input-control1"
+                onChange={handleChange}
+                required
+              />
+              {state.error3 && <p className="error">{state.error3}</p>}
             </div>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={state.confirmPassword}
-              className="input-control"
-              onChange={handleChange}
-              required
-            />
-            {state.error3 && <p className="error">{state.error3}</p>}
-          </div>
-        </fieldset>
-        <button
-          disabled={isInputEmpty}
-          type="submit"
-          className={`btn ${isInputEmpty && 'opacity-70  cursor-not-allowed'}`}
-        >
-          Register
-        </button>
-        <p className="break-normal mt-4">
-          Already have an account?{' '}
-          <Link to="/login" className="text-color ">
-            Login
-          </Link>
-        </p>
-      </form>
+          </fieldset>
+          <button
+            disabled={isInputEmpty}
+            type="submit"
+            className={`btn focus-ring ${isInputEmpty && 'opacity-70  cursor-not-allowed'}`}
+          >
+            Register
+          </button>
+          <p className="break-normal mt-4">
+            Already have an account?{' '}
+            <Link to={ROUTES.LOGIN} className="text-color ">
+              Login
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

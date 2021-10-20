@@ -1,19 +1,18 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as ROUTES from '../../constants/routes';
 import FormInputPassword from '../../components/input/password';
 import ValidateConfirmPassword from '../../utilities/validation/confirm-password';
 import notify from '../../components/public/notification';
-import { UserResetPassword } from '../../services/auth';
+import { UserResetPassword } from '../../service/auth';
 import ValidatePassword from '../../utilities/validation/password';
 
 const SetPasswordView = () => {
   const { token } = useParams();
-  const history = useHistory();
   const [state, setState] = useState({
     password: '',
     confirmPassword: '',
@@ -47,8 +46,9 @@ const SetPasswordView = () => {
     try {
       e.preventDefault();
       const response = await UserResetPassword(state);
-      state.password = '';
       notify(response);
+      state.password = '';
+      state.confirmPassword = '';
     } catch (error) {
       notify({
         type: 'error',
@@ -58,44 +58,46 @@ const SetPasswordView = () => {
   };
 
   return (
-    <div className="box1 h-screen bg-gradient">
+    <div className="row h-screen bg-gradient">
       <ToastContainer />
-      <form onSubmit={_handleSubmit} className="box2 col card-rounded bg-white">
-        <fieldset>
-          <div>
+      <div className="glass-morphism">
+        <form onSubmit={_handleSubmit} className="box2 card-rounded bg-white">
+          <fieldset>
             <div>
-              <label htmlFor="password">Password</label>
+              <div>
+                <label htmlFor="password">Password</label>
+              </div>
+              <FormInputPassword value={state.password} handleChange={handleChange} />
+              {state.error2 && <p className="error">{state.error2}</p>}
             </div>
-            <FormInputPassword value={state.password} handleChange={handleChange} />
-            {state.error2 && <p className="error">{state.error2}</p>}
-          </div>
-          <div>
             <div>
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div>
+                <label htmlFor="confirmPassword">Confirm Password</label>
+              </div>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={state.confirmPassword}
+                className="input-control1"
+                onChange={handleChange}
+                required
+              />
+              {state.error3 && <p className="error">{state.error3}</p>}
             </div>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={state.confirmPassword}
-              className="input-control"
-              onChange={handleChange}
-              required
-            />
-            {state.error3 && <p className="error">{state.error3}</p>}
+          </fieldset>
+          <button
+            disabled={isInputEmpty}
+            type="submit"
+            className={`btn focus-ring ${isInputEmpty && 'opacity-70 cursor-not-allowed'}`}
+            onClick={_handleSubmit}
+          >
+            Submit
+          </button>
+          <div className="text-center text-color mt-4 underline">
+            <Link to={ROUTES.LOGIN}>Back to login</Link>
           </div>
-        </fieldset>
-        <button
-          disabled={isInputEmpty}
-          type="submit"
-          className={`btn ${isInputEmpty && 'opacity-70 cursor-not-allowed'}`}
-          onClick={_handleSubmit}
-        >
-          Submit
-        </button>
-        <div className="text-center text-color mt-4 underline">
-          <Link to={ROUTES.LOGIN}>Back to login</Link>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

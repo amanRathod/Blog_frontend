@@ -39,6 +39,13 @@ module.exports = {
        borderbg:'#6b6363',
        formbg: '#362525',
      },
+     grey: {
+      one: '#f5f5f5',
+      fifty: '#fafafa',
+      six: '#757575',
+      seven: '#616161',
+      eight: '#424242'
+    },
      yellow: {
        base: '#fbc02d',
        primary: '#ffff8d'
@@ -52,9 +59,18 @@ module.exports = {
        primary: '#ed4956',
        secondary: '#db3236',
        light: '#FECACA'
-
      },
      orange: {
+       fifty: '#fbe9e7',
+       one: '#ffccbc',
+       two: '#ffab91',
+       three: '#ff8a65',
+       four: '#ff7043',
+       five: '#ff5722',
+       six: '#f4511e',
+       seven: '#e64a19',
+       eight: '#d84315',
+       nine: '#bf360c',
        base: '#f32c2c',
        secondary: '#b30606'
      },

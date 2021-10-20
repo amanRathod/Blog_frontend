@@ -7,7 +7,7 @@ export default function FormInputName({ value, handleChange, name }) {
       type="text"
       name={name}
       value={value}
-      className="input-control"
+      className="input-control1"
       onChange={handleChange}
       required
     />
