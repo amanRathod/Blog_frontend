@@ -14,7 +14,7 @@ const ForgetPassword = lazy(() => import('../view/public/forgot-password'));
 const ResetPassword = lazy(() => import('../view/public/set-password'));
 const Profile = lazy(() => import('../pages/profile'));
 const WriteBlog = lazy(() => import('../components/WriteBlog'));
-const ReadStory = lazy(() => import('../components/blogContainer'));
+const ReadStory = lazy(() => import('../pages/blogContainer'));
 const Setting = lazy(() => import('../components/profile/editProfile'));
 
 const renderLoader = () => <p>Loading...</p>;

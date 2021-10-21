@@ -21,6 +21,9 @@
   .row {
     @apply flex items-center justify-center ;
   }
+  .row1 {
+    @apply flex justify-around space-x-2;
+  }
   .col {
     @apply flex flex-col items-center justify-center;
   }
@@ -42,6 +45,12 @@
   .dark-nine {
     @apply text-orange-nine dark:text-orange-two
   }  
+  .header {
+    @apply mx-auto px-4  bg-headerWhite  dark-base shadow-lg  text-center text-xl font-bold tracking-tighter;
+  }
+  .hover {
+    @apply hover:bg-orange-fifty dark:hover:bg-darkMode-primary
+  }
   .error {
     @apply text-red-primary mb-3 break-normal;
   }

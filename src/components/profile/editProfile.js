@@ -8,7 +8,7 @@ import Header from '../header';
 import BasicInfo from './profileUpdate/BasicInfo';
 import ProfileInfo from './profileUpdate/profileIdentity';
 import UpdateProfile from '../../context/editProfile';
-import Footer from '../footer';
+// import Footer from '../footer';
 import { updateProfileData } from '../../service/put_backenedCall';
 import * as ROUTES from '../../constants/routes';
 import Flash from '../flash';
@@ -107,7 +107,7 @@ const EditProfile = () => {
         >
           Update Information
         </button>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

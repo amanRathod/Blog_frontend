@@ -1,8 +1,9 @@
+/* eslint-disable no-empty-function */
 import axios from 'axios';
 import jwt from 'jwt-decode';
 import notify from '../components/public/notification';
 
-const link = 'http://localhost:444/api/v1';
+const link = 'http://localhost:4444/api/v1';
 
 const token = localStorage.getItem('token');
 
@@ -22,8 +23,7 @@ const isTokenExpired = () => {
 // if token is expired, logout user
 const checkTokenExpired = () => {
   if (isTokenExpired()) {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     window.location.href = '/login';
   }
 };
@@ -41,6 +41,7 @@ export async function GetUserData() {
         Authorization: `Bearer ${token}`
       }
     };
+    console.log('token', token);
     const response = await axios.get(`${link}/user`, config);
     return response.data;
   } catch (err) {
@@ -48,19 +49,4 @@ export async function GetUserData() {
   }
 }
 
-export async function GetTAData() {
-  try {
-    const token = localStorage.getItem('accessToken');
-
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    };
-    const response = await axios.get(`${link}/TA`, config);
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-}
+export async function GetData() {}

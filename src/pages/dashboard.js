@@ -3,7 +3,7 @@ import Header from '../components/header';
 import Timeline from '../components/Posts';
 import { getAllPosts } from '../service/backened_call';
 import Flash from '../components/flash';
-import Footer from '../components/footer';
+import Footer from '../components/public/footer';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);

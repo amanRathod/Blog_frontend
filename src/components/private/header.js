@@ -1,14 +1,16 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, NavLink } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import UserDataContext from '../../utilities/context/userData';
 import DarkMode from '../public/dark_mode';
 import notify from '../public/notification';
 
-const Header = () => {
+const Header = ({ userData }) => {
   const history = useHistory();
-  const { state } = useContext(UserDataContext);
+  // const { state } = useContext(UserDataContext);
+  // console.log('datate4', state);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ const Header = () => {
         type: 'success',
         message: 'Logout successfully'
       });
-      history.push('/login');
+      history.push(ROUTES.LOGIN);
     } catch (err) {
       console.log(err);
     }
@@ -28,14 +30,14 @@ const Header = () => {
     <header className="h-16 bg-white  dark:bg-darkMode-base dark:text-white  border-gray-base shadow-md  border-b ">
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
-          <div className=" text-center felx items-center align-items cursor-pointer">
-            <h1 className="flex justify-center w-full">
+          <div className=" text-center row cursor-pointer mt-2 mr-2 ">
+            {/* <h1 className="flex justify-center w-full"> */}
               <Link to={ROUTES.DASHBOARD} className="m-3 text-color underline-link">
                 Blog
               </Link>
-            </h1>
+            {/* </h1> */}
           </div>
-          <div className="text-center flex items-center align-items">
+          <div className="text-center row">
             <Link
               to={ROUTES.WRITE_BLOG}
               aria-label="Write-Story"
@@ -43,7 +45,7 @@ const Header = () => {
             >
               <button type="submit" className="focus:outline-none">
                 <svg
-                  className="w-10 mt-2 mr-2 opacity-80 hover:text-orange-base dark:hover:text-darkMode-orange"
+                  className="w-10 mt-2 mr-2 "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -58,9 +60,10 @@ const Header = () => {
                 </svg>
               </button>
             </Link>
+            <Link className="m-3 text-color underline-link">
             <button className="focus:outline-none" onClick={handleLogout} type="button">
               <svg
-                className="w-8 mr-6 text-black-light cursor-pointer hover:text-orange-base dark:hover:text-darkMode-orange"
+                className="w-8 mt-2 mr-2 cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -74,16 +77,19 @@ const Header = () => {
                 />
               </svg>
             </button>
+            </Link>
 
-            <div className="flex items-center cursor-pointer mr-2">
-              <Link to={`profile/${state.username}`} className="m-3 text-color underline-link">
+            
+              <Link to={`profile/${userData.username}`} className="m-3 text-color underline-link">
+                <button type="submit">
                 <img
-                  className=" rounded-full h-8 w-8 flex"
-                  src={`${state.image}`}
-                  alt={`${state.username} profile`}
+                  className=" rounded-full h-8 w-8 mt-2 mr-2 flex"
+                  src={`${userData.image}`}
+                  alt={`${userData.username} profile`}
                 />
+                </button>
               </Link>
-            </div>
+
             <DarkMode />
           </div>
         </div>

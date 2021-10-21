@@ -21,6 +21,7 @@ module.exports = {
        dark: '#303f9f',
      },
      white: '#ffffff',
+     headerWhite: '#f6f4f2',
      blue: {
        medium: '#005c98'
      },

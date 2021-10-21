@@ -2,6 +2,8 @@ import React, { useEffect, useReducer } from 'react';
 import Header from '../../components/private/header';
 import UserDataContext from '../../utilities/context/userData';
 import { GetUserData } from '../../service/user';
+import Footer from '../../components/public/footer';
+import Posts from '../../pages/blogs/posts';
 
 const Home = () => {
   const reducer = (state, action) => {
@@ -40,6 +42,7 @@ const Home = () => {
   };
 
   const InitialState = {
+    id: '',
     fullName: '',
     username: '',
     image: '',
@@ -56,10 +59,12 @@ const Home = () => {
   const fetchData = async () => {
     try {
       // get logged-In user Data
-      const response = GetUserData();
+      const response = await GetUserData();
+      console.log(response);
 
       const { data, allBlog } = response;
       // store the response data to their respective state
+      dispatch({ type: 'id', fieldName: 'id', payload: data._id });
       dispatch({ type: 'fullName', fieldName: 'fullName', payload: data.fullName });
       dispatch({
         type: 'username',
@@ -90,18 +95,20 @@ const Home = () => {
     document.title = 'Home';
     fetchData();
     // update data for every 10 second
-    const interval = setInterval(() => {
-      fetchData();
-    }, 10000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   fetchData();
+    // }, 10000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
-    <>
-      <UserDataContext.Provider value={(state, dispatch)}>
-        <Header />
+    <div className="bg-gray-background dark:bg-darkMode-base">
+      <UserDataContext.Provider value={{ state, dispatch }}>
+        <Header userData={state} />
+        <Posts />
+        <Footer />
       </UserDataContext.Provider>
-    </>
+    </div>
   );
 };
 
