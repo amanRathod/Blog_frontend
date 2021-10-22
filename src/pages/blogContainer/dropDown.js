@@ -1,17 +1,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
-import ProfileContext from '../../context/profile';
-import { deleteComment } from '../../service/delete_backenedCall';
+import { deleteComment } from '../../service/comment';
 import BlogContext from '../../utilities/context/blogs';
 
-const DropDown = ({ commentId, blogId }) => {
-  const history = useHistory();
-  const { dispatch } = useContext(BlogContext);
+const DropDown = ({ commentId }) => {
+  const { state, dispatch } = useContext(BlogContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -27,7 +23,7 @@ const DropDown = ({ commentId, blogId }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await deleteComment(commentId, blogId);
+      const response = await deleteComment(commentId, state.blogId);
       dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });
     } catch (err) {
       console.log(err);

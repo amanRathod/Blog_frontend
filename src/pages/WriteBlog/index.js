@@ -45,6 +45,7 @@ const Index = () => {
     content: blogData ? blogData.content : ''
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log('writeblog', state);
   return (
     <>
       <div className="bg-white dark:bg-darkMode-base">

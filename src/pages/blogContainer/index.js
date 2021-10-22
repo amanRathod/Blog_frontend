@@ -44,20 +44,22 @@ const Index = () => {
     userData: blogData.userId
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log('statee', state);
+  const fetchComments = async () => {
+    const response = await getAllComments(blogData._id);
+    console.log('comments', response);
+    dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
+    dispatch({type: 'likes', fieldName: 'likes', payload: response.likes});
+  };
+
   useEffect(() => {
     document.title = 'Read Blog'
-    const getPosts = async () => {
-      const response = await getAllComments(blogData._id);
-      dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
-      dispatch({type: 'likes', fieldName: 'likes', payload: response.likes});
-    };
-    getPosts();
+    fetchComments();
 
-    return () => {
-      getPosts();
-    };
-    // window.history.replaceState({}, document.title)
+     const interval = setInterval(() => {
+      fetchComments();
+    }, 5000);
+    return () => clearInterval(interval);
+
   }, []);
 
   return (

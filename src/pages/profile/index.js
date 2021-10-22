@@ -31,6 +31,9 @@ const Profile = () => {
       case 'following': {
         return { ...state, [action.fieldName]: action.payload };
       }
+      case 'username': {
+        return { ...state, [action.fieldName]: action.payload };
+      }
       case 'followers': {
         return { ...state, [action.fieldName]: action.payload };
       }
@@ -56,6 +59,7 @@ const Profile = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log('profile', state);
 
   const getProfileData = async () => {
     const { data } = await GetUserProfile(username);
@@ -63,10 +67,11 @@ const Profile = () => {
     dispatch({ type: 'followers', fieldName: 'followers', payload: data.followers });
     dispatch({ type: 'following', fieldName: 'following', payload: data.following });
     dispatch({ type: 'fullName', fieldName: 'fullName', payload: data.fullName });
+    dispatch({ type: 'username', fieldName: 'username', payload: data.username });
     dispatch({ type: 'image', fieldName: 'image', payload: data.image });
     dispatch({ type: 'bio', fieldName: 'bio', payload: data.bio });
     dispatch({ type: 'email', fieldName: 'email', payload: data.email });
-    dispatch({ type: 'userBlog', fieldName: 'userBlog', payload: data.userBlog });
+    dispatch({ type: 'userBlog', fieldName: 'userBlog', payload: data.blog });
   };
   useEffect(() => {
     getProfileData();

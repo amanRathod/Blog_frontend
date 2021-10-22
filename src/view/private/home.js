@@ -61,7 +61,6 @@ const Home = () => {
       // get logged-In user Data
       const response = await GetUserData();
       console.log(response);
-
       const { data, allBlog } = response;
       // store the response data to their respective state
       dispatch({ type: 'id', fieldName: 'id', payload: data._id });

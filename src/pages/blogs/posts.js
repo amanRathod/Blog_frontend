@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import parse from 'html-react-parser';
-import draftToHtml from 'draftjs-to-html';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MyLoader } from '../../components/skeleton';
 import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
@@ -22,7 +23,7 @@ const Timeline = () => {
 
   return (
     <>
-    
+    <ToastContainer />
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className=" grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
           { state.allBlog ? (
@@ -37,7 +38,7 @@ const Timeline = () => {
                   </div>
                   {blog.userId.username === state.username  ? (
                     <div>
-                      <DropDown postData={blog} />
+                      <DropDown blogData={blog} />
                     </div>
                   ) : null}
                 </div>
@@ -47,17 +48,17 @@ const Timeline = () => {
                 </h1>
                 {blog.tags.map((tag, idx) => (
                   <li
-                    key={idx}
+                    key={tag.id}
                     className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
                   >
-                    #{tag}
+                    #{tag.text}
                   </li>
                 ))}
                 <img className="w-full rounded-xl" src={blog.photo} alt="" />
 
                 <div style={mystyle} className=" max-w-full">
                   <div className="dark:text-white dark:text-opacity-80 text-gray-formbg text-center font-medium  mt-1">
-                    {parse(draftToHtml((blog.content)))}
+                    {parse((blog.content))}
                   </div>
                 </div>
                 <div className="flex gap-4 mt-5">

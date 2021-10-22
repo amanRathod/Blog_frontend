@@ -2,8 +2,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '../../styles/global.css';
 import WriteBlogContext from '../../utilities/context/writeBlog';
@@ -14,7 +16,11 @@ const WriteBlog = () => {
   const [editorState, setEditorState] = useState();
   useEffect(() => {
     if (state.content) {
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(state.content))));
+      console.log(state.content);
+      const blocksFromHtml = htmlToDraft(state.content);
+      const { contentBlocks, entityMap } = blocksFromHtml;
+      const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+      setEditorState(EditorState.createWithContent(contentState));
     } else {
       setEditorState(EditorState.createEmpty());
     }
@@ -23,7 +29,7 @@ const WriteBlog = () => {
   const handleEditorChange = (state) => {
     setEditorState(state);
     const contentState = editorState.getCurrentContent();
-    const sanitizeContent = (JSON.stringify(convertToRaw(contentState)));
+    const sanitizeContent = (draftToHtml(convertToRaw(contentState)));
     dispatch({type: 'content', fieldName: 'content', payload: sanitizeContent});
   };
 

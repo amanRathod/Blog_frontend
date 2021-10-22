@@ -1,7 +1,7 @@
 /* eslint-disable no-empty-function */
 import axios from 'axios';
 
-const link = 'http://localhost:4444/api/v1/blog';
+const link = 'http://localhost:4444/api/v1/blog/comment';
 
 export async function addComment(content, blogId) {
   try {
@@ -19,7 +19,7 @@ export async function addComment(content, blogId) {
       blogId
     };
 
-    const response = await axios.post(`${link}/comment`, state, config);
+    const response = await axios.post(`${link}/create`, state, config);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -43,7 +43,7 @@ export async function toggleLikesIntoComments(commentId, toggle, blogId) {
       blogId
     };
 
-    const response = await axios.post(`${link}/comment/addLike`, state, config);
+    const response = await axios.post(`${link}/addLike`, state, config);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -64,8 +64,33 @@ export async function getAllComments(blogId) {
     const state = {
       blogId
     };
+    console.log('comments get ', state);
+    console.log('comments get ', config);
 
-    const response = await axios.get(`${link}/comment`, state, config);
+    const response = await axios.post(`${link}/getComments`, state, config);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function deleteComment(commentId, blogId) {
+  try {
+    const token = localStorage.getItem('token');
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    };
+
+    const state = {
+      commentId,
+      blogId
+    };
+
+    const response = await axios.put(`${link}/delete`, state, config);
     return response.data;
   } catch (err) {
     console.log(err);

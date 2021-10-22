@@ -1,12 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext,  useState } from 'react';
-import PropTypes from 'prop-types';
 import jwt from 'jwt-decode';
 import { ReplyIcon, ThumbUpIcon } from '@heroicons/react/solid';
 import BlogContext from '../../utilities/context/blogs';
 import PostsHeader from '../blogs/postsHeader';
 import DropDown from './dropDown';
-import UserContext from '../../context/user';
 import { toggleLikesIntoComments } from '../../service/comment';
 
 const ReplyComments = () => {
@@ -14,16 +12,15 @@ const ReplyComments = () => {
   // const { user } = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
   const decode = jwt(localStorage.getItem('token'));
-  console.log('state commentsss', state);
   const handleLikeClick = async (commentId) => {
     try {
-      console.log('like');
       setToggle(() => !toggle);
       const response = await toggleLikesIntoComments(commentId, !toggle, state.blogId);
+      console.log('response response', response);
       if (response.status === 200) {
-        console.log('likee', response);
         dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });
       }
+      console.log(state.comments);
     } catch (err) {
       console.error(err);
     }
@@ -49,7 +46,7 @@ const ReplyComments = () => {
             >
               <div className="flex justify-between">
                 <PostsHeader userData={item.userId} date={item.date} />
-                <DropDown commentId={item._id} blogId={state.id} />
+                <DropDown commentId={item._id} />
               </div>
               <div className=" w-auto py-4  pt-3 pl-11">{item.content}</div>
               <div className="container flex">

@@ -33,7 +33,7 @@ const Title = () => {
       />
       <div className="flex justify-between mb-4">
         <div>
-          <img src={`${state.imageSrc || state.picture}`} alt="" />
+          <img src={state.imageSrc || state.coverPicture} alt="cover" />
           <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base dark:bg-darkMode-orange dark:text-darkMode-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
             <input
               type="file"

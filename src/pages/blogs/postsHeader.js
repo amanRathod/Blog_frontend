@@ -8,7 +8,6 @@ import moment from 'moment';
 
 const PostsHeader = ({ userData, date }) => {
   const [user, setUser] = useState();
-  console.log('userser', userData);
 
   return (
     <>

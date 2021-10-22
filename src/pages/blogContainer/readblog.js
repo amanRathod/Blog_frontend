@@ -18,7 +18,6 @@ import Comments from './comments';
 
 const ReadBlog = () => {
   const {  state, dispatch } = useContext(BlogContext);
-  console.log('bloggg', state);
   useEffect(() => {
     document.title = 'Blog';
   }, []);
@@ -33,19 +32,19 @@ const ReadBlog = () => {
         <div className="mt-4 font-bold text-6xl">{state.title}</div>
 
         {state.tags.map((tag, idx) => (
-          <li
-            key={tag.id}
-            className="bg-red-light dark:text-darkMode-base m-2 ml-3 px-2 rounded-lg  inline-block hover:underline cursor-pointer"
-          >
-            {tag}
-          </li>
-        ))}
+                  <li
+                    key={tag.id}
+                    className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
+                  >
+                    #{tag.text}
+                  </li>
+                ))}
         <div className=" grid grid-cols-6">
           <div className="container col-span-6 md:col-span-5 bg-gray-background dark:bg-darkMode-primary dark:text-white shadow-sm p-10">
             <PostsHeader userData={state.userData} date={state.updatedAt}/>
             <div className="mt-4 text-lg">
               {/* {parse(draftToHtml((state.content)))} */}
-              {state.content}
+              {parse(state.content)}
               {/* {renderHTML((htmlText))} */}
               {/* <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(htmlText)}} /> */}
             </div>

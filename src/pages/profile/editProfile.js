@@ -62,7 +62,6 @@ const EditProfile = () => {
       formData.append('fullName', state.fullName);
       formData.append('bio', state.bio);
       formData.append('image', state.image);
-      formData.append('username', state.username);
       const response = await updateProfile(formData);
       if (response.status === 200) {
       localStorage.setItem('image',response.image);

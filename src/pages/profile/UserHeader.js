@@ -3,8 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Skelton from 'react-loading-skeleton';
-import { isUserFollow } from '../../service/backened_call';
-import { togglefollowers } from '../../service/put_backenedCall';
+import { togglefollowers } from '../../service/user';
 import { ProfileSKeleton } from '../../components/skeleton';
 import ProfileContext from '../../utilities/context/profile';
 import VerticalDot from './verticalDot.js';
@@ -13,7 +12,9 @@ const UserHeader = () => {
   const {state, dispatch} = useContext(ProfileContext);
   const username = localStorage.getItem('username');
    const [userFollow, setUserFollow] = useState(false);
-  const btnFollow = state.username && state.username !== username;
+  const btnFollow = state.username !== username;
+
+  console.log('btnFollow', btnFollow);
 
   useEffect(() => {
     document.title = 'Profile-Blog';
@@ -43,7 +44,6 @@ const UserHeader = () => {
         <div className="w-full">
           {state.image ? (
             <div className="container  bg-white dark:text-white dark:bg-darkMode-primary rounded shadow-xl hover:shadow-sm text-center py-5">
-              {/* <VerticalDot /> */}
               <div className="flex justify-around">
                 <div>
                   <img
@@ -55,7 +55,9 @@ const UserHeader = () => {
                   <h1 className="text-2xl mt-2 ml-12 sm:ml-32">{state.fullName}</h1>
                 </div>
                 <div>
+                {state.username === username ? (
                   <VerticalDot />
+                ) : null }
                 </div>
               </div>
 

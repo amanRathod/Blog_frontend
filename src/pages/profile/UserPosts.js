@@ -42,7 +42,7 @@ export default function UserPosts() {
               </h1>
               <div style={mystyle}>
                 <p className="overflow-hidden  dark:text-white dark:text-opacity-80 text-gray-formbg  text-sm sm:text-base ">
-                  {parse(draftToHtml(JSON.parse(blogData.content)))}
+                  {parse(blogData.content)}
                 </p>
               </div>
               <div className="flex gap-4 mt-auto">

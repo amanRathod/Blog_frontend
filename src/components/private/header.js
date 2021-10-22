@@ -18,6 +18,8 @@ const Header = () => {
     e.preventDefault();
     try {
       localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('image');
       notify({
         type: 'success',
         message: 'Logout successfully'

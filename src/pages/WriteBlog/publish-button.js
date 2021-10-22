@@ -13,12 +13,6 @@ const Publish = () => {
   const handlePublish = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append('title', state.title);
-      formData.append('tags', JSON.stringify(state.tags));
-      formData.append('file', state.coverPicture);
-      formData.append('content', state.content);
-      formData.append('status', state.status);
       if (state.title === '' || state.tags.length === 0 || state.content === '') {
         if (state.title === '') {
           notify({ type: 'warning', message: 'Title is required' });
@@ -31,6 +25,12 @@ const Publish = () => {
         }
         return;
       }
+      const formData = new FormData();
+      formData.append('title', state.title);
+      formData.append('tag', JSON.stringify(state.tags));
+      formData.append('file', state.coverPicture);
+      formData.append('content', state.content);
+      formData.append('status', state.status);
 
       const response = await createBlog(formData);
       notify(response);
@@ -46,7 +46,7 @@ const Publish = () => {
       const formData = new FormData();
       formData.append('file', state.coverPicture);
       formData.append('title', state.title);
-      formData.append('tags', JSON.stringify(state.tags));
+      formData.append('tag', JSON.stringify(state.tags));
       formData.append('content', state.content);
       formData.append('status', state.status);
       formData.append('blogId', blogData._id);

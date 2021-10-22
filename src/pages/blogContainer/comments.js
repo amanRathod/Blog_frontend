@@ -3,11 +3,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import BlogContext from '../../utilities/context/blogs';
-import UserContext from '../../context/user';
-import PostsHeader from '../blogs/postsHeader';
 import { addComment } from '../../service/comment';
-import ReplyComments from './replyComments';
 import notify from '../../components/public/notification';
 
 const Comments = ({ state, dispatch }) => {
@@ -26,7 +22,6 @@ const Comments = ({ state, dispatch }) => {
       }
 
       const response = await addComment(inputComment, state.blogId);
-      console.log('rrrrererererer', response);
       dispatch({type: 'comments', fieldName: 'comments', payload: response.data});
       setInputComment('');
 

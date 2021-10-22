@@ -19,13 +19,13 @@ const UserFollowing = () => {
   }, []);
 
   return (
-    <div className={`flex mx-auto max-w-screen-lg `}>
+    <div className="flex mx-auto max-w-screen-lg">
       <div className="flex flex-wrap justify-between">
-        {state.following ? (
+        {state.following[0] ? (
           state.following.map((userData, idx) => (
             <div
               key={idx}
-              className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5"
+              className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5 dark:bg-darkMode-primary"
             >
               <img
                 className="max-h-20 w-full opacity-80 absolute top-0 "
@@ -44,7 +44,10 @@ const UserFollowing = () => {
               </div>
               <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
                 {userFollow ? (
-                  <div className=" border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base dark:text-white dark:hover:text-darkMode-base opacity-80 dark:hover:bg-darkMode-orange ">
+                  <div
+                    className={`border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base dark:text-white dark:hover:text-darkMode-base opacity-80 dark:hover:bg-darkMode-orange 
+                    ${username === userData.username ? 'hidden' : 'block'}`}
+                  >
                     Following
                   </div>
                 ) : (

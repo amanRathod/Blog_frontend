@@ -11,14 +11,12 @@ import UserDataContext from '../../utilities/context/userData';
 const Appreciate = ({ state, dispatch }) => {
   // const {state, dispatch } = useContext(BlogContext);
   const decode = jwt(localStorage.getItem('token'));
-  console.log('ddecode', decode);
   const [toggle, setToggle] = useState(!!state.likes.includes(decode.id));
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
       setToggle(() => !toggle);
       const response = await toggleLike(state.blogId, !toggle);
-      console.log('responsseee', response);
       dispatch({type: 'likes', fieldName: 'likes', payload: response.data});
     } catch (err) {
       console.error(err);

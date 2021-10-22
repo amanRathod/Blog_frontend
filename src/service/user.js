@@ -24,6 +24,8 @@ const isTokenExpired = () => {
 const checkTokenExpired = () => {
   if (isTokenExpired()) {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('image');
     window.location.href = '/login';
   }
 };
@@ -41,8 +43,7 @@ export async function GetUserData() {
         Authorization: `Bearer ${token}`
       }
     };
-    console.log('token', token);
-    const response = await axios.get(`${link}`, config);
+    const response = await axios.get(`${link}/user-data`, config);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -62,7 +63,7 @@ export async function GetUserProfile(username) {
     const state = {
       username
     };
-    const response = await axios.get(`${link}/userProfile`, state, config);
+    const response = await axios.post(`${link}/user-profile`, state, config);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -105,11 +106,8 @@ export async function updateProfile(formData) {
         Authorization: `Bearer ${token}`
       }
     };
-    const state = {
-      formData
-    };
 
-    const response = await axios.post(`${link}/update-profile`, state, config);
+    const response = await axios.post(`${link}/update-profile`, formData, config);
     return response.data;
   } catch (err) {
     console.log(err);

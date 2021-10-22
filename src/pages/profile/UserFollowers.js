@@ -22,7 +22,7 @@ const UserFollowers = () => {
   return (
     <div className={`flex mx-auto max-w-screen-lg `}>
       <div className="flex flex-wrap justify-between">
-        {state.followers ? (
+        {state.followers[0] ? (
           state.followers.map((userData, idx) => (
             <div
               key={idx}

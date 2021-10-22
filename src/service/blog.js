@@ -18,9 +18,9 @@ export async function toggleLike(blogId, toggle) {
       toggle,
       blogId
     };
+    console.log('toggle', toggle);
 
     const response = await axios.post(`${link}/toggle-like`, state, config);
-    console.log('rererer', response);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -57,6 +57,28 @@ export async function updateBlog(formData) {
     };
 
     const response = await axios.put(`${link}/update`, formData, config);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function deleteBlog(blogId) {
+  try {
+    const token = localStorage.getItem('token');
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    };
+
+    const state = {
+      blogId
+    };
+
+    const response = await axios.put(`${link}/delete`, state, config);
     return response.data;
   } catch (err) {
     console.log(err);
