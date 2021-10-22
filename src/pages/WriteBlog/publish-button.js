@@ -1,19 +1,14 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
-import WriteBlogContext from '../../context/writeBlog';
-import { addBlog } from '../../service/post_backenedCalls';
-import { saveBlog } from '../../service/put_backenedCall';
+import { useHistory } from 'react-router-dom';
+import WriteBlogContext from '../../utilities/context/writeBlog';
+import { createBlog, updateBlog } from '../../service/blog';
 import * as ROUTES from '../../constants/routes';
-import UserContext from '../../context/user';
-import Flash from '../flash';
+import notify from '../../components/public/notification';
 
 const Publish = () => {
   const { state, dispatch, blogData } = useContext(WriteBlogContext);
   const history = useHistory();
-  const { username } = useParams();
-  const { user } = useContext(UserContext);
-  const [flash, setFlash] = useState({});
 
   const handlePublish = async (e) => {
     e.preventDefault();
@@ -24,25 +19,22 @@ const Publish = () => {
       formData.append('file', state.coverPicture);
       formData.append('content', state.content);
       formData.append('status', state.status);
-      formData.append('userId', user.id);
-      formData.append('username', username);
       if (state.title === '' || state.tags.length === 0 || state.content === '') {
         if (state.title === '') {
-          setFlash({ warning: 'Title is required' });
+          notify({ type: 'warning', message: 'Title is required' });
         }
         if (state.tags.length === 0) {
-          setFlash({ warning: 'Tags is required' });
+          notify({ type: 'warning', message: 'Tags is required' });
         }
         if (state.content === '') {
-          setFlash({ warning: 'Content is required' });
+          notify({ type: 'warning', message: 'Content is required' });
         }
-      } else {
-        const response = await addBlog(formData);
-        setFlash(response);
-        window.setTimeout(() => {
-          history.push(ROUTES.DASHBOARD);
-        }, 3000);
+        return;
       }
+
+      const response = await createBlog(formData);
+      notify(response);
+      history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.error(err);
     }
@@ -61,21 +53,20 @@ const Publish = () => {
 
       if (state.title === '' || state.tags.length === 0 || state.content === '') {
         if (state.title === '') {
-          setFlash({ warning: 'Title is required' });
+          notify({ type: 'warning', message: 'Title is required' });
         }
         if (state.tags.length === 0) {
-          setFlash({ warning: 'Tags is required' });
+          notify({ type: 'warning', message: 'Tags is required' });
         }
         if (state.content === '') {
-          setFlash({ warning: 'Content is required' });
+          notify({ type: 'warning', message: 'Content is required' });
         }
-      } else {
-        const response = await saveBlog(formData);
-        setFlash(response);
-        window.setTimeout(() => {
-          history.push(ROUTES.DASHBOARD);
-        }, 2000);
+        return;
       }
+
+      const response = await updateBlog(formData);
+      notify(response);
+      history.push(ROUTES.DASHBOARD);
     } catch (err) {
       console.log(err);
     }
@@ -83,7 +74,6 @@ const Publish = () => {
 
   return (
     <>
-      <Flash flash={flash} setFlash={setFlash} />
       <div className="flex-col">
         {!blogData ? (
           <button
@@ -110,7 +100,6 @@ const Publish = () => {
           <option value="Private">Private</option>
         </select>
       </div>
-      {/* <div>{blog.content}</div> */}
     </>
   );
 };

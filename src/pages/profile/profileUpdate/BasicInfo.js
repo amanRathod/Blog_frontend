@@ -1,33 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Resizer from 'react-image-file-resizer';
-import { EditProfileSkeleton, EditProfileSkeletons } from '../../skeleton';
-import UpdateProfile from '../../../context/editProfile';
+import { EditProfileSkeleton, EditProfileSkeletons } from '../../../components/skeleton';
+import UpdateProfile from '../../../utilities/context/editProfile';
 
 const BasicInfo = () => {
   const { state, dispatch } = useContext(UpdateProfile);
   const [fallback, setFallback] = useState(false);
 
-  // const resizeFile = (file) =>
-  // new Promise((resolve) => {
-  //   Resizer.imageFileResizer(
-  //     file,
-  //     128,
-  //     128,
-  //     'JPEG',
-  //     100,
-  //     0,
-  //     (uri) => {
-  //       resolve(uri);
-  //     },
-  //     'base64'
-  //   );
-  // });
-
   const handleImageUpload = async (e) => {
     e.preventDefault();
     const fileImage = e.target.files[0];
-    // const image = await resizeFile(fileImage);
     const temperoryLink = URL.createObjectURL(fileImage);
     dispatch({ type: 'image', fieldName: 'image', payload: temperoryLink });
     dispatch({ type: 'picture', fieldName: 'picture', payload: fileImage });

@@ -3,22 +3,20 @@
 /* eslint-disable prettier/prettier */
 import React, { useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, useLocation } from 'react-router-dom';
-import Header from '../header';
+import Header from '../../components/private/header';
 import BasicInfo from './profileUpdate/BasicInfo';
 import ProfileInfo from './profileUpdate/profileIdentity';
-import UpdateProfile from '../../context/editProfile';
-// import Footer from '../footer';
-import { updateProfileData } from '../../service/put_backenedCall';
-import * as ROUTES from '../../constants/routes';
-import Flash from '../flash';
+import UpdateProfile from '../../utilities/context/editProfile';
+import Footer from '../../components/public/footer';
+import { updateProfile } from '../../service/user';
+import notify from '../../components/public/notification';
 
 const EditProfile = () => {
-  const history = useHistory();
   const location = useLocation();
-  const [profile, setProfile] = useState(location.state.profile);
-  const [flash, setFlash] = useState({});
-  console.log('poictrure', profile);
+  const [profile, setProfile] = useState(location.state? location.state.profile: '');
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -55,39 +53,34 @@ const EditProfile = () => {
     picture: profile.image,
   }
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log('ckick updateee')
     try {
       const formData = new FormData();
       formData.append('file', state.picture);
       formData.append('fullName', state.fullName);
       formData.append('bio', state.bio);
+      formData.append('image', state.image);
       formData.append('username', state.username);
-      const response = await updateProfileData(formData);
-      const storeData = {
-        id: response._id,
-        email: response.email,
-        fullName: response.fullName,
-        username: response.username,
-        image: response.image,
-        followers: response.followers,
-        following: response.following
-      };
-  
-      localStorage.setItem('user', JSON.stringify(storeData));
-      setFlash({success: 'Profile Updated Successfully'})
-      
-      window.setTimeout(() => {history.push(ROUTES.DASHBOARD)}, 2000);
-     
+      const response = await updateProfile(formData);
+      if (response.status === 200) {
+      localStorage.setItem('image',response.image);
+      localStorage.setItem('username',response.username);
+      dispatch({type: 'fullName', fieldName: 'fullName', payload: response.fullName});
+      dispatch({type: 'image', fieldName: 'image', payload: response.image});
+      dispatch({type: 'bio', fieldName: 'bio', payload: response.bio});
+      notify({type: 'success', message: 'Profile Updated Successfully'});
+      }
+
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   return (
     <>
+    <ToastContainer />
       <Header />
       <div className=" dark:bg-darkMode-base container h-screen mx-auto max-w-screen-lg">
         <UpdateProfile.Provider
@@ -98,7 +91,6 @@ const EditProfile = () => {
         >
           <BasicInfo />
           <ProfileInfo />
-          <Flash flash={flash} setFlash={setFlash} />
         </UpdateProfile.Provider>
         <button
           type="submit"
@@ -107,7 +99,7 @@ const EditProfile = () => {
         >
           Update Information
         </button>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   );

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { EditProfileSkeletons } from '../../skeleton';
-import UpdateProfile from '../../../context/editProfile';
+import { EditProfileSkeletons } from '../../../components/skeleton';
+import UpdateProfile from '../../../utilities/context/editProfile';
 
 const ProfileInfo = () => {
   const {state, dispatch} = useContext(UpdateProfile);

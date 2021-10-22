@@ -5,7 +5,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Tags from './tags';
-import WriteBlogContext from '../../context/writeBlog';
+import WriteBlogContext from '../../utilities/context/writeBlog';
 
 const Title = () => {
   const { username } = useParams();
@@ -32,19 +32,7 @@ const Title = () => {
         required
       />
       <div className="flex justify-between mb-4">
-        {/* <div className="ml-4 h-10">
-          <label className=" flex">
-            <span className="text-gray-700 text-bold cursor-text">Category:</span>       
-              <select className="form-select ml-2 rounded-md shadow-lg text-white bg-orange-base block w-full "
-                onBlur={(e) => blog.setCategory(e.target.value)}
-              >
-                <option value="Web Development">Web Development</option>
-                <option value="Android Development">Android Development</option>
-                <option value="Operating System">Operating System</option>
-              </select>
-          </label>
-        </div> */}
-        <div className="">
+        <div>
           <img src={`${state.imageSrc || state.picture}`} alt="" />
           <label className="btn pl-4 ml-4 btn-primary btn-block btn-lg bg-orange-base dark:bg-darkMode-orange dark:text-darkMode-base text-white  rounded-md shadow-lg px-3 py-1 mb-4">
             <input

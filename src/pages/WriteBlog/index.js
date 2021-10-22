@@ -1,8 +1,10 @@
 import React, { useReducer, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../header';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from '../../components/private/header';
 import BlogBody from './blog_body';
-import WriteBlogContext from '../../context/writeBlog';
+import WriteBlogContext from '../../utilities/context/writeBlog';
 
 const Index = () => {
   const data = useLocation();
@@ -46,6 +48,7 @@ const Index = () => {
   return (
     <>
       <div className="bg-white dark:bg-darkMode-base">
+        <ToastContainer />
         <Header />
         <WriteBlogContext.Provider
           value={{

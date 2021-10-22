@@ -6,7 +6,7 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '../../styles/global.css';
-import WriteBlogContext from '../../context/writeBlog';
+import WriteBlogContext from '../../utilities/context/writeBlog';
 
 const WriteBlog = () => {
   const { state, dispatch } = useContext(WriteBlogContext);

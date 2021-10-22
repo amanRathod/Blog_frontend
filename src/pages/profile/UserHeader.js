@@ -1,52 +1,41 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import Skelton from 'react-loading-skeleton';
 import { isUserFollow } from '../../service/backened_call';
 import { togglefollowers } from '../../service/put_backenedCall';
-import { ProfileSKeleton } from '../skeleton';
-import ProfileContext from '../../context/profile';
+import { ProfileSKeleton } from '../../components/skeleton';
+import ProfileContext from '../../utilities/context/profile';
 import VerticalDot from './verticalDot.js';
-import UserContext from '../../context/user';
 
 const UserHeader = () => {
   const {state, dispatch} = useContext(ProfileContext);
-  const { user } = useContext(UserContext);
+  const username = localStorage.getItem('username');
    const [userFollow, setUserFollow] = useState(false);
-  const btnFollow = state.username && state.username !== user.username;
+  const btnFollow = state.username && state.username !== username;
 
   useEffect(() => {
     document.title = 'Profile-Blog';
-
-    const isUserFollowing = async (loggedInusername, profileId) => {
-      const data = await isUserFollow(loggedInusername, profileId);
-      setUserFollow(data);
-    };
-
-    if (state.id) {
-      isUserFollowing(user.username, state.id);
-    }
-  }, [user.username, state.id]);
+    // check if user is following the user or not
+    if (state.followers && state.followers.length > 0) { 
+      const isFollowing = state.followers.find(follower => follower.username === username);
+      if (isFollowing) {
+        setUserFollow(true);
+      }
+      else {
+        setUserFollow(false);
+      }
+    }      
+    }, []);
 
   const handleFollowClick = async (e) => {
     e.preventDefault();
 
     setUserFollow((userFollow) => !userFollow);
-    const data = await togglefollowers(user.id, state.id, !userFollow);
-    dispatch({type: 'followers', fieldName: 'followers', payload: data.profile.followers});
-    dispatch({type: 'following', fieldName: 'following', payload: data.profile.following});
+    const response = await togglefollowers( state.id, !userFollow);
+    dispatch({type: 'followers', fieldName: 'followers', payload: response.followers});
 
-    const storeData = {
-      id: data.loggedIn._id,
-      email: data.loggedIn.email,
-      fullName: data.loggedIn.fullName,
-      username: data.loggedIn.username,
-      image: data.loggedIn.image,
-      followers: data.loggedIn.followers,
-      following: data.loggedIn.following
-    };
-
-    localStorage.setItem('user', JSON.stringify(storeData));
   };
   return (
     <div className="w-full py-20 px-3">
@@ -88,7 +77,7 @@ const UserHeader = () => {
                   </div>
                   <div className="flex flex-col">
                     {' '}
-                    <span className="font-bold text-2xl">{Object.keys(state.blog).length}</span>{' '}
+                    <span className="font-bold text-2xl">{state.userBlog.length}</span>{' '}
                     <span className="text-sm text-gray-base">Blog</span>{' '}
                   </div>
                   <div className="flex flex-col">

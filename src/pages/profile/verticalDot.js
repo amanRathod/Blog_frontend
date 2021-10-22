@@ -1,17 +1,15 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { createPopper } from '@popperjs/core';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
-import ProfileContext from '../../context/profile';
-import EditProfile from './editProfile';
+import ProfileContext from '../../utilities/context/profile';
 
 const VerticalDot = () => {
   const history = useHistory();
-  const { username } = useParams();
   const {state} = useContext(ProfileContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -25,12 +23,11 @@ const VerticalDot = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  const obj = JSON.parse(JSON.stringify(state));
-  obj.username = username;
+  const userData = JSON.parse(JSON.stringify(state));
   const goToEditPage = () => {
     history.push({
       pathname: '/setting',
-      state: { profile: obj }
+      state: { profile: userData }
     });
   };
 
@@ -68,7 +65,6 @@ const VerticalDot = () => {
               <button
                 type="submit"
                 className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90  focus:outline-none"
-                // onClick={(e) => handleDelete(e)}
               >
                 Delete
               </button>

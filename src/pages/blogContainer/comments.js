@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import BlogContext from '../../utilities/context/blogs';
 import UserContext from '../../context/user';
 import PostsHeader from '../blogs/postsHeader';
-import { addComment } from '../../service/blog';
+import { addComment } from '../../service/comment';
 import ReplyComments from './replyComments';
 import notify from '../../components/public/notification';
 

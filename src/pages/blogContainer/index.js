@@ -11,7 +11,7 @@ import BlogContext from '../../utilities/context/blogs';
 import Comments from './comments';
 import ReplyComments from './replyComments';
 import Footer from '../../components/public/footer';
-import { getAllComments } from '../../service/blog';
+import { getAllComments } from '../../service/comment';
 
 const Index = () => {
   const commentInput = useRef(null);
@@ -64,7 +64,7 @@ const Index = () => {
     <>
       <div className="bg-white dark:bg-darkMode-base">
       <ToastContainer />
-      <Headers userData={blogData.userId}/>
+      <Headers />
       <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg">
         <BlogContext.Provider
           value={{

@@ -10,19 +10,6 @@ const PostsHeader = ({ userData, date }) => {
   const [user, setUser] = useState();
   console.log('userser', userData);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const response = await getSingleUser(username);
-  //     // setUser(response);
-  //   };
-  //   if (username) {
-  //     fetchData();
-  //   }
-  //   return () => {
-  //     fetchData();
-  //   };
-  // }, [username]);
-
   return (
     <>
       {userData ? (

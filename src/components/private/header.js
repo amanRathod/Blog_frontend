@@ -2,15 +2,17 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import { Link, useHistory, NavLink } from 'react-router-dom';
+import jwt from 'jwt-decode';
 import * as ROUTES from '../../constants/routes';
 import UserDataContext from '../../utilities/context/userData';
 import DarkMode from '../public/dark_mode';
 import notify from '../public/notification';
 
-const Header = ({ userData }) => {
+const Header = () => {
   const history = useHistory();
-  // const { state } = useContext(UserDataContext);
-  // console.log('datate4', state);
+  const decode = jwt(localStorage.getItem('token'));
+  const {username} = decode;
+  const image = localStorage.getItem('image');
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -80,12 +82,12 @@ const Header = ({ userData }) => {
             </Link>
 
             
-              <Link to={`profile/${userData.username}`} className="m-3 text-color underline-link">
+              <Link to={`profile/${username}`} className="m-3 text-color underline-link">
                 <button type="submit">
                 <img
                   className=" rounded-full h-8 w-8 mt-2 mr-2 flex"
-                  src={`${userData.image}`}
-                  alt={`${userData.username} profile`}
+                  src={`${image}`}
+                  alt={`${username} profile`}
                 />
                 </button>
               </Link>

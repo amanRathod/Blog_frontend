@@ -7,7 +7,7 @@ import BlogContext from '../../utilities/context/blogs';
 import PostsHeader from '../blogs/postsHeader';
 import DropDown from './dropDown';
 import UserContext from '../../context/user';
-import { toggleLikesIntoComments } from '../../service/blog';
+import { toggleLikesIntoComments } from '../../service/comment';
 
 const ReplyComments = () => {
   const { state, dispatch } = useContext(BlogContext);
@@ -19,7 +19,7 @@ const ReplyComments = () => {
     try {
       console.log('like');
       setToggle(() => !toggle);
-      const response = await toggleLikesIntoComments(commentId, !toggle);
+      const response = await toggleLikesIntoComments(commentId, !toggle, state.blogId);
       if (response.status === 200) {
         console.log('likee', response);
         dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });

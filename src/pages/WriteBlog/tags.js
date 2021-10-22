@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/global.css';
 import { WithContext as ReactTags } from 'react-tag-input';
-import WriteBlogContext from '../../context/writeBlog';
+import WriteBlogContext from '../../utilities/context/writeBlog';
 
 const Geeks = [
   { id: 'react', text: 'react' },

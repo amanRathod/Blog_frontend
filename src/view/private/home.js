@@ -104,7 +104,7 @@ const Home = () => {
   return (
     <div className="bg-gray-background dark:bg-darkMode-base">
       <UserDataContext.Provider value={{ state, dispatch }}>
-        <Header userData={state} />
+        <Header />
         <Posts />
         <Footer />
       </UserDataContext.Provider>

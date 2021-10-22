@@ -35,6 +35,8 @@ export default function LoginView() {
       notify(response);
       if (response.type === 'success') {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('image', response.image);
+        localStorage.setItem('username', response.username);
         history.push(ROUTES.DASHBOARD);
       }
     } catch (error) {

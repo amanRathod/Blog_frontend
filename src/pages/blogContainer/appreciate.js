@@ -12,7 +12,7 @@ const Appreciate = ({ state, dispatch }) => {
   // const {state, dispatch } = useContext(BlogContext);
   const decode = jwt(localStorage.getItem('token'));
   console.log('ddecode', decode);
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(!!state.likes.includes(decode.id));
   const handleLikeClick = async (e) => {
     e.preventDefault();
     try {
