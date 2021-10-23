@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useHistory, NavLink } from 'react-router-dom';
 import jwt from 'jwt-decode';
 import * as ROUTES from '../../constants/routes';
-import UserDataContext from '../../utilities/context/userData';
 import DarkMode from '../public/dark_mode';
 import notify from '../public/notification';
 
@@ -31,21 +30,19 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 bg-white  dark:bg-darkMode-base dark:text-white  border-gray-base shadow-md  border-b ">
+    <header className="h-16 bg-white  dark:bg-darkMode-base dark:text-darkMode-orange text-orange-base border-gray-base shadow-md  border-b ">
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
           <div className=" text-center row cursor-pointer mt-2 mr-2 ">
-            {/* <h1 className="flex justify-center w-full"> */}
-              <Link to={ROUTES.DASHBOARD} className="m-3 text-color underline-link">
+              <Link to={ROUTES.DASHBOARD} className="m-3 text-3xl underline-link">
                 Blog
               </Link>
-            {/* </h1> */}
           </div>
           <div className="text-center row">
             <Link
               to={ROUTES.WRITE_BLOG}
               aria-label="Write-Story"
-              className="m-3 text-color underline-link"
+              className="m-3  underline-link"
             >
               <button type="submit" className="focus:outline-none">
                 <svg
@@ -64,7 +61,7 @@ const Header = () => {
                 </svg>
               </button>
             </Link>
-            <Link className="m-3 text-color underline-link">
+            <Link className="m-3  underline-link">
             <button className="focus:outline-none" onClick={handleLogout} type="button">
               <svg
                 className="w-8 mt-2 mr-2 cursor-pointer"
@@ -84,7 +81,7 @@ const Header = () => {
             </Link>
 
             
-              <Link to={`profile/${username}`} className="m-3 text-color underline-link">
+              <Link to={`profile/${username}`} className="m-3 underline-link">
                 <button type="submit">
                 <img
                   className=" rounded-full h-8 w-8 mt-2 mr-2 flex"

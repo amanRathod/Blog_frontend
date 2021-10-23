@@ -34,7 +34,7 @@ const Comments = ({ state, dispatch }) => {
     <>
       <div className=" grid grid-cols-6 font-semibold ">
         <div className="col-span-6 md:col-span-2">
-          <h1 className="text-xl mr-3 ml-10">Comments</h1>
+          <h1 className="text-3xl mr-3 ml-10">Comments</h1>
         </div>
 
         <div className="col-span-6 md:col-span-4 md:ml-32">

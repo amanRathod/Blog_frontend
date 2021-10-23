@@ -1,4 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useReducer } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '../../components/private/header';
 import UserDataContext from '../../utilities/context/userData';
 import { GetUserData } from '../../service/user';
@@ -101,13 +104,18 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gray-background dark:bg-darkMode-base">
+    <>
+     <div className="bg-gray-background dark:bg-darkMode-base">
+      <ToastContainer />
+      <Header />
+      <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
       <UserDataContext.Provider value={{ state, dispatch }}>
-        <Header />
-        <Posts />
-        <Footer />
+          <Posts />
       </UserDataContext.Provider>
-    </div>
+        </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

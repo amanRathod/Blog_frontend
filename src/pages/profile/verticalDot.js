@@ -61,13 +61,6 @@ const VerticalDot = () => {
               >
                 Edit Profile
               </button>
-
-              <button
-                type="submit"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90  focus:outline-none"
-              >
-                Delete
-              </button>
             </div>
           </div>
         </div>

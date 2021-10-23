@@ -1,10 +1,11 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../../components/private/header';
 import BlogBody from './blog_body';
 import WriteBlogContext from '../../utilities/context/writeBlog';
+import Footer from '../../components/public/footer';
 
 const Index = () => {
   const data = useLocation();
@@ -46,20 +47,28 @@ const Index = () => {
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log('writeblog', state);
+
+  useEffect(() => {
+    document.title = 'Write Blog';
+  }, []);
+
   return (
     <>
-      <div className="bg-white dark:bg-darkMode-base">
+      <div className="bg-gray-background dark:bg-darkMode-base">
         <ToastContainer />
         <Header />
-        <WriteBlogContext.Provider
-          value={{
-            state,
-            dispatch,
-            blogData
-          }}
-        >
-          <BlogBody />
-        </WriteBlogContext.Provider>
+        <div className="dark:bg-darkMode-base dark:text-black-dark mx-auto max-w-screen-lg h-full">
+          <WriteBlogContext.Provider
+            value={{
+              state,
+              dispatch,
+              blogData
+            }}
+          >
+            <BlogBody />
+          </WriteBlogContext.Provider>
+        </div>
+        <Footer />
       </div>
     </>
   );

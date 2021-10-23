@@ -10,13 +10,19 @@
     @apply dark:bg-darkMode-primary dark:text-white;
   }
   .focus-ring {
-    @apply focus:outline-none focus:ring-4 focus:ring-orange-seven focus:ring-offset-2 duration-500;
+    @apply focus:outline-none focus:ring-4 focus:ring-orange-seven dark:focus:ring-darkMode-orange focus:ring-offset-2 duration-500;
   }
   .bg-gradient {
     @apply bg-gradient-to-l from-black-left  to-black-right;
   }
   .btn {
     @apply py-2 max-w-xs px-4 mr-4 mt-4 font-bold rounded-2xl bg-orange-five text-white tracking-tighter text-base;
+  }
+  .btn-transparent {
+    @apply mb-2 ml-10 hover:bg-orange-fifty dark:bg-darkMode-primary dark:hover:bg-darkMode-base text-orange-base dark:text-darkMode-orange font-semibold py-2 px-4 border border-orange-base rounded focus:ring-2 focus:ring-offset-2 duration-500  focus:ring-orange-base;
+  }
+  .btn-blog {
+    @apply  px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary dark:bg-darkMode-orange dark:text-darkMode-base focus-ring
   }
   .row {
     @apply flex items-center justify-center ;
@@ -48,8 +54,11 @@
   .header {
     @apply mx-auto px-4  bg-headerWhite  dark-base shadow-lg  text-center text-xl font-bold tracking-tighter;
   }
-  .hover {
-    @apply hover:bg-orange-fifty dark:hover:bg-darkMode-primary
+  .hover-text {
+    @apply hover:text-orange-base dark:hover:text-darkMode-orange
+  }
+  .hover-bg {
+    @apply hover:bg-orange-base dark:hover:bg-darkMode-orange
   }
   .error {
     @apply text-red-primary mb-3 break-normal;
@@ -59,6 +68,9 @@
   }
   .input-control1 {
     @apply  w-80 px-5 py-2 text-white bg-gray-borderbg bg-opacity-30 border-t border-white border-opacity-20 border-solid  shadow-2xl rounded-xl tracking-tighter text-base focus:outline-none;
+  }
+  .profile-input {
+    @apply px-3 py-3 placeholder-gray-borderbg text-gray-base w-full relative  bg-orange-fifty rounded text-sm border-0 shadow outline-none focus-ring
   }
   .text-color {
     @apply dark-nine text-lg font-semibold ;
@@ -72,4 +84,61 @@
   .underline-link {
     @apply  border-b-4 cursor-pointer border-white  hover:border-orange-five dark:hover:border-orange-five dark:border-darkMode-base duration-500;
   }
+  .footer {
+    @apply bg-orange-fifty dark:bg-darkMode-primary dark-nine dark:text-white  px-6 lg:px-8 py-12
+  }
+  .footer-icon {
+    @apply flex space-x-2 font-normal dark:text-white dark:text-opacity-70 dark:hover:text-grey-one
+  }
+  .footer-copyright {
+    @apply mx-auto dark:border-grey-seven space-y-4 mt-8 lg:mt-12 border-t-2 pt-8
+  }
+  .footer-follow {
+    @apply  border-t-2 pt-8 space-y-10 dark:border-grey-seven
+  }
+  .footer-grid {
+    @apply md:grid md:grid-cols-5 space-y-2 md:space-y-0
+  }
+  .profile-label {
+    @apply block mb-2 text-sm font-semibold text-gray-base dark:text-grey-four
+  }
+  .profile-container {
+    @apply dark:bg-darkMode-primary container mb-10 w-full p-8 bg-white border border-gray-primary dark:border-darkMode-base shadow-sm rounded-lg mt-10
+  }
+  .ReactTags__tagInput {
+    @apply relative 
+  }
+
+  .ReactTags__tagInput input.ReactTags__tagInputField,
+  .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    @apply w-52 profile-input -ml-2 mt-10 bg-orange-fifty text-gray-base  dark:hover:text-darkMode-primary dark:text-opacity-90 focus:outline-none
+  }
+
+  .ReactTags__selected span.ReactTags__tag {
+    @apply bg-orange-base dark:bg-darkMode-orange text-white dark:text-darkMode-base text-lg font-semibold tracking-tighter rounded-full px-3 py-1 mr-2 mb-1 mt-4 border-2 border-orange-base dark:border-darkMode-base focus:outline-none
+  }
+
+  .ReactTags__suggestions ul {
+    @apply  list-none w-52 dark:bg-darkMode-primary bg-white
+  }
+
+  .ReactTags__suggestions li {
+    @apply  cursor-pointer text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none
+  }
+  .tag {
+    @apply text-md m-1 inline-block cursor-pointer hover:underline bg-orange-one text-orange-eight px-1 rounded-lg
+  }
+  .wrapper-class {
+    @apply border-darkMode-primary
+  }
+  .editor-class {
+    @apply border-2 border-orange-base  dark:border-darkMode-orange bg-white p-5 dark:bg-headerWhite min-h-screen;
+  }
+  .toolbar-class {
+    @apply border-2 border-orange-base  dark:border-orange-base bg-grey-four dark:bg-orange-fifty
+  }
+  .App-link {
+    @apply text-blue-medium
+  }
+ 
 }

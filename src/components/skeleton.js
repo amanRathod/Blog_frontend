@@ -1,13 +1,15 @@
 import ContentLoader from 'react-content-loader';
 
+const theme = localStorage.getItem('color-theme');
+
 export const MyLoader = () => (
   <ContentLoader
     speed={4}
     width={296}
     height={524}
     viewBox="0 0 176 324"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor={theme === 'dark' ? '#272727' : '#f3f3f3'}
+    foregroundColor={theme === 'dark' ? '#424242' : '#bdbdbd'}
   >
     <circle cx="21" cy="21" r="21" />
     <rect x="6" y="108" rx="0" ry="0" width="193" height="96" />
@@ -34,8 +36,8 @@ export const EditProfileSkeleton = () => (
     width={976}
     height={525}
     viewBox="0 0 976 525"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor={theme === 'dark' ? '#272727' : '#f3f3f3'}
+    foregroundColor={theme === 'dark' ? '#424242' : '#bdbdbd'}
   >
     <rect x="26" y="17" rx="0" ry="0" width="1" height="0" />
     <rect x="9" y="8" rx="0" ry="0" width="1088" height="8" />
@@ -61,8 +63,8 @@ export const EditProfileSkeletons = () => (
     width={976}
     height={525}
     viewBox="0 0 976 525"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor={theme === 'dark' ? '#272727' : '#f3f3f3'}
+    foregroundColor={theme === 'dark' ? '#424242' : '#bdbdbd'}
   >
     <rect x="26" y="17" rx="0" ry="0" width="1" height="0" />
     <rect x="9" y="8" rx="0" ry="0" width="1088" height="8" />
@@ -85,8 +87,8 @@ export const ProfileSKeleton = () => (
     width={676}
     height={505}
     viewBox="0 0 576 425"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor={theme === 'dark' ? '#272727' : '#f3f3f3'}
+    foregroundColor={theme === 'dark' ? '#424242' : '#bdbdbd'}
   >
     <rect x="26" y="17" rx="0" ry="0" width="1" height="0" />
     <rect x="576" y="514" rx="0" ry="0" width="11" height="0" />
@@ -115,8 +117,8 @@ export const UserBlogsSkeleton = () => (
     width={1076}
     height={525}
     viewBox="0 0 1076 510"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor={theme === 'dark' ? '#272727' : '#f3f3f3'}
+    foregroundColor={theme === 'dark' ? '#424242' : '#bdbdbd'}
   >
     <rect x="26" y="17" rx="0" ry="0" width="1" height="0" />
     <rect x="576" y="514" rx="0" ry="0" width="11" height="0" />

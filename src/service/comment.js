@@ -26,7 +26,7 @@ export async function addComment(content, blogId) {
   }
 }
 
-export async function toggleLikesIntoComments(commentId, toggle, blogId) {
+export async function toggleLikesIntoComments(commentId, blogId) {
   try {
     const token = localStorage.getItem('token');
 
@@ -39,7 +39,6 @@ export async function toggleLikesIntoComments(commentId, toggle, blogId) {
 
     const state = {
       commentId,
-      toggle,
       blogId
     };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/global.css';
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -14,11 +14,6 @@ const Geeks = [
   { id: 'c++', text: 'c++' },
   { id: 'data-structure', text: 'data-structure' }
 ];
-
-const suggestions = Geeks.map((geek) => ({
-  id: geek,
-  text: geek
-}));
 
 const KeyCodes = {
   comma: 188,
@@ -53,7 +48,10 @@ const Tags = () => {
   };
 
   return (
-    <div className="w-full bg-gray-background dark:bg-darkMode-base h-20 pl-6 mb-4 text-xl focus:outline-none ">
+    <div className="w-full  pl-6 mb-4 text-xl focus:outline-none ">
+      <label htmlFor="full-name" className="profile-label text-xl pt-10">
+        Enter Tags
+      </label>
       <ReactTags
         tags={state.tags}
         suggestions={Geeks}
@@ -63,7 +61,8 @@ const Tags = () => {
         handleDrag={handleDrag}
         inputFieldPosition="bottom"
         autocomplete
-        placeholder="Press enter to add tag"
+        className="bg-orange-fifty"
+        placeholder="Press enter to add tag "
       />
     </div>
   );

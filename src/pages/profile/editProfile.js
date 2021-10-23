@@ -62,15 +62,18 @@ const EditProfile = () => {
       formData.append('fullName', state.fullName);
       formData.append('bio', state.bio);
       formData.append('image', state.image);
+
       const response = await updateProfile(formData);
-      if (response.status === 200) {
-      localStorage.setItem('image',response.image);
-      localStorage.setItem('username',response.username);
-      dispatch({type: 'fullName', fieldName: 'fullName', payload: response.fullName});
-      dispatch({type: 'image', fieldName: 'image', payload: response.image});
-      dispatch({type: 'bio', fieldName: 'bio', payload: response.bio});
-      notify({type: 'success', message: 'Profile Updated Successfully'});
-      }
+      notify(response);
+
+      const { fullName, bio, image} = response.data;
+      console.log(response.data);
+      console.log('fulll', fullName);
+      localStorage.setItem('image',image);
+      dispatch({type: 'fullName', fieldName: 'fullName', payload: fullName});
+      dispatch({type: 'image', fieldName: 'image', payload: image});
+      dispatch({type: 'bio', fieldName: 'bio', payload: bio});
+      
 
     } catch (err) {
       console.log(err);
@@ -79,9 +82,10 @@ const EditProfile = () => {
 
   return (
     <>
+    <div className="bg-gray-background dark:bg-darkMode-base">
     <ToastContainer />
       <Header />
-      <div className=" dark:bg-darkMode-base container h-screen mx-auto max-w-screen-lg">
+      <div className=" dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
         <UpdateProfile.Provider
           value={{
             state,
@@ -93,11 +97,12 @@ const EditProfile = () => {
         </UpdateProfile.Provider>
         <button
           type="submit"
-          className=" mb-2 ml-10 bg-transparent hover:bg-orange-base text-orange-base font-semibold hover:text-white py-2 px-4 border border-orange-base hover:border-transparent rounded focus:ring-2 focus:ring-offset-2 duration-500  focus:ring-orange-base"
+          className="btn-transparent mb-10 ml-28 sm:ml-56 md:ml-80 lg:ml-96"
           onClick={handleUpdate}
         >
           Update Information
         </button>
+      </div>
         <Footer />
       </div>
     </>

@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
-import draftToHtml from 'draftjs-to-html';
 import { UserBlogsSkeleton } from '../../components/skeleton';
 import ProfileContext from '../../utilities/context/profile';
 
@@ -29,7 +27,7 @@ export default function UserPosts() {
     <>
       {state.userBlog ? (
         state.userBlog.map((blogData, _idx) => (
-          <div className="bg-white dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
+          <div className=" dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 bg-white mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
             <div
               style={{
                 backgroundImage: `url(${blogData.photo})`

@@ -9,10 +9,10 @@ const ProfileInfo = () => {
   return (
     <>
     {state.email? (
-      <div className="dark:bg-darkMode-base container mb-10 w-full p-8 bg-white border border-gray-primary shadow-sm rounded-lg">
-        <h1 className="mb-5 text-xl font-bold text-gray-formbg">User Info</h1>
+      <div className="profile-container">
+        <h1 className="mb-5 text-xl font-bold text-orange-base dark:text-darkMode-orange">User Info</h1>
         <div className="mb-6">
-          <label htmlFor="Email" className="block mb-2 text-sm font-semibold text-gray-base">
+          <label htmlFor="Email" className="profile-label">
             Email
           </label>
           <input
@@ -21,13 +21,13 @@ const ProfileInfo = () => {
             name="email"
             id="email"
             placeholder="Email@"
-            className="px-3 py-3 placeholder-gray-borderbg text-gray-base relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full focus:ring-orange-base"
+            className="profile-input cursor-not-allowed"
             value={state.email}
             onChange={(e) => dispatch({ type: 'email', fieldName: 'email', payload: e.target.value })}
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="Username" className="block mb-2 text-sm font-semibold text-gray-base">
+          <label htmlFor="Username" className="profile-label">
             Username
           </label>
           <input
@@ -36,7 +36,7 @@ const ProfileInfo = () => {
             name="username"
             id="username"
             placeholder="Username"
-            className="px-3 py-3 placeholder-gray-borderbg text-gray-base relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full focus:ring-orange-base"
+            className="profile-input cursor-not-allowed"
             value={state.username}
             onChange={(e) => dispatch({ type: 'username', fieldName: 'username', payload: e.target.value })}
           />

@@ -6,28 +6,28 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(172, 23, 23);
   margin-bottom: 5vh;
   text-align: center;
 }
-.App-link {
+/* .App-link {
   color: #2fb0d4;
-}
+} */
 
-.wrapper-class {
+/* .wrapper-class {
   padding: 1rem;
   border: 1px solid rgb(255, 255, 255);
-}
-.editor-class {
+} */
+/* .editor-class {
   background-color:rgb(255, 255, 255);
   padding: 1rem;
   min-height: 30rem;
   border: 1px solid rgb(255, 255, 255);
-}
-.toolbar-class {
+} */
+/* .toolbar-class {
   border: 4px double #f32c2c;
   background-color: #f7d5d5a2;
-}
+} */
 
 
 /* Example Styles for React Tags*/
@@ -42,33 +42,35 @@
   margin: auto;
   width: 100%;
 } 
-.ReactTags__tags {
+/* .ReactTags__tags {
   position: relative;
-} 
+}  */
 
 /* Styles for the input */
-.ReactTags__tagInput {
-  width: 200px;
+/* .ReactTags__tagInput {
+  width: 300px;
   border-radius: 2px;
   display: inline-block;
   outline: none;
+  background-color: #fbe9e7;
+  margin-top: 20px;
 }
 *:focus {
   outline: none;
-}
+} */
 
-.ReactTags__tagInput input.ReactTags__tagInputField,
+/* .ReactTags__tagInput input.ReactTags__tagInputField,
 .ReactTags__tagInput input.ReactTags__tagInputField:focus {
   height: 40px;
-  margin: 5;
+  margin-top: 5px;
   font-size: 20px;
   width: 100%;
   border: 0px solid #f32c2c;
-  background-color: #FDFAF6;
-}
+  background-color: #fbe9e7;
+} */
 
 /* Styles for selected tags */
-.ReactTags__selected span.ReactTags__tag {
+/* .ReactTags__selected span.ReactTags__tag {
   border: 0px solid rgb(233, 46, 46);
   background: #f32c2c;
   color: white;
@@ -82,10 +84,10 @@
   color: rgb(252, 20, 20);
   margin-left: 20px;
   cursor: wait;
-}
+} */
 
 /* Styles for suggestions */
-.ReactTags__suggestions {
+/* .ReactTags__suggestions {
   position: absolute;
 }
 .ReactTags__suggestions ul {
@@ -100,7 +102,7 @@
   margin: 0;
   
 }
-.ReactTags__suggestions li mark {
+  {
   text-decoration: underline;
   background: none;
   font-weight: 600;
@@ -118,19 +120,4 @@
   cursor: pointer;
   background: none;
   color: white;
-}
-
-.flashdiv
-{
-  position: fixed!important; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 38%;
-  top: 1%;
-  overflow: auto; /* Enable scroll if needed */
-  /* background-color: rgb(0,0,0); /* Fallback color */
-  /* background-color: rgba(0,0,0,0.5); Black w/ opacity */ 
-  border-radius: 5px;;
-  padding:10px;
-  color: #ffffff;
-}
-
+} */

@@ -1,8 +1,6 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -29,8 +27,8 @@ const WriteBlog = () => {
   const handleEditorChange = (state) => {
     setEditorState(state);
     const contentState = editorState.getCurrentContent();
-    const sanitizeContent = (draftToHtml(convertToRaw(contentState)));
-    dispatch({type: 'content', fieldName: 'content', payload: sanitizeContent});
+    const sanitizeContent = draftToHtml(convertToRaw(contentState));
+    dispatch({ type: 'content', fieldName: 'content', payload: sanitizeContent });
   };
 
   return (
@@ -64,7 +62,3 @@ const WriteBlog = () => {
 };
 
 export default WriteBlog;
-
-WriteBlog.propTypes = {
-  content: PropTypes.string,
-};

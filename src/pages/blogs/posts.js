@@ -2,8 +2,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import parse from 'html-react-parser';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { MyLoader } from '../../components/skeleton';
 import PostsHeader from './postsHeader';
 import ReadMore from './readmore';
@@ -23,12 +21,11 @@ const Timeline = () => {
 
   return (
     <>
-    <ToastContainer />
-      <div className="container mx-auto max-w-screen-lg h-full">
-        <div className=" grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
-          { state.allBlog ? (
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
+          { state.allBlog[0] ? (
             state.allBlog.map((blog, idx) => (
-                <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white">
+                <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white mb-10">
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 mb-10">
                     <PostsHeader
@@ -43,13 +40,13 @@ const Timeline = () => {
                   ) : null}
                 </div>
 
-                <h1 className="font-semibold dark:text-white leading-none text-xl mt-1  capitalize truncate">
+                <h1 className="font-semibold dark:text-white dark:text-opacity-80 leading-none text-xl mt-1 ml-1  capitalize truncate">
                   {blog.title}
                 </h1>
                 {blog.tags.map((tag, idx) => (
                   <li
                     key={tag.id}
-                    className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
+                    className="tag"
                   >
                     #{tag.text}
                   </li>
@@ -64,7 +61,7 @@ const Timeline = () => {
                 <div className="flex gap-4 mt-5">
                   <button
                     type="button"
-                    className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10 border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
+                    className="hover-bg  dark:hover:text-darkMode-base flex items-center gap-1 h-10 border border-orange-base px-3  rounded-full hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
                   >
                     <svg
                       stroke="currentColor"
@@ -81,7 +78,7 @@ const Timeline = () => {
                   </button>
                   <button
                     type="button"
-                    className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base flex items-center gap-1 h-10  border border-orange-base px-3  rounded-full hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
+                    className="hover-bg  dark:hover:text-darkMode-base flex items-center gap-1 h-10  border border-orange-base px-3  rounded-full  hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
                   >
                     <svg
                       stroke="currentColor"

@@ -5,12 +5,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
-// import DOMPurify from 'dompurify';
-import draftToHtml from 'draftjs-to-html';
-// import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
-// import { stateFromHTML } from 'draft-js-import-html';
-// import { Markup } from 'interweave';
-// import renderHTML from 'react-render-html';
 import Appreciate from './appreciate';
 import BlogContext from '../../utilities/context/blogs';
 import PostsHeader from '../blogs/postsHeader';
@@ -22,37 +16,26 @@ const ReadBlog = () => {
     document.title = 'Blog';
   }, []);
 
-  // const htmlText = content;
-
-  const htmlText = draftToHtml((state.content));
   return (
     <>
-      <div className=" ">
+      <div className="mt-5">
         {state.photo && <img src={`${state.photo}`} alt="Cover Photo" />}
         <div className="mt-4 font-bold text-6xl">{state.title}</div>
 
         {state.tags.map((tag, idx) => (
-                  <li
-                    key={tag.id}
-                    className="text-sm text-gray-base  ml-2  inline-block cursor-pointer hover:underline hover:text-orange-base"
-                  >
-                    #{tag.text}
-                  </li>
-                ))}
+          <li
+            key={tag.id}
+            className="tag"
+          >
+            #{tag.text}
+          </li>
+        ))}
         <div className=" grid grid-cols-6">
-          <div className="container col-span-6 md:col-span-5 bg-gray-background dark:bg-darkMode-primary dark:text-white shadow-sm p-10">
+          <div className="container col-span-6 md:col-span-5 bg-orange-fifty dark:bg-darkMode-primary dark:text-white shadow-sm p-10">
             <PostsHeader userData={state.userData} date={state.updatedAt}/>
-            <div className="mt-4 text-lg">
-              {/* {parse(draftToHtml((state.content)))} */}
+            <div className="mt-4 text-lg ">
               {parse(state.content)}
-              {/* {renderHTML((htmlText))} */}
-              {/* <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(htmlText)}} /> */}
             </div>
-
-            {/*  <Markup content={htmlText} /> */}
-
-            {/* {htmlText} */}
-            {/* {tt} */}
           </div>
           <div className=" md:col-span-1">
             <Appreciate state={state} dispatch={dispatch}/>

@@ -28,7 +28,6 @@ module.exports = {
      black: {
        left: '#17191ad0',
        right: '#352d2d',
-       borders: '',
        base: '#414141',
        dark: '#222831'
 
@@ -43,6 +42,8 @@ module.exports = {
      grey: {
       one: '#f5f5f5',
       fifty: '#fafafa',
+      four: '#bdbdbd',
+      five: '#9e9e9e',
       six: '#757575',
       seven: '#616161',
       eight: '#424242'

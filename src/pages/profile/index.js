@@ -80,7 +80,7 @@ const Profile = () => {
   return (
     <div className="bg-gray-background dark:bg-darkMode-base">
       <Header />
-      <div className="mx-auto max-w-screen-lg">
+      <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
         <ProfileContext.Provider
           value={{
             state,
@@ -89,9 +89,9 @@ const Profile = () => {
         >
           <UserHeader />
           <UserData />
-          <Footer />
         </ProfileContext.Provider>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -29,7 +29,7 @@ const ReadMore = ({ blogData }) => {
       {/* <Link  key={Math.random()} to={{pathname: `/blog/${user.username}/${blogData.title}`, state: {blogData: blogData, userData: user} }}> */}
       <button
         type="button"
-        className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base ml-auto flex items-center gap-1 h-15 border border-orange-base px-3  rounded-xl hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
+        className="hover-bg  dark:hover:text-darkMode-base ml-auto flex items-center gap-1 h-15 border border-orange-base px-3  rounded-xl hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
         onClick={() => goToNextPage()}
       >
         <span>Read more</span>

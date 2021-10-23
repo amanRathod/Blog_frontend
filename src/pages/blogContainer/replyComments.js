@@ -9,16 +9,13 @@ import { toggleLikesIntoComments } from '../../service/comment';
 
 const ReplyComments = () => {
   const { state, dispatch } = useContext(BlogContext);
-  // const { user } = useContext(UserContext);
-  const [toggle, setToggle] = useState(false);
   const decode = jwt(localStorage.getItem('token'));
+
   const handleLikeClick = async (commentId) => {
     try {
-      setToggle(() => !toggle);
-      const response = await toggleLikesIntoComments(commentId, !toggle, state.blogId);
-      console.log('response response', response);
+      const response = await toggleLikesIntoComments(commentId, state.blogId);
       if (response.status === 200) {
-        dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });
+        dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
       }
       console.log(state.comments);
     } catch (err) {
@@ -39,10 +36,10 @@ const ReplyComments = () => {
     <>
       {state.comments ? (
           state.comments.map((item, idx) => (
-        <div className="bg-gray-background dark:bg-darkMode-base p-10 container grid grid-cols-6 ">
+        <div className=" dark:bg-darkMode-base p-3 container grid grid-cols-6 ">
             <div
               key={idx}
-              className="col-span-6 lg:col-span-5 bg-white dark:bg-darkMode-primary w-full border mt-2 p-2 sm:p-4 rounded-xl shadow-sm  border-gray-primary hover:border-red-secondary dark:hover:border-darkMode-orange"
+              className="col-span-6 lg:col-span-5 bg-white dark:bg-darkMode-primary w-full border mt-2 p-2 sm:p-4 rounded-xl shadow-sm  border-gray-primary hover:bg-orange-fifty hover:border-red-secondary dark:hover:border-darkMode-orange"
             >
               <div className="flex justify-between">
                 <PostsHeader userData={item.userId} date={item.date} />

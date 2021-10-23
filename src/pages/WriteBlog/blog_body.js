@@ -5,7 +5,7 @@ import Publish from './publish-button';
 import Tags from './tags';
 
 const BlogBody = () => (
-  <div className="container  h-full mx-auto max-w-screen-lg">
+  <div className="mt-10">
     <Title />
     <WriteBlog />
     <Tags />
