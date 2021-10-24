@@ -14,7 +14,7 @@ Backend Code -> [https://github.com/amanRathod/Blog_backend](https://github.com/
 
 # Tech Stack
 
-<b>Frontned</b>: Reactjs
+<b>Frontend</b>: Reactjs
 <br>
 <b>Additional NPM Libraries</b>
   - react-router-dom
