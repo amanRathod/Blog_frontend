@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const link = 'http://localhost:4444/api/v1/blog/comment';
+const link = 'https://blogthese.herokuapp.com/api/v1/blog/comment';
 
 export async function addComment(content, blogId) {
   try {

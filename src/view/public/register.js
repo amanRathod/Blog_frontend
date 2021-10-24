@@ -131,7 +131,7 @@ export default function RegisterView() {
           >
             Register
           </button>
-          <p className="break-normal mt-4">
+          <p className="break-normal text-orange-fifty mt-4">
             Already have an account?{' '}
             <Link to={ROUTES.LOGIN} className="text-color ">
               Login

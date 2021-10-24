@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const link = 'http://localhost:4444/api/v1/blog';
+const link = 'https://blogthese.herokuapp.com/api/v1/blog';
 
 export async function toggleLike(blogId, toggle) {
   try {

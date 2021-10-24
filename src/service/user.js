@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt from 'jwt-decode';
 
-const link = 'http://localhost:4444/api/v1/user';
+const link = 'https://blogthese.herokuapp.com/api/v1/user';
 
 const token = localStorage.getItem('token');
 

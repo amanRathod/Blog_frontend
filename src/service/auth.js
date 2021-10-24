@@ -1,7 +1,7 @@
 import axios from 'axios';
 import notify from '../components/public/notification';
 
-const link = 'http://localhost:4444/api/v1/auth';
+const link = 'https://blogthese.herokuapp.com/api/v1/auth';
 const config = {
   headers: { 'Content-type': 'application/json' }
 };
