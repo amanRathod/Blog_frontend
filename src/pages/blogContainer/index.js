@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState, useRef, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -14,23 +12,23 @@ import { getAllComments } from '../../service/comment';
 const Index = () => {
   const commentInput = useRef(null);
   const location = useLocation();
-  const [blogData, setBlogData] = useState(location.state? location.state.blogData: '');
-  
+  const [blogData] = useState(location.state ? location.state.blogData : '');
+
   const reducer = (state, action) => {
     switch (action.type) {
       case 'likes': {
-        return {...state, [action.fieldName]: action.payload,};
+        return { ...state, [action.fieldName]: action.payload };
       }
       case 'comments': {
-        return {...state,  [action.fieldName]: action.payload,};
+        return { ...state, [action.fieldName]: action.payload };
       }
       default: {
         return state;
       }
     }
-  }
- 
-  const initialState =  {
+  };
+
+  const initialState = {
     blogId: blogData._id,
     content: blogData.content,
     comments: blogData.comments,
@@ -44,39 +42,38 @@ const Index = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const fetchComments = async () => {
     const response = await getAllComments(blogData._id);
-    dispatch({type: 'comments', fieldName: 'comments', payload: response.comments});
-    dispatch({type: 'likes', fieldName: 'likes', payload: response.likes});
+    dispatch({ type: 'comments', fieldName: 'comments', payload: response.comments });
+    dispatch({ type: 'likes', fieldName: 'likes', payload: response.likes });
   };
 
   useEffect(() => {
-    document.title = 'Read Blog'
+    document.title = 'Read Blog';
     fetchComments();
 
-     const interval = setInterval(() => {
+    const interval = setInterval(() => {
       fetchComments();
     }, 5000);
     return () => clearInterval(interval);
-
   }, []);
 
   return (
     <>
       <div className="bg-gray-background dark:bg-darkMode-base">
-      <ToastContainer />
-      <Headers />
-      <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
-        <BlogContext.Provider
-          value={{
-            state,
-            dispatch,
-            commentInput
-          }}
-        >
-          <ReadBlog/>
-          <ReplyComments />
-        </BlogContext.Provider>
-      </div>
-          <Footer  />
+        <ToastContainer />
+        <Headers />
+        <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
+          <BlogContext.Provider
+            value={{
+              state,
+              dispatch,
+              commentInput
+            }}
+          >
+            <ReadBlog />
+            <ReplyComments />
+          </BlogContext.Provider>
+        </div>
+        <Footer />
       </div>
     </>
   );

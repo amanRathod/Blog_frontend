@@ -1,7 +1,4 @@
-/* eslint-disable react/no-unused-prop-types */
-import React, { useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import React, { useContext } from 'react';
 import WriteBlogContext from '../../utilities/context/writeBlog';
 
 const Title = () => {
@@ -43,10 +40,3 @@ const Title = () => {
 };
 
 export default Title;
-
-Title.propTypes = {
-  username: PropTypes.string,
-  imageSrc: PropTypes.string,
-  title: PropTypes.string,
-  coverPicture: PropTypes.string
-};

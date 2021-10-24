@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -14,7 +13,6 @@ const WriteBlog = () => {
   const [editorState, setEditorState] = useState();
   useEffect(() => {
     if (state.content) {
-      console.log(state.content);
       const blocksFromHtml = htmlToDraft(state.content);
       const { contentBlocks, entityMap } = blocksFromHtml;
       const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);

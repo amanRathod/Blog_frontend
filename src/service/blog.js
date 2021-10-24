@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-function */
 import axios from 'axios';
 
 const link = 'http://localhost:4444/api/v1/blog';
@@ -18,7 +17,6 @@ export async function toggleLike(blogId, toggle) {
       toggle,
       blogId
     };
-    console.log('toggle', toggle);
 
     const response = await axios.post(`${link}/toggle-like`, state, config);
     return response.data;

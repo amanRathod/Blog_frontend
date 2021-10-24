@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import parse from 'html-react-parser';
 import { MyLoader } from '../../components/skeleton';
@@ -23,17 +21,17 @@ const Timeline = () => {
     <>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-8">
-          { state.allBlog[0] ? (
+          {state.allBlog[0] ? (
             state.allBlog.map((blog, idx) => (
-                <div key={idx} className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white mb-10">
+              <div
+                key={idx}
+                className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white mb-10"
+              >
                 <div className="flex justify-between">
                   <div className="flex items-center space-x-2 mb-10">
-                    <PostsHeader
-                      userData={blog.userId}
-                      date={blog.updatedAt}
-                    />
+                    <PostsHeader userData={blog.userId} date={blog.updatedAt} />
                   </div>
-                  {blog.userId.username === state.username  ? (
+                  {blog.userId.username === state.username ? (
                     <div>
                       <DropDown blogData={blog} />
                     </div>
@@ -43,11 +41,8 @@ const Timeline = () => {
                 <h1 className="font-semibold dark:text-white dark:text-opacity-80 leading-none text-xl mt-1 ml-1  capitalize truncate">
                   {blog.title}
                 </h1>
-                {blog.tags.map((tag, idx) => (
-                  <li
-                    key={tag.id}
-                    className="tag"
-                  >
+                {blog.tags.map((tag) => (
+                  <li key={tag.id} className="tag">
                     #{tag.text}
                   </li>
                 ))}
@@ -55,7 +50,7 @@ const Timeline = () => {
 
                 <div style={mystyle} className=" max-w-full">
                   <div className="dark:text-white dark:text-opacity-80 text-gray-formbg text-center font-medium  mt-1">
-                    {parse((blog.content))}
+                    {parse(blog.content)}
                   </div>
                 </div>
                 <div className="flex gap-4 mt-5">
@@ -93,11 +88,11 @@ const Timeline = () => {
                     </svg>
                     <span>{blog.comments.length}</span>
                   </button>
-                  <ReadMore blogData={blog} />          
+                  <ReadMore blogData={blog} />
                 </div>
               </div>
             ))
-            ) : (
+          ) : (
             <>
               <MyLoader />
               <MyLoader />

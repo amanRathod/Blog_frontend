@@ -1,6 +1,4 @@
-/* eslint-disable react/no-unused-prop-types */
-import React, { useContext, useEffect, useReducer, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import { GetUserProfile } from '../../service/user';
 import Header from '../../components/private/header';
@@ -59,7 +57,6 @@ const Profile = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log('profile', state);
 
   const getProfileData = async () => {
     const { data } = await GetUserProfile(username);
@@ -97,14 +94,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-Profile.propTypes = {
-  username: PropTypes.string,
-  user: PropTypes.object,
-  followers: PropTypes.number,
-  following: PropTypes.number,
-  fullName: PropTypes.string,
-  image: PropTypes.string,
-  bio: PropTypes.string,
-  email: PropTypes.string
-};

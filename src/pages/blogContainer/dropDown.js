@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { createPopper } from '@popperjs/core';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { deleteComment } from '../../service/comment';
@@ -55,14 +55,6 @@ const DropDown = ({ commentId }) => {
             >
               <button
                 type="submit"
-                className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white  dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none"
-                // onClick={}
-              >
-                Edit Profile
-              </button>
-
-              <button
-                type="submit"
                 className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90  focus:outline-none"
                 onClick={(e) => handleDelete(e)}
               >
@@ -77,3 +69,7 @@ const DropDown = ({ commentId }) => {
 };
 
 export default DropDown;
+
+DropDown.propTypes = {
+  commentId: PropTypes.string.isRequired
+};

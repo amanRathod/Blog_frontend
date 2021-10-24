@@ -9,7 +9,7 @@ import Footer from '../../components/public/footer';
 
 const Index = () => {
   const data = useLocation();
-  const [blogData, setBlogData] = useState(data.state ? data.state.blogData : '');
+  const [blogData] = useState(data.state ? data.state.blogData : '');
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -46,7 +46,6 @@ const Index = () => {
     content: blogData ? blogData.content : ''
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log('writeblog', state);
 
   useEffect(() => {
     document.title = 'Write Blog';

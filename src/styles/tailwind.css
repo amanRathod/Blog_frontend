@@ -22,7 +22,7 @@
     @apply mb-2 ml-10 hover:bg-orange-fifty dark:bg-darkMode-primary dark:hover:bg-darkMode-base text-orange-base dark:text-darkMode-orange font-semibold py-2 px-4 border border-orange-base rounded focus:ring-2 focus:ring-offset-2 duration-500  focus:ring-orange-base;
   }
   .btn-blog {
-    @apply  px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse border-r-full text-white bg-orange-base hover:bg-red-secondary dark:bg-darkMode-orange dark:text-darkMode-base focus-ring
+    @apply  px-4 py-2 mt-4 font-bold rounded-full shadow-lg ml-4 border-collapse text-white bg-orange-base hover:bg-red-secondary dark:bg-darkMode-orange dark:text-darkMode-base focus-ring
   }
   .row {
     @apply flex items-center justify-center ;
@@ -126,7 +126,7 @@
     @apply  cursor-pointer text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-gray-primary text-gray-base dark:text-white dark:hover:bg-darkMode-orange dark:hover:text-darkMode-base dark:text-opacity-90 focus:outline-none
   }
   .tag {
-    @apply text-md m-1 inline-block cursor-pointer hover:underline bg-orange-one text-orange-eight px-1 rounded-lg
+    @apply text-xs m-1 inline-block cursor-pointer hover:underline bg-orange-one text-orange-eight px-1 rounded-lg
   }
   .wrapper-class {
     @apply border-darkMode-primary

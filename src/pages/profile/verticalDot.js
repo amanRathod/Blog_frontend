@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-expressions */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
@@ -10,7 +8,7 @@ import ProfileContext from '../../utilities/context/profile';
 
 const VerticalDot = () => {
   const history = useHistory();
-  const {state} = useContext(ProfileContext);
+  const { state } = useContext(ProfileContext);
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
@@ -70,8 +68,3 @@ const VerticalDot = () => {
 };
 
 export default VerticalDot;
-
-VerticalDot.propTypes = {
-  username: PropTypes.string.isRequired,
-  
-}

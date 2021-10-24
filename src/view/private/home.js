@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useReducer } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,9 +60,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      // get logged-In user Data
       const response = await GetUserData();
-      console.log(response);
       const { data, allBlog } = response;
       // store the response data to their respective state
       dispatch({ type: 'id', fieldName: 'id', payload: data._id });
@@ -97,21 +94,21 @@ const Home = () => {
     document.title = 'Home';
     fetchData();
     // update data for every 10 second
-    // const interval = setInterval(() => {
-    //   fetchData();
-    // }, 10000);
-    // return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      fetchData();
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-     <div className="bg-gray-background dark:bg-darkMode-base">
-      <ToastContainer />
-      <Header />
-      <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
-      <UserDataContext.Provider value={{ state, dispatch }}>
-          <Posts />
-      </UserDataContext.Provider>
+      <div className="bg-gray-background dark:bg-darkMode-base">
+        <ToastContainer />
+        <Header />
+        <div className="dark:bg-darkMode-base dark:text-white mx-auto max-w-screen-lg h-full">
+          <UserDataContext.Provider value={{ state, dispatch }}>
+            <Posts />
+          </UserDataContext.Provider>
         </div>
         <Footer />
       </div>

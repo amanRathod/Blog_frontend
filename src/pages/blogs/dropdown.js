@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { createPopper } from '@popperjs/core';
 import UserDataContext from '../../utilities/context/userData';
@@ -36,7 +35,6 @@ const DropDown = ({ blogData }) => {
     try {
       const response = await deleteBlog(blogData._id);
       notify(response);
-      console.log('rere', response);
       dispatch({ type: 'allBlog', fieldName: 'allBlog', payload: response.allBlog });
     } catch (err) {
       console.log(err);
@@ -92,8 +90,6 @@ const DropDown = ({ blogData }) => {
 
 export default DropDown;
 
-// DropDown.propTypes = {
-//   postData: PropTypes.object.isRequired,
-//   setPosts: PropTypes.func.isRequired,
-//   setFlash: PropTypes.func
-// };
+DropDown.propTypes = {
+  blogData: PropTypes.object.isRequired
+};

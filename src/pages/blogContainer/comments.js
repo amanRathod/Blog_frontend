@@ -1,13 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/button-has-type */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addComment } from '../../service/comment';
 import notify from '../../components/public/notification';
 
 const Comments = ({ state, dispatch }) => {
-  // const { user } = useContext(UserContext);
   const [inputComment, setInputComment] = useState('');
 
   const handleSubmit = async (e) => {
@@ -16,15 +12,14 @@ const Comments = ({ state, dispatch }) => {
       if (inputComment === '') {
         notify({
           type: 'info',
-          message: 'Comment cannot be empty',
+          message: 'Comment cannot be empty'
         });
         return;
       }
 
       const response = await addComment(inputComment, state.blogId);
-      dispatch({type: 'comments', fieldName: 'comments', payload: response.data});
+      dispatch({ type: 'comments', fieldName: 'comments', payload: response.data });
       setInputComment('');
-
     } catch (err) {
       console.error(err.message);
     }
@@ -64,7 +59,7 @@ const Comments = ({ state, dispatch }) => {
 
 export default Comments;
 
-Comments.prototype = {
-  commentInput: PropTypes.string,
-  setComments: PropTypes.func
+Comments.propTypes = {
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 };

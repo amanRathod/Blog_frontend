@@ -1,42 +1,34 @@
-/* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
-import Skelton from 'react-loading-skeleton';
 import { togglefollowers } from '../../service/user';
 import { ProfileSKeleton } from '../../components/skeleton';
 import ProfileContext from '../../utilities/context/profile';
 import VerticalDot from './verticalDot.js';
 
 const UserHeader = () => {
-  const {state, dispatch} = useContext(ProfileContext);
+  const { state, dispatch } = useContext(ProfileContext);
   const username = localStorage.getItem('username');
-   const [userFollow, setUserFollow] = useState(false);
+  const [userFollow, setUserFollow] = useState(false);
   const btnFollow = state.username !== username;
-
-  console.log('btnFollow', btnFollow);
 
   useEffect(() => {
     document.title = 'Profile-Blog';
     // check if user is following the user or not
-    if (state.followers && state.followers.length > 0) { 
-      const isFollowing = state.followers.find(follower => follower.username === username);
+    if (state.followers && state.followers.length > 0) {
+      const isFollowing = state.followers.find((follower) => follower.username === username);
       if (isFollowing) {
         setUserFollow(true);
-      }
-      else {
+      } else {
         setUserFollow(false);
       }
-    }      
-    }, []);
+    }
+  }, [state.followers, username]);
 
   const handleFollowClick = async (e) => {
     e.preventDefault();
 
     setUserFollow((userFollow) => !userFollow);
-    const response = await togglefollowers( state.id, !userFollow);
-    dispatch({type: 'followers', fieldName: 'followers', payload: response.followers});
-
+    const response = await togglefollowers(state.id, !userFollow);
+    dispatch({ type: 'followers', fieldName: 'followers', payload: response.followers });
   };
   return (
     <div className="w-full py-20 px-3">
@@ -49,16 +41,11 @@ const UserHeader = () => {
                   <img
                     className="w-32 h-32 rounded-full ml-16 sm:ml-36"
                     src={`${state.image}`}
-                    
                     alt={`${state.fullName} Profile`}
                   />
                   <h1 className="text-2xl mt-2 ml-12 sm:ml-32">{state.fullName}</h1>
                 </div>
-                <div>
-                {state.username === username ? (
-                  <VerticalDot />
-                ) : null }
-                </div>
+                <div>{state.username === username ? <VerticalDot /> : null}</div>
               </div>
 
               <div className="text-center">

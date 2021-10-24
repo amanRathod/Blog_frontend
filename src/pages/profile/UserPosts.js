@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
 import { UserBlogsSkeleton } from '../../components/skeleton';
@@ -14,20 +15,24 @@ const mystyle = {
 
 export default function UserPosts() {
   const { state } = useContext(ProfileContext);
+  const history = useHistory();
+  console.log('postststs', state);
 
-  // const goToNextPage = (blogData) => {
-  //   const UserProfileData = JSON.parse(JSON.stringify(profile));
-  //   history.push({
-  //     pathname: `/state.blog/${username}/${blogDatas.title}`,
-  //     state: {blogData: blogDatas, userData: UserProfileData}
-  //   });
-  // }
+  const goToNextPage = (blogData) => {
+    history.push({
+      pathname: `/blog/${blogData.userId.username}/${blogData.title}`,
+      state: { blogData }
+    });
+  };
 
   return (
     <>
       {state.userBlog ? (
-        state.userBlog.map((blogData, _idx) => (
-          <div className=" dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 bg-white mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none">
+        state.userBlog.map((blogData, idx) => (
+          <div
+            key={idx}
+            className=" dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 bg-white mb-4 p-2 w-100 max-w-5xl sm:w-full sm:p-4 h-auto sm:h-64 rounded-2xl shadow-xl hover:shadow-sm flex flex-col sm:flex-row gap-5 select-none"
+          >
             <div
               style={{
                 backgroundImage: `url(${blogData.photo})`
@@ -80,6 +85,8 @@ export default function UserPosts() {
                 </button>
                 <button
                   type="submit"
+                  aria-hidden="true"
+                  onClick={() => goToNextPage(blogData)}
                   className="dark:hover:bg-darkMode-orange  dark:hover:text-darkMode-base ml-auto flex items-center gap-1 h-15 border border-orange-base px-3  rounded-xl hover:bg-orange-base hover:text-white transition-colors focus:bg-orange-secondary focus:outline-none focus-visible:border-orange-secondary"
                 >
                   <span>Read more</span>

@@ -1,15 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import jwt from 'jwt-decode';
 import { ThumbUpIcon, ShareIcon, AnnotationIcon } from '@heroicons/react/solid';
-import BlogContext from '../../utilities/context/blogs';
 import { toggleLike } from '../../service/blog';
-import UserDataContext from '../../utilities/context/userData';
 
 const Appreciate = ({ state, dispatch }) => {
-  // const {state, dispatch } = useContext(BlogContext);
   const decode = jwt(localStorage.getItem('token'));
   const [toggle, setToggle] = useState(!!state.likes.includes(decode.id));
   const handleLikeClick = async (e) => {
@@ -17,7 +12,7 @@ const Appreciate = ({ state, dispatch }) => {
     try {
       setToggle(() => !toggle);
       const response = await toggleLike(state.blogId, !toggle);
-      dispatch({type: 'likes', fieldName: 'likes', payload: response.data});
+      dispatch({ type: 'likes', fieldName: 'likes', payload: response.data });
     } catch (err) {
       console.error(err);
     }
@@ -29,7 +24,7 @@ const Appreciate = ({ state, dispatch }) => {
         <div className="flex">
           <ThumbUpIcon
             className={`h-10 w-10 m-5 hover:text-orange-base focus:text-orange-secondary
-            ${state.likes.includes(decode.id) && `text-orange-base` } `}
+            ${state.likes.includes(decode.id) && `text-orange-base`} `}
             aria-hidden="true"
             onClick={handleLikeClick}
           />
@@ -55,9 +50,8 @@ const Appreciate = ({ state, dispatch }) => {
 
 export default Appreciate;
 
-Appreciate.prototype = {
-  likes: PropTypes.number,
-  setLikes: PropTypes.func,
-  comments: PropTypes.number,
-  id: PropTypes.number
+// proptypes for Appreciate component to check if the props are passed correctly
+Appreciate.propTypes = {
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 };

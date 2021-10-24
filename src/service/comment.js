@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-function */
 import axios from 'axios';
 
 const link = 'http://localhost:4444/api/v1/blog/comment';
@@ -63,8 +62,6 @@ export async function getAllComments(blogId) {
     const state = {
       blogId
     };
-    console.log('comments get ', state);
-    console.log('comments get ', config);
 
     const response = await axios.post(`${link}/getComments`, state, config);
     return response.data;

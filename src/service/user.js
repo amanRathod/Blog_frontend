@@ -1,7 +1,5 @@
-/* eslint-disable no-empty-function */
 import axios from 'axios';
 import jwt from 'jwt-decode';
-import notify from '../components/public/notification';
 
 const link = 'http://localhost:4444/api/v1/user';
 
