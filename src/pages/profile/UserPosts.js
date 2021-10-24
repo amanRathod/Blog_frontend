@@ -16,7 +16,6 @@ const mystyle = {
 export default function UserPosts() {
   const { state } = useContext(ProfileContext);
   const history = useHistory();
-  console.log('postststs', state);
 
   const goToNextPage = (blogData) => {
     history.push({

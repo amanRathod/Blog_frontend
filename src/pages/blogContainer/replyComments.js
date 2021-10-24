@@ -21,15 +21,6 @@ const ReplyComments = () => {
     }
   };
 
-  const handleReplyClick = async (e) => {
-    e.preventDefault();
-    try {
-      console.log('hit reply');
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <>
       {state.comments
@@ -58,7 +49,6 @@ const ReplyComments = () => {
                     <ReplyIcon
                       className=" h-6 w-6 m-5 hover:text-orange-base focus:text-orange-secondary cursor-not-allowed"
                       aria-hidden="true"
-                      onClick={handleReplyClick}
                     />
                   </div>
                 </div>
