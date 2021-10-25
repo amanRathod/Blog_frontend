@@ -8,6 +8,8 @@ Frontend Code -> [https://github.com/amanRathod/Blog_frontend](https://github.co
 <br>
 Deployed URL -> [https://blogthese.netlify.app/](https://blogthese.netlify.app)
 <br>
+API doc -> [https://documenter.getpostman.com/view/15820246/UV5c8Ezp](https://documenter.getpostman.com/view/15820246/UV5c8Ezp)
+<br>
 Backend Code -> [https://github.com/amanRathod/Blog_backend](https://github.com/amanRathod/Blog_backend)
 <br>
 
