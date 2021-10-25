@@ -1,7 +1,6 @@
 # Blog
 
-Blog is a highly scalable and high performant one stop solution to:
-- Write and Manage your blog
+Blog is a free developer blogging platform that allows you to publish articles and helps you to stay connected with a global developer
 
 # Application Links
 
@@ -9,12 +8,14 @@ Frontend Code -> [https://github.com/amanRathod/Blog_frontend](https://github.co
 <br>
 Deployed URL -> [https://blogthese.netlify.app/](https://blogthese.netlify.app)
 <br>
+API doc -> [https://documenter.getpostman.com/view/15820246/UV5c8Ezp](https://documenter.getpostman.com/view/15820246/UV5c8Ezp)
+<br>
 Backend Code -> [https://github.com/amanRathod/Blog_backend](https://github.com/amanRathod/Blog_backend)
 <br>
 
 # Tech Stack
 
-<b>Frontned</b>: Reactjs
+<b>Frontend</b>: Reactjs
 <br>
 <b>Additional NPM Libraries</b>
   - react-router-dom
