@@ -91,7 +91,7 @@ export default function LoginView() {
           <p className="mt-4 text-orange-fifty">
             Don't have an account?{' '}
             <Link to={ROUTES.SIGNUP} className="text-color">
-              Singup
+              SignUp
             </Link>
           </p>
         </form>

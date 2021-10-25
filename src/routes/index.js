@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Theme from '../constants/theme';
 import ThemeContext from '../utilities/context/theme';
 import * as ROUTES from '../constants/routes';
+import renderLoader from '../utilities/objects/loader';
 
 import PublicRoute from './public-route';
 import PrivateRoute from './private-route';
@@ -16,8 +17,6 @@ const Profile = lazy(() => import('../pages/profile'));
 const WriteBlog = lazy(() => import('../pages/WriteBlog'));
 const ReadStory = lazy(() => import('../pages/blogContainer'));
 const Setting = lazy(() => import('../pages/profile/editProfile'));
-
-const renderLoader = () => <p>Loading...</p>;
 
 function App() {
   const { theme, setTheme } = Theme();
