@@ -1,4 +1,4 @@
-import loaderGif from './giphy.gif';
+import loaderGif from '../../asserts/giphy.gif';
 
 const loading = () => <p className="text-9xl text-white">Loading</p>;
 
