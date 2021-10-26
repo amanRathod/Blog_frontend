@@ -1,9 +1,11 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import Theme from '../constants/theme';
 import ThemeContext from '../utilities/context/theme';
 import * as ROUTES from '../constants/routes';
 import renderLoader from '../utilities/objects/loader';
+import ErrorFallback from '../components/public/error_boundary';
 
 import PublicRoute from './public-route';
 import PrivateRoute from './private-route';
@@ -20,22 +22,25 @@ const Setting = lazy(() => import('../pages/profile/editProfile'));
 
 function App() {
   const { theme, setTheme } = Theme();
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Router>
-        <Suspense fallback={renderLoader()}>
-          <Switch>
-            <PublicRoute path={ROUTES.LOGIN} component={Login} />
-            <PublicRoute path={ROUTES.SIGNUP} component={Signup} />
-            <PublicRoute path={ROUTES.FORGOT_PASSWORD} component={ForgetPassword} />
-            <PublicRoute path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
-            <PrivateRoute path={ROUTES.DASHBOARD} component={Dashboard} exact />
-            <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
-            <PrivateRoute path={ROUTES.WRITE_BLOG} component={WriteBlog} />
-            <PrivateRoute path={ROUTES.READ_STORY} component={ReadStory} />
-            <PrivateRoute path={ROUTES.SETTING} component={Setting} />
-          </Switch>
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={renderLoader()}>
+            <Switch>
+              <PublicRoute path={ROUTES.LOGIN} component={Login} />
+              <PublicRoute path={ROUTES.SIGNUP} component={Signup} />
+              <PublicRoute path={ROUTES.FORGOT_PASSWORD} component={ForgetPassword} />
+              <PublicRoute path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
+              <PrivateRoute path={ROUTES.DASHBOARD} component={Dashboard} exact />
+              <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
+              <PrivateRoute path={ROUTES.WRITE_BLOG} component={WriteBlog} />
+              <PrivateRoute path={ROUTES.READ_STORY} component={ReadStory} />
+              <PrivateRoute path={ROUTES.SETTING} component={Setting} />
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </Router>
     </ThemeContext.Provider>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FormInputEmail from '../../components/input/email';
@@ -14,6 +14,7 @@ import notify from '../../components/public/notification';
 import * as ROUTES from '../../constants/routes';
 
 export default function RegisterView() {
+  const history = useHistory();
   const [state, setState] = useState({
     fullName: '',
     username: '',
@@ -56,12 +57,8 @@ export default function RegisterView() {
     e.preventDefault();
     try {
       const response = await UserRegister(state);
-      notify(response || {});
-      state.fullName = '';
-      state.username = '';
-      state.email = '';
-      state.password = '';
-      state.confirmPassword = '';
+      notify(response);
+      history.push(ROUTES.LOGIN);
     } catch (err) {
       notify(err);
     }
