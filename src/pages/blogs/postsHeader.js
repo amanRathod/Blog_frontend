@@ -10,9 +10,9 @@ const PostsHeader = ({ userData, date }) => (
       <div className="flex">
         <Link to={`/profile/${userData.username}`}>
           <img
-            className="w-10 h-10 object-cover object-center rounded-full"
+            className="w-10 h-10 border-2 object-cover object-center rounded-full"
             src={userData.image}
-            alt={userData.username}
+            alt="profile"
           />
         </Link>
 

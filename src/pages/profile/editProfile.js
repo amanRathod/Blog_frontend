@@ -59,12 +59,12 @@ const EditProfile = () => {
 
   useEffect(() => {
     document.title = 'Setting';
-    fetchProfileData();
+    // fetchProfileData();
 
-    const interval = setInterval(() => {
-      fetchProfileData();
-    }, 5000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   fetchProfileData();
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, []);
 
   const handleUpdate = async (e) => {
