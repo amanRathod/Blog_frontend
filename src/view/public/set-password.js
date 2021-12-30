@@ -68,7 +68,7 @@ const SetPasswordView = () => {
                   Password
                 </label>
               </div>
-              <FormInputPassword value={state.password} handleChange={handleChange} />
+              <FormInputPassword value={state.password} handleChange={() => handleChange} />
               {state.error2 && <p className="error">{state.error2}</p>}
             </div>
             <div>
