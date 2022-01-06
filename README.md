@@ -6,7 +6,7 @@ Blog is a free developer blogging platform that allows you to publish articles a
 
 Frontend Code -> [https://github.com/amanRathod/Blog_frontend](https://github.com/amanRathod/Blog_frontend)
 <br>
-Deployed URL -> [https://blogtheses.netlify.app/](https://blogtheses.netlify.app)
+Deployed URL -> [https://blog-dev.me/](https://blog-dev.me)
 <br>
 API doc -> [https://documenter.getpostman.com/view/15820246/UV5c8Ezp](https://documenter.getpostman.com/view/15820246/UV5c8Ezp)
 <br>
