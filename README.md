@@ -20,6 +20,7 @@ Backend Code -> [https://github.com/amanRathod/Blog_backend](https://github.com/
 <b>Additional NPM Libraries</b>
   - react-router-dom
   - react-icons
+  - ioredis
   - axios
   - moment
   - eslint
