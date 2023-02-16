@@ -15,7 +15,7 @@ const UserFollowers = () => {
           state.followers.map((userData, idx) => (
             <div
               key={idx}
-              className="card border   w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5 border-darkMode-base dark:bg-darkMode-primary"
+              className="card border  w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5 border-darkMode-base dark:bg-darkMode-primary"
             >
               <img
                 className="max-h-20 w-full opacity-80 absolute top-0 "
@@ -27,7 +27,7 @@ const UserFollowers = () => {
                   <img
                     className="w-28 h-28 p-1 bg-white dark:bg-darkMode-primary rounded-full z-10"
                     src={userData.image}
-                    alt=""
+                    alt={userData.fullName}
                   />
                 ) : (
                   <Skelton

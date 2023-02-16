@@ -25,10 +25,10 @@ const Timeline = () => {
             state.allBlog.map((blog, idx) => (
               <div
                 key={idx}
-                className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white mb-10"
+                className="dark:bg-darkMode-primary dark:text-white  dark:text-opacity-70 hover:shadow-sm rounded-2xl shadow-lg md:p-8 p-2 bg-white mb-4"
               >
                 <div className="flex justify-between">
-                  <div className="flex items-center space-x-2 mb-10">
+                  <div className="flex items-center space-x-2 mb-4">
                     <PostsHeader userData={blog.userId} date={blog.updatedAt} />
                   </div>
                   {blog.userId.username === state.username ? (
@@ -46,7 +46,16 @@ const Timeline = () => {
                     #{tag.text}
                   </li>
                 ))}
-                <img className="w-full rounded-xl" src={blog.photo} alt="" />
+                <div className="flex justify-center mt-4">
+                  <
+                    img className="w-96 h-40 rounded-xl"
+                    src={blog.photo}
+                    alt=""
+                  />
+                </div>
+{/*                 
+                <img className="w-96 rounded-xl" 
+                    src={blog.photo} alt="" /> */}
 
                 <div style={mystyle} className=" max-w-full">
                   <div className="dark:text-white dark:text-opacity-80 text-gray-formbg text-center font-medium  mt-1">

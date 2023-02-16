@@ -92,14 +92,14 @@ module.exports = {
         allowTemplateLiterals: true
       }
     ],
-    'prettier/prettier': [
-      'error',
-      {
-        trailingComma: 'none',
-        singleQuote: true,
-        printWidth: 100
-      }
-    ],
+    // 'prettier/prettier': [
+    //   'error',
+    //   {
+    //     trailingComma: 'none',
+    //     singleQuote: true,
+    //     printWidth: 100
+    //   }
+    // ],
     'jsx-a11y/href-no-hash': 'off',
     'jsx-a11y/anchor-is-valid': [
       'warn',

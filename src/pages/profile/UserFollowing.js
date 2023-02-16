@@ -32,7 +32,7 @@ const UserFollowing = () => {
                 <h1>{userData.fullName}</h1>
               </div>
               <div className="buttons flex absolute bottom-0 font-bold right-0 text-xs text-gray-500 space-x-0 my-3.5 mr-3">
-                {userData.following.includes(id) ? (
+                {userData.following && userData.following.includes(id) ? (
                   <div
                     className={`border rounded-l-2xl rounded-sm border-orange-base p-1 px-4 cursor-pointer hover:bg-orange-base hover:text-white focus:outline-none  focus:ring-2 focus:ring-offset-0 duration-500 focus:ring-orange-base dark:text-white dark:hover:text-darkMode-base opacity-80 dark:hover:bg-darkMode-orange 
                     ${username === userData.username ? 'hidden' : 'block'}`}
